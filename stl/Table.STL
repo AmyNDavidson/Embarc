@@ -1,0 +1,16 @@
+solid Table
+   facet normal 0 0 1
+      outer loop
+         vertex -500 -500 0
+         vertex  500 -500 0
+         vertex  500  500 0
+      endloop
+   endfacet
+   facet normal 0 0 1
+      outer loop
+         vertex  500  500 0
+         vertex -500  500 0
+         vertex -500 -500 0
+      endloop
+   endfacet
+endsolid
