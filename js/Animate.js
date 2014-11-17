@@ -1,73 +1,31 @@
 
-
+//console.log("mypositions: " + myPositions);
 
 var container;
 var camera, scene, renderer, objects;
-var initX=0, initY=-300, initZ=-350;
 
 var ArmXYZ = new Array();
 ArmXYZ = ['0.0', '0.0', '0.0'];
 
-var Angles = new Array(8);
-var myObjects = new Array();
-myObjects = 	[
-            	 'stl/BASE_PLATE.STL',
-            	 'stl/Base.STL',
-            	 'stl/A.STL',								
-            	 'stl/BC25.STL',								
-            	 'stl/C_FORK.STL',								
-            	 'stl/DE25.STL',								
-            	 'stl/F.STL',								
-            	 'stl/F_AXIS.STL',								
-            	 'stl/Buttons.STL',								
-            	 'stl/Hard_Probe_15.STL',																
-            	 ];
-var myPositions = new Array();
-// all positions are relative to the previous object's
-// position.
-myPositions = [
-               [initX, initY, initZ],
-               [0,0,89.5],
-               [0,0,150],
-               [0,0,137],
-               [711,0,62],
-               [39,0,0],
-               [62,0,-451.5],
-               [0,0,-48.5],
-               [0,0,0],
-               [0,15,-69.5],
-               ];
 
-var myAxes = new Array();
-// all positions are relative to the previous object's
-// position.
-myAxes = [
-          " ",
-          " ",
-          "Z",
-          "Y",
-          "X",
-          "Y",
-          "Z",
-          "Y",
-          " ",
-          " ",
-          ];
+var Angles = new Array(8);
 
 var meshGroup = new Array(myPositions.length);
 
+function init()  //init function
+{
 
-
-function init() {
+    console.log("init Function Called.");
 
     container = document.getElementById("animation");
-    camera = new THREE.PerspectiveCamera( 35, container.clientWidth / container.clientHeight, 1, 15000 );
-    camera.position.set( 100, -3480, 1000 );
-
+    camera = new THREE.PerspectiveCamera( 15, container.clientWidth / container.clientHeight, 1, 15000 );
+     // camera.position.set( 100, -3480, 1000 );
+     //  camera.position.set( 100, -4000, 1000 );
+    camera.position.set( 0, -3800, 1200 );
     scene = new THREE.Scene();
     group = new THREE.Object3D();
 
-   scene.fog = new THREE.Fog( 0x808080, 2, 15000 );
+    scene.fog = new THREE.Fog( 0x808080, 2, 15000 );
 
     // Grid
 
@@ -75,13 +33,13 @@ function init() {
     var geometry = new THREE.Geometry();
     var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-    for ( var i = - size; i <= size; i += step ) {
+    for ( var i = - size; i <= size; i += step ) 
+    {
+      	geometry.vertices.push( new THREE.Vector3( - size, - 0.04, i ) );
+      	geometry.vertices.push( new THREE.Vector3(   size, - 0.04, i ) );
 
-	geometry.vertices.push( new THREE.Vector3( - size, - 0.04, i ) );
-	geometry.vertices.push( new THREE.Vector3(   size, - 0.04, i ) );
-
-	geometry.vertices.push( new THREE.Vector3( i, - 0.04, - size ) );
-	geometry.vertices.push( new THREE.Vector3( i, - 0.04,   size ) );
+      	geometry.vertices.push( new THREE.Vector3( i, - 0.04, - size ) );
+      	geometry.vertices.push( new THREE.Vector3( i, - 0.04,   size ) );
 
     }
 
@@ -102,13 +60,21 @@ function init() {
 
     scene.add( new THREE.AmbientLight( 0x777777 ) );
 
-    addShadowedLight( 1, 1, 1, 0xffffff, 1.35 );
+   // addShadowedLight( 1, 1, 1, 0xffffff, 1.35 );
+   // addShadowedLight( 0.5, 1, -1, 0xffaa00, 1 );
+   
+
+    addShadowedLight( 1, -0.5, 1, 0xffffff, 1.35 );
     addShadowedLight( 0.5, 1, -1, 0xffaa00, 1 );
+
+
+    // addShadowedLight( 0.2, 1, -1, 0xffffff, 5 );
 
     // renderer
     renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
     
    // renderer = new THREE.WebGLRenderer( { antialias: true, clearColor: 0x111111, clearAlpha: 1, alpha: false } );
+
     renderer.setSize( container.clientWidth, container.clientHeight );
     renderer.setClearColor( scene.fog.color, 1 );
 
@@ -125,9 +91,13 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize, false );
 
-}	// init
+}	// init ended here
+
+
 
 function addShadowedLight( x, y, z, color, intensity ) {
+
+    console.log("addShadowedLight Function Called.");
 
     var directionalLight = new THREE.DirectionalLight( color, intensity );
     directionalLight.position.set( x, y, z )
@@ -155,15 +125,20 @@ function addShadowedLight( x, y, z, color, intensity ) {
 
 function onWindowResize() {
 
+      console.log("onWindowResize Function Called.");
+
 //    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
 //    renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setSize( container.clientWidth, container.clientHeight );
+
+   renderer.setSize( container.clientWidth, container.clientHeight );
 
 }
 
 function render() {
+
+    console.log("render Function Called.");
     camera.lookAt( scene.position );
     renderer.render( scene, camera );
 }
@@ -174,6 +149,7 @@ var count = 0;
 
 function loadObjects()
 {
+    console.log("loadObjects Function Called.");
     // Objects
     lastLoad = 0;
     count = 0;
@@ -181,53 +157,196 @@ function loadObjects()
     var loader = new THREE.STLLoader();	
     loader.addEventListener( 'load', function ( event ) {
 	
-	count++;
-	var index = event.index;
-	var geometry = event.content;
-	    var material = new THREE.MeshPhongMaterial( { ambient: 0xff5533, color: 0xff5533, specular: 0x111111, shininess: 200 } );
-	    var mesh =  new THREE.Mesh( geometry, material );
-
-	    mesh.castShadow = true;
-	    mesh.receiveShadow = true;
-	    mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
-	    meshGroup[index] = mesh;	// insert mesh into correct position in
-	    // scene
-	    if(count ==  myObjects.length)
-	    {
-		scene.add(meshGroup[0]);
-		for(var j = 0; j < myObjects.length - 1; j++)
-		    meshGroup[j].add(meshGroup[j+1]);	
-		
-		lastLoad = 1;
-	    }
-} );
-    
+      	count++;
+      	var index = event.index;
+   //   console.log("event.index value: "+ index);
+      	var geometry = event.content;
+  	   switch (index) {
+            
+            case 0:
+                    var material0 = new THREE.MeshPhongMaterial( { ambient: 0x262B30, color: 0x262B30, specular: 0x111111, shininess: 200 } );
+                    var mesh0 =  new THREE.Mesh( geometry, material0 );
+                    mesh0.castShadow = true;
+                    mesh0.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh0.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh0;
+                    break;
+            case 1:
+                    var material2 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh2 =  new THREE.Mesh( geometry, material2 );
+                    mesh2.castShadow = true;
+                    mesh2.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh2.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh2;
+                    break;
+            case 2:
+                    var material2 = new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 } );
+                    var mesh2 =  new THREE.Mesh( geometry, material2 );
+                    mesh2.castShadow = true;
+                    mesh2.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh2.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh2;
+                    break;
+            
+               
+            case 3:
+                    var material3 = new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 } );
+                    var mesh3 =  new THREE.Mesh( geometry, material3 );
+                    mesh3.castShadow = true;
+                    mesh3.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh3.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh3;
+                    break;
+            
+               
+            case 4:
+                    var material4 = new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 } );
+                    var mesh4 =  new THREE.Mesh( geometry, material4 );
+                    mesh4.castShadow = true;
+                    mesh4.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh4.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh4;
+                    break;
+            
+               
+            case 5:
+                    var material5 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh5 =  new THREE.Mesh( geometry, material5 );
+                    mesh5.castShadow = true;
+                    mesh5.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh5.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh5;
+                    break;
+            
+               
+            case  6:
+                    var material6 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh6 =  new THREE.Mesh( geometry, material6 );
+                    mesh6.castShadow = true;
+                    mesh6.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh6.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh6;
+                    break;
+          
+               
+            case  7:
+                    var material7 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh7 =  new THREE.Mesh( geometry, material7 );
+                    mesh7.castShadow = true;
+                    mesh7.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh7.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh7;
+                    break;
+            
+               
+            case  8:
+                    var material8 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh8 =  new THREE.Mesh( geometry, material8 );
+                    mesh8.castShadow = true;
+                    mesh8.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh8.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh8;
+                    break;
+            
+               
+            case  9:
+                    var material9 = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 } );
+                    var mesh9 =  new THREE.Mesh( geometry, material9 );
+                    mesh9.castShadow = true;
+                    mesh9.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh9.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh9;
+                    break;
+            
+               
+            case  10:
+                    var material10 = new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 } );
+                    var mesh10 =  new THREE.Mesh( geometry, material10 );
+                    mesh10.castShadow = true;
+                    mesh10.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh10.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh10;
+                    break;
+             case  11:
+                    var material11 = new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 } );
+                    var mesh11 =  new THREE.Mesh( geometry, material11 );
+                    mesh11.castShadow = true;
+                    mesh11.receiveShadow = true;
+                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    mesh11.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh11;
+                    break;
+            default:
+                    var material = new THREE.MeshPhongMaterial( { ambient: 0xff5533, color: 0xff5533, specular: 0x111111, shininess: 200 } );
+                    var mesh =  new THREE.Mesh( geometry, material );
+                    mesh.castShadow = true;
+                    mesh.receiveShadow = true;
+                    console.log("Mesh Position set : myPositions:- " + myPositions[index][0] + "==="+ + myPositions[index][1]+ "==="+ + myPositions[index][2]);
+                    mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+                    meshGroup[index] = mesh;
+                    break;
+        } 
+  	   
+  	    if(count ==  myObjects.length)
+  	    {
+        		scene.add(meshGroup[0]);
+        		for(var j = 0; j < myObjects.length - 1; j++)
+        		meshGroup[j].add(meshGroup[j+1]);	
+        		lastLoad = 1;
+  	    }
+    } );
+      
     for(var j = 0; j < myObjects.length; j++)
     {
-	loader.load(myObjects[j], 0, j);
+  	      loader.load(myObjects[j], 0, j);
     }
+
 }
 
 
 
+
+
 function UpdateAnimation(data){
+
+
+    console.log("UpdateAnimation Function Called.");
+
+     if((data.Button1 == 0) && (data.Button2 == 0) && (data.Button3 == 0)){
+      return;
+     }
+
+//	console.log(data);
     if(lastLoad == 0)
 	return;
     
     var x=0.0, y=0.0, z=0.0;
     var minChange = 10;
 
+    x = ArmXYZ[0];
+    y = ArmXYZ[1];
+    z = ArmXYZ[2];
+
+
     if((Math.abs(x-data.X) < minChange) && (Math.abs(y-data.y) < minChange) && (Math.abs(z-data.Z) < minChange))
 	return;
 
-    x = ArmXYZ[0];
-    y = ArmXYZ[1];
-    z = ArmXYZ[2]
 
     var angleIndex = 0;
     for(var j = 0; j < myObjects.length; j++)
-    {
-	if(myAxes[j] != " ")
+    
+	    if(myAxes[j] != " ")
 	{
 	    if(myAxes[j] == "X")
 		meshGroup[j].rotation.x = data.Angles[angleIndex];
@@ -237,8 +356,36 @@ function UpdateAnimation(data){
 		meshGroup[j].rotation.z = data.Angles[angleIndex];
 	    angleIndex +=1;
 	}
+
+    render();
+}
+function UpdateAnimationSS(data){
+
+//   console.log("UpdateAnimationSS Function Called.");
+
+    if(lastLoad == 0)
+    return;
+    
+    var x=0.0, y=0.0, z=0.0;
+   
+    x = ArmXYZ[0];
+    y = ArmXYZ[1];
+    z = ArmXYZ[2]
+
+    var angleIndex = 0;
+    for(var j = 0; j < myObjects.length; j++)
+    {
+    if(myAxes[j] != " ")
+    {
+        if(myAxes[j] == "X")
+            meshGroup[j].rotation.x = data.Angles[angleIndex];
+        else if(myAxes[j] == "Y")
+            meshGroup[j].rotation.y = data.Angles[angleIndex];
+        else
+            meshGroup[j].rotation.z = data.Angles[angleIndex];
+        angleIndex +=1;
+    }
     }
 
     render();
 }
-

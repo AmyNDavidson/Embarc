@@ -17,30 +17,29 @@
 <script src="js/circle.js" type="text/javascript"></script>
 <script src="js/measureDetails.js" type="text/javascript"></script>
 <script src="js/session.js" type="text/javascript"></script>
+
 </head>
+
 <body id="measurePage1">
 
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-          <div class="container">
-               <div class="navbar">
-              	    <a class="navbar-brand" href="#"><img src="images/home_icon.png" alt="">
-                    </a>
-                    <h3 class="brand" id="headerText"></h3>
-                    <ul class="topRgtIcon">
-                    <li>
-                      <img id="selectedIconId" src="images/measureTopRgtIcon.png" alt="">
-                    </li>
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
+         <div class="container">
+            <div class="navbar">
+            	 <a class="navbar-brand" href="#"><img src="images/home_icon.png" alt=""></a>
+                <h3 class="brand" id="headerText"></h3>
+                <ul class="topRgtIcon">
+               	<li><img id="selectedIconId" src="images/measureTopRgtIcon.png" alt=""></li>
                 </ul>               
          </div>            
-    </div>	
-
- </div>
-   <!--Navigation END Here-->
-     <!--  <div class="container" id="step1Id" style="display:block;">
-      <div class="row marTop">
-        	<div class="col-lg-7 col-sm-7"> 
+</div>	
+ </div><!--Navigation END Here-->
+    
+     
+    <div class="container" id="step1Id" style="display:block;"> <!--Body START Here-->
+    	<div class="row marTop">
+        	<div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
             	<div class="pointsContainer">
-                    <h1 id="step1Heading">Step 1:  Measure the Plane</h1>
+                    <h1>Step 1:  Measure the Plane</h1>
                     <div class="pointsRequired">
                         <label>Points Required</label>
                         <input name="" stype="text" id="pointsRequire" placeholder="c" value="3" readonly>
@@ -63,18 +62,18 @@
                 </div></div>
                 
                </div> 
-            </div>
+            </div><!--Input Boxes END Here-->
             
             <div class="col-lg-5 col-sm-5 circleText">
-            	<div class="planeMeasure"><p><img src="images/planePoints.png" alt="" id="firsStepImage"></p></div>
-                <p id="firstStepText">Plane</p>
+            	<div class="planeMeasure"><p><img src="images/planePoints.png" alt=""></p></div>
+                <p>Plane</p>
             </div>
             
         </div>
-    </div> -->
-    <!--Body END Here-->
- 
-   <div class="container" id="step2Id"> <!--Body START Here-->
+    </div><!--Body END Here-->
+
+
+  <div class="container" id="step2Id" style="display:none;"> <!--Body START Here-->
       <div class="row marTop">
           <div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
               <div class="pointsContainer">
@@ -87,7 +86,6 @@
                         <label>Points Taken</label>
                         <input name="" id="pointsTakenId2" type="text" placeholder="0" readonly>
                     </div>
-                    
                 <!--<div class="clearfix"></div>-->
                 <em class="pointText" id="measureTextId2"></em>
                 <div class="clearfix"></div>
@@ -96,26 +94,28 @@
                 <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="images/closeIcon.png" alt=""></span> Cancel </a>
                 </div>
                 
-                <div class="pointsRequired" id="CalculateResultId" style="display:none">
+                <div class="pointsRequired" id="CalculateResultId">
                   <a href="#" class="btn btn-green">
                     <span class="glyphicon glyphicon-chevron-right">
-                  <img src="images/btn_Icon.png" id="calculateImg" alt="" ></span><span id="calculateTextId">Calculate</span></a>
+                  <img src="images/btn_Icon.png" alt="" ></span>Calculate</a>
                 </div>
                 
-               <div class="pointsRequired" id="measurePlaneNextButton" >
+               <div class="pointsRequired" id="TempNextButton" style="display:none">
+                  
                   <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right">
                   <img src="images/nextIcon.png" alt="" ></span> Next </a>
-                </div>
-              </div>
-              </div> 
-            
-              </div>
+               </div>
 
-            <!--Input Boxes END Here-->
+
+
+              </div>
+                
+               </div> 
+            </div><!--Input Boxes END Here-->
             
             <div class="col-lg-5 col-sm-5 circleText">
               <div class="planeMeasure"><p><img src="" alt="" id="measureTypeImage"></p></div>
-                <p id="measureTypeTitle">Circle</p>
+                <p id="measureTypeTitle">Circle Hole</p>
             </div>
             
             <div class="diameterContainer">
@@ -125,12 +125,8 @@
                 </div>
                <div class="diameterButtons">
                   <div class="pointsRequired" id="saveCircleButton">
-                    <a class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="images/floppyIcon.png" alt=""></span> Save </a>
+                    <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="images/floppyIcon.png" alt=""></span> Save </a>
                   </div>
-                   <div class="pointsRequired" id="homeNavigateButton" style="display:none">
-                    <a class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="images/home_icon.png" alt=""></span>Home</a>
-                  </div>
-
                   <div class="pointsRequired" id="measureDetailsDoneButton">
                   <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right"><img src="images/tickIcon.png" alt=""></span> Done </a>
                   </div>
@@ -146,7 +142,7 @@
     <div class="popup_div" id="saveAlert" style="display:none;">
     <div  class="import_contact" >
         <div class="heaading_bg">
-            <div class="div_1_heading" id="headingId">
+            <div class="div_1_heading">
               SUCCESS
             </div>
              
@@ -156,7 +152,7 @@
           <p id="popUpText">Your data has been successfully saved.</p>
         </div>
         <div class="cancelBtns">
-            <a title="Close" onClick="" id="closePopUp">Close</a>
+            <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
        </div>
       
      </div>
