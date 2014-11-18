@@ -7,15 +7,15 @@
     var continueFlag=false;
     var resultStr="";
     var dataArray = new Array();
-    // var inputFlag=false;
-    var checkOutType =  localStorage.getItem('CheckOutType');
+    
+   // var inputFlag=false;
+ 
+   var checkOutType =  localStorage.getItem('CheckOutType');
 
 $(document).ready(function(){
-
      GetSettings();
-       /*======Check selected checkout type show the respective images and settings==========*/
-
-     if(checkOutType=="Length Checkout" || checkOutType=="Sphere Checkout"){
+  
+    if(checkOutType=="Length Checkout" || checkOutType=="Sphere Checkout"){
       inputFlag=true;
 
      $(".pointText").addClass("grayFont");
@@ -48,31 +48,31 @@ $(document).ready(function(){
         
          continueFlag=true;
          SetCheckout(Checkouts.Point);
-         //$("#measureTypeImage").attr("src","images/probCal.png") 
+         //$("#measureTypeImage").attr("src","../images/probCal.png") 
          $("#headerText").html("Point Checkout")
-         $("#selectedIconId").attr("src","images/pointcheckoutBreadCrum.png")
+         $("#selectedIconId").attr("src","../images/pointcheckoutBreadCrum.png")
         
         
         }else if(checkOutType=="Length Checkout"){
 		     SetCheckout(Checkouts.Length);
 
          $("#headerText").html("Length Checkout")
-        // $("#measureTypeImage").attr("src","images/probCal.png") 
-		     $("#selectedIconId").attr("src","images/lengthcheckoutBredCrum.png")
+        // $("#measureTypeImage").attr("src","../images/probCal.png") 
+		     $("#selectedIconId").attr("src","../images/lengthcheckoutBredCrum.png")
 		
       }else if(checkOutType=="Plane Checkout"){
       
          continueFlag=true;
       SetCheckout(Checkouts.Plane);
-	    //$("#measureTypeImage").attr("src","images/probCal.png") 
+	    //$("#measureTypeImage").attr("src","../images/probCal.png") 
         $("#headerText").html("Plane Checkout")
-		  $("#selectedIconId").attr("src","images/plane_200x200.png")
+		  $("#selectedIconId").attr("src","../images/plane_200x200.png")
        
      }else if(checkOutType=="Sphere Checkout"){
         $("#headerText").html("Sphere Checkout")
         SetCheckout(Checkouts.Sphere);
-       //$("#measureTypeImage").attr("src","images/probCal.png"); 
-		   $("#selectedIconId").attr("src","images/SpherebreadCrumb.png");
+       //$("#measureTypeImage").attr("src","../images/probCal.png"); 
+		   $("#selectedIconId").attr("src","../images/SpherebreadCrumb.png");
     }
   
      $("#continueButton").click(function(){
@@ -85,9 +85,10 @@ $(document).ready(function(){
          }else if(checkOutType=="Length Checkout"){
             saveBarLength($("#continueText").val());  
          }
+
       continueFlag=true;
       localStorage.setItem('checkOutLengthData', $("#continueText").val());
-     
+      
       $("#pointsRequire2").val(pointNeededVal)
       $("#measureDetails2CancelButton .btn-red").css('background','#df443f');
       $("#CalculateResultId .pointsContainer .btn-green").css('background','#F1F1F1');
@@ -97,29 +98,11 @@ $(document).ready(function(){
       $("#pointsRequire2").removeClass("grayBg");
       $("#checkOutCancelButton .btn-red").css('background','#df443f');
       $("#instructionText").html('  Take at least '+pointNeededVal+' points and click Calculate or Arm Button 3 to see the result. ')
-   
-     }else if($("#continueText").val()==""){
 
-        $("#popUpId").css('display','block');
-        $("#popUpId #popUpHeading").html("ALERT")
-        $("#popUpId #popUpText").html("Please enter the require field value")
-
-
-     }
-
-
-
-     else{
-
+     }else{
 	     $("#popUpId").css('display','block');
-       $("#popUpId #popUpHeading").html("ALERT")
-
-      
-
-	  	 $("#popUpId #popUpText").html("Bar Length/Sphere Length can not be 0.")
-
-	    
-       }
+	  	 $("#popUpId #popUpText").html("Please enter the require field value")
+	     }
     })
 
   
@@ -140,8 +123,9 @@ $(document).ready(function(){
     }
     
      $("#saveCheckOutButton").click(function(){
-         //var resultStr = "Min Deviation ="+$("#minDevi").html()+", Max Deviation="+$("#maxDevi").html()+",Average Deviation="+$("#aveDevi").html()+", Range Over 2-X="+$("#rangeX").html()+", Range Over 2-Y="+$("#rangeY").html()+", Range Over 2-Z="+$("#rangeZ").html()
-          saveInLogFile(checkOutType,resultStr,dataArray);  
+     //var resultStr = "Min Deviation ="+$("#minDevi").html()+", Max Deviation="+$("#maxDevi").html()+",Average Deviation="+$("#aveDevi").html()+", Range Over 2-X="+$("#rangeX").html()+", Range Over 2-Y="+$("#rangeY").html()+", Range Over 2-Z="+$("#rangeZ").html()
+
+       saveInLogFile(checkOutType,resultStr,dataArray);  
   
      });
    
@@ -218,32 +202,23 @@ function showCheckOutdata(data){
   var MeasureObject = [MeasureACircle, MeasureACircle, MeasureASlot, MeasureARectangle, MeasureAnExtCircle, MeasurePtToPt,MeasurePlnToPln, MeasureCirtoCir, MeasurePtToLine, MeasurePtToPln, MeasureAngle2PLn,          MeasureAngle2Lines, MeasureAngleLin2Pln];
     
   var SphereDiameter = 25.0;
-
-
-  /*========Result event handling ================================*/
   
   
   socket.on('Result', function(data){
 
+       console.log(data);
+
+  
       if(data.Valid == 0)
       {
-            
-
-
-
-           // $("#resultDiv").hide(); 
-            $("#saveAlert #headingId").html("Error")
-            $("#saveAlert #popUpText").html("Calculation failed")
-            $("#saveAlert").css("display","block");
-
-
+         string = "Calculation failed";
+         alert("calculation failed");
          
       }
       else
       {
-            $(".diameterContainer").show();
-            $("#resultDiv").show(); 
-            $("#resultButton").show(); 
+           $("#resultDiv").show(); 
+           $("#resultButton").show(); 
         
             
             if(checkOutType=="Sphere Checkout"){
@@ -323,14 +298,13 @@ function showCheckOutdata(data){
               $("#minDevi").html(data.XRange2+" "+dataUnits);
               $("#maxDevi").html(data.YRange2+" "+dataUnits);
               $("#aveDevi").html(data.ZRange2+" "+dataUnits);
-             
               } else{
-            
+              
               $("#minDevi").html(Number(String(math.eval(data.XRange2+' mm to inch')).split("inch")[0]).toFixed(4)+" "+dataUnits);
               $("#maxDevi").html(Number(String(math.eval(data.YRange2+' mm to inch')).split("inch")[0]).toFixed(4)+" "+dataUnits);
               $("#aveDevi").html(Number(String(math.eval(data.ZRange2+' mm to inch')).split("inch")[0]).toFixed(4)+" "+dataUnits);
-            
-       }
+             
+             }
  
   resultStr = "Range Over 2-X = "+$("#minDevi").html()+", Range Over 2-Y = "+$("#maxDevi").html()+", Range Over 2-Z = "+$("#aveDevi").html();
 
@@ -340,14 +314,10 @@ function showCheckOutdata(data){
         }
    });
        
-    
-   /*======track points taken and button 1 2 & 3 handling =============*/
-
-
     socket.on('DRO', function(data){
-    
-   if(continueFlag){
-   
+
+    if(continueFlag){
+
     UpdateAnimation(data);
     droObject.X = data.X.toFixed(3);
     droObject.Y = data.Y.toFixed(3);
@@ -355,50 +325,82 @@ function showCheckOutdata(data){
     droObject.I = data.I.toFixed(3);
     droObject.J = data.J.toFixed(3);
     droObject.K = data.K.toFixed(3);
- 
-  localStorage["droData"] = JSON.stringify(data);
 
-  if(data.Button2 != 0){
-   console.log("second button hit") 
-   TakeAPoint(data);
-  } 
-   
-   else if(data.Button1 != 0){
-     console.log("first button hit") 
+    localStorage["droData"] = JSON.stringify(data);
+    
+  if(data.Button2 != 0)
+    TakeAPoint(data);
+  if(data.Button1 != 0)
      EraseAPoint();
-   }  
-  else if(data.Button3 != 0)
-  {    
-          console.log("third button hit") 
-       
-        
-     //   MeasureStep++; 
-       // if(MeasureStep==maxSteps[feature]-1){
-          if(pts1.length>=pointNeededVal){
-            MakeMeasureSound(); 
-            finalStep();
-         } 
-      // }
-     }
+    
+  if(data.Button3 != 0)
+  {
+
+
+      if(MeasureStep==0){
+      
+      $("#measurePlaneNextButton").trigger("click");      
+      
+      }else if(MeasureStep==1){
+              
+               $("#CalculateResultId").trigger("click");      
+               
+            }
+
+       MeasureStep++;
+      
+       if(MeasureStep==0){
+
+             var elem = document.getElementById("pointsTakenId");
+
+
+    }else
+    {
+             elem = document.getElementById("pointsTakenId2");
+
+    }
+      
+           elem.value = 0;
+      
+          if(MeasureStep == maxSteps[feature]){
+          showResult();
+
+          }
+      else
+      { 
+         //var f = document.getElementById("STEP");
+          f.value = MeasureStep + 1;
+          //var f1 = document.getElementById("FEATURE");
+      
+        switch(MeasureStep)
+        {
+        case 1:
+          f1.value = MyMeasureObject.SubFeature2;
+          break;
+        case 2:
+          f1.value = MyMeasureObject.SubFeature3;
+          break;
+        case 3:
+          f1.value = MyMeasureObject.SubFeature4;
+          break;
+
+      }
+    
+    }
+  }
+
   }else{
  
-
+  //  $("#popUpId #popUpText").html("Please click continue to take points")   
+    //$("#popUpId").css("display","block");
   }
-     if(data.Button3 !=0){
-              if(!continueFlag){
-                 $("#continueButton").trigger("click");
-              }
-      }
-
 
 });
  
  
-   /*=========Get data form the setting section=====================*/
-
-
     socket.on('Settings', function(data){
-  
+
+
     settingObject.SSID = data.SSID;
     settingObject.PASSWORD = data.PASSWORD;
     settingObject.CHANNEL = data.CHANNEL;
@@ -451,13 +453,97 @@ function showCheckOutdata(data){
         }
         settingObject.dataUnits=1;
   
-      } 
+      /*$("#lengthId").html("Enter Bar Length(inch)")    
+      settingObject.dataUnits=1;*/
+    } 
 
  });
       
+    socket.on('ARM', function(data){
+    armObject.Battery = data.Battery;
+     
+
+    /*elem = document.getElementById("version");
+    elem.value = data.Version;*/
+        armObject.Version = data.Version;
+    /*elem = document.getElementById("axes");
+    elem.value = data.Axes;
+    */armObject.Axes = data.Axes;
+        armObject.Volume = data.Volume;
+        armObject.HWVersion = data.HWVersion;
+        armObject.SWVersionHi = data.SWVersionHi;
+        armObject.SWVersionLo = data.SWVersionLo;
+   
+/*
+    elem = document.getElementById("armvolume");
+    elem.value = data.ArmVolume;
+*/
+          armObject.ArmVolume = data.ArmVolume;
+/*
+    elem = document.getElementById("temperature");
+    elem.value = data.Ambient;*/
+
+             armObject.Ambient = data.Ambient;
+/*
+    elem = document.getElementById("hapticon");
+    elem.disabled = (0 == data.Haptic);
+*/
+         armObject.Haptic = data.Haptic;
+
+
+
+    /*elem = document.getElementById("hapticoff");
+    elem.disabled = (0 == data.Haptic);
+*/
+             armObject.Haptic = data.Haptic;    
+
+  /*  elem = document.getElementById("headlighton");
+    elem.disabled = (0 == data.Headlights);
+*/
+        armObject.Headlights = data.Headlights;    
+/*
+    elem = document.getElementById("headlightoff");
+    elem.disabled = (0 == data.Headlights);
+*/
+        //armObject.headlightoff = data.headlightoff;      
+
+  
+       });
+   
+
+
+
+      socket.on('PROBE', function(data){
+
+
+    /*  var elem = document.getElementById("type");
+
+
+    elem.value = data.PType;*/
+       probeObject.PType = data.PType
     
 
 
+
+/*
+      elem = document.getElementById("name");
+    elem.value = data.PName;*/
+
+    probeObject.PName = data.PName
+      /*elem = document.getElementById("diameter");
+    elem.value = data.Diameter;*/
+        probeObject.Diameter = data.Diameter
+
+/*
+      elem = document.getElementById("pid");
+    elem.value = data.PID;*/
+
+    probeObject.PID = data.PID
+
+
+
+
+       });
  
    socket.on('PROBESPECS', function(data){
         var string;
@@ -488,16 +574,23 @@ function showCheckOutdata(data){
       var pts3 = []; 
       var pts4 = []; 
       
-
-/*=========Take point and update the button visiblity and input box value =============*/
-
-
  function TakeAPoint(data)
  {
     TakePointSound();
     
    var x = {"X": data.X, "Y":data.Y, "Z": data.Z, "I": data.I, "J": data.J, "K": data.K, "ANGLES": data.ANGLES, "RawPositions" : data.RawPositions};  
-   elem = document.getElementById("pointsTakenId2");
+   
+     
+
+   // if(MeasureStep==0){
+     //  var elem = document.getElementById("pointsTakenId");
+
+  //   }else{
+  
+       elem = document.getElementById("pointsTakenId2");
+  //   }
+
+
   switch(MeasureStep)
   {
 
@@ -510,16 +603,16 @@ function showCheckOutdata(data){
              
               $("#calPointsId").html(pts1.length+"/"+pointNeededVal)
             }
-             elem.value = pts1.length;
+      elem.value = pts1.length;
+        // special case for calibration and checkout.
 
+    if(MaxPointsToTake != 0 && MaxPointsToTake == pts1.length){
 
-    if(MaxPointsToTake != 0 && MaxPointsToTake <= pts1.length){
       $(".pointsContainer .btn-green").css('background','#1db79b'); 
-      $("#CalculateResultId").click(function(){
-            finalStep();
-          
-       }) 
 
+      $("#CalculateResultId").click(function(){
+          showResult();
+      });
 
     }
 
@@ -539,25 +632,44 @@ function showCheckOutdata(data){
     break;
   }
    
+    
+       if(MeasureStep==0){
+         
+       $("#pointsTakenId").val(pts1.length);
+
+       if(pts1.length>=3){
+            
+            $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');
+            
+             $("#measurePlaneNextButton").click(function(){
+          $("#step1Id").css("display","none");
+              $("#step2Id").css("display","block");
+         }); 
+
+           } 
+      
+        }
+      else if(MeasureStep==1){
+
+           $("#pointsTakenId2").val(pts2.length);
+          
+           if($("#pointsTakenId2").val()>=$("#pointsRequire2").val()){
+
+           $(".pointsContainer .btn-green").css('background','#1db79b');
+          
+           $("#CalculateResultId").click(function(){
+            showResult();
+
+            })
+         }    
+
+      }
  }
 
  
- function  finalStep(){
-   
-      showResult(); 
-      var elem = document.getElementById("pointsTakenId2");
-      elem.value = 0;
-
-
- }
-
-
-
-/*========Delete point and update the buttons handling and input box value===========*/
-
-
  function EraseAPoint()
  {
+  
 
   ErasePointSound();
 
@@ -568,14 +680,6 @@ function showCheckOutdata(data){
     case 0:
       pts1.pop();
     elem.value = pts1.length;
-   
-
-    if(pts1.length<pointNeededVal){
-         $("#CalculateResultId .btn-green").css('background','#F1F1F1'); 
-         $("#CalculateResultId").unbind("click");
-     } 
-
-
     break;
     case 1:
       pts2.pop();
@@ -590,9 +694,6 @@ function showCheckOutdata(data){
     elem.value = pts4.length;
     break;
   } 
-
-
-
  }
  
  function MeasureFeature()
@@ -658,10 +759,6 @@ function SetMeasurement(meas)
 }
 
 
-/*======Set checkout type================*/
-
-
-
 function SetCheckout(meas)
 {
 
@@ -678,9 +775,16 @@ pointNeededVal=maxChkPts[meas]
 }
 
  $("#calPointsId").html("0/"+pointNeededVal)
+
+
+ //$("#pointsRequire2").val(maxChkPts[meas])
+ 
+  
   MaxPointsToTake = maxChkPts[meas];
   MyMeasureObject = Checkout;
   MyMeasureObject.Feature = meas;
+ 
+
      if(checkOutType=="Length Checkout" || checkOutType=="Sphere Checkout"){
 
       MyMeasureObject.BarLength = $("#continueText").val();
@@ -695,6 +799,17 @@ pointNeededVal=maxChkPts[meas]
   
 }
 
+function SetCalibration(meas)
+{
+ // ClearData();
+  feature = meas;
+  $("#pointsRequire2").val(maxCalPts[meas])
+  MaxPointsToTake = maxCalPts[meas];
+  MyMeasureObject = Calibration;
+  MyMeasureObject.Feature = meas;
+
+  
+}
 
 function ClearData()
 {
@@ -704,41 +819,77 @@ function ClearData()
   pts4 = [];
   MeasureStep = 0;
   MaxPointsToTake = 0;
+  
+  //var elem = document.getElementById("PTSTAKEN");
      if(MeasureStep==0){
+      //var elem = document.getElementById("pointsTakenId");
     }else
     {
+          //var elem = document.getElementById("pointsTakenId2");
+
     }
- 
+  //elem.value = 0;
+
+  //elem = document.getElementById("PTSNEEDED");
+  //elem.value = 0;
+}
+
+function GetSettings()
+{
+  socket.emit('client_data', Update);
+}
+
+function SetSettings()
+{
+
+  /*var elem = document.getElementById("ssid");
+  Settings.SSID = elem.value;
+  elem = document.getElementById("password");
+  Settings.PASSWORD = elem.value;
+  elem = document.getElementById("channel");
+  Settings.CHANNEL = elem.value;
+  elem = document.getElementById("volume");
+  Settings.VOLUME = elem.value;
+  elem = document.getElementById("barlength");
+  Settings.BARLENGTH = elem.value;
+  elem = document.getElementById("spherediameter");
+  Settings.SPHEREDIAMETER = elem.value;
+  
+  elem = document.getElementById("hapticon");
+  Settings.HAPTIC = 0;
+  if(elem.checked == true)
+    Settings.HAPTIC = 1;
+  Settings.HEADLIGHT = 0;
+  elem = document.getElementById("headlighton");
+  if(elem.checked == true)
+    Settings.HEADLIGHT = 1;
+  elem = document.getElementById("unitsinch");
+  Settings.UNITS = 0;
+  if(elem.checked == true)
+    Settings.UNITS = 1;
+    
+  socket.emit('client_data', Settings);*/
 }
 
 
+function showResult(){
+  
+    $(".diameterContainer").show();
+
+     $("#CalculateResultId .btn-green").css('background','#F1F1F1');
+     $("#checkOutCancelButton .btn-red").css('background','#F1F1F1');
+
+    MeasureFeature();
+  
+}
 
 
-  function GetSettings()
-  {
-    socket.emit('client_data', Update);
-  }
- 
-  /*===disable button and measure feature called============*/
-
-
-  function showResult(){
-       $("#CalculateResultId .btn-green").css('background','#F1F1F1');
-       $("#checkOutCancelButton .btn-red").css('background','#F1F1F1');
-       $(".pointText").addClass("grayFont");
-       MeasureFeature();    
-
-  }
-
-/*===== Read json data and save into the array ======== */  
-
-function readJsonFile(){
-
+ function readJsonFile(){
      socket.emit('readJsonObject');  
+   }
 
-}
 
- socket.on('logsJsonData', function(response){
+     socket.on('logsJsonData', function(response){
    
       if(response.Data.length>0){
              $.each(response.Data, function(idx, topic){
@@ -748,17 +899,11 @@ function readJsonFile(){
                     dataArray.push(obj);
              });
         }
- });
+    });
    
 
-/*===== Data saved in the log file handler ================ */ 
-
-
  socket.on('writeDone', function(data){
-    $("#saveAlert").css("display","block");
-    $("#saveCheckOutButton").hide(); 
-    $("#homeNavigationButton").show(); 
-    $("#homeNavigationButton").click(function(){
-     window.location = "home.html";      
-    })
+
+  $("#saveAlert").css("display","block");
+
 });

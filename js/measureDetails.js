@@ -5,189 +5,249 @@
     var resultString="";
     var dataArray = new Array();
     var MeasureStep = 0;
-    var feature = 0;    
+    var feature = 1;    
     var socket = io.connect();
     var MyMeasureObject;
     var MaxPointsToTake = 0;
     var settingUnits;
-    var pointsRequire;
-    var pointsTaken;  
     // number of subfeatures for each measurement
     var maxSteps = [0,2,2,2,2,2,2,4,4,3,2,4,3];
+
     // number of points for each checkout
     var maxChkPts = [0,10,9,9,10];
     // number of points for each calibration
     var maxCalPts = [0,20,15,36];
-    // indexed array of measurements.
+     // indexed array of measurements.
     var MeasureName = ["Invalid", "MeasureACircle", "MeasureASlot", "MeasureARectangle", "MeasureAnExtCircle", "MeasurePtToPt",
  					"MeasurePlnToPln", "MeasureCirtoCir", "MeasurePtToLine", "MeasurePtToPln", "MeasureAngle2PLn", 
  					"MeasureAngle2Lines", "MeasureAngleLin2Pln"];
     var CheckoutName = ["Invalid", "Point Checkout", "Plane Checkout", "Sphere Checkout", "Length Checkout"];
     var CalibrationName = ["Invalid", "Calibration - Point", "Calibration - Plane", "Calibration - Sphere"];
+ 					
 	var MeasureObject = [MeasureACircle, MeasureACircle, MeasureASlot, MeasureARectangle, MeasureAnExtCircle, MeasurePtToPt,MeasurePlnToPln, MeasureCirtoCir, MeasurePtToLine, MeasurePtToPln, MeasureAngle2PLn, 					MeasureAngle2Lines, MeasureAngleLin2Pln];
+    
 	var SphereDiameter = 25.0;
-	var MeasureType = "";
+	
 
     $(document).ready(function() {
+
     	GetSettings();
-	   
-    /*======Check the selected measurement and show its respective setting image ==============*/
-
-
-
-	    MeasureType =  localStorage.getItem('MeasureType');
+	  
+	    var MeasureType =  localStorage.getItem('MeasureType');
         $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
+        $(".pointsContainer .btn-green").css('background','#F1F1F1');
         $(".diameterContainer").hide();
-   	    if(MeasureType=="holeDiameter"){
+
+   		
+   		if(MeasureType=="holeDiameter"){
+	    
 	    SetMeasurement(Measurements.MeasureACircle);
+		
 		$("#headerText").html("Measure Circle")
-		$("#selectedIconId").attr("src","images/circle_breadcrumb_200x200.png")
+		$("#selectedIconId").attr("src","../images/circle_breadcrumb_200x200.png")
+		$("#measureTextId2").html("Take at least 3 points on the Circle and click Calculate or Arm Button 3")
+		$("#measureTypeImage").attr("src","../images/circle_Img.png")
+		$("#measureTypeTitle").html("Circle Hole")
+		$("#measureTitleText").html("Step 2:  Measure the Circle")
+		$("#pointsRequire2").val("3");
 		$("#resultId").html('<h2>Circle Diameter</h2><h1 id="diameterId"></h1>');
-        
 
-
+        				
         }else if(MeasureType=="slotDimensions"){
 
-      	SetMeasurement(Measurements.MeasureASlot)
-        $("#headerText").html("Measure Slot")
-		 $("#selectedIconId").attr("src","images/measure_slot_200x200.png")
+	 	SetMeasurement(Measurements.MeasureASlot)
+	    $("#headerText").html("Measure Slot")
+		$("#measureTextId").html("Measure Atleast 6 points on the slot") 
+		$("#selectedIconId").attr("src","../images/measure_slot_200x200.png")
+		$("#measureTypeImage").attr("src","../images/slotImage.png")
+		$("#measureTypeTitle").html("Slot")
+		$("#measureTitleText").html("Step 2: Measure the Slot")
+		$("#pointsRequire2").val("6");
 		$("#resultId").html('<h2>Slot length is</h2><h1 id="diameterId"></h1><h2>Slot width is</h2><h1 id="diameterId"></h1>');
 	   }else if(MeasureType=="rectangleDimensions"){
-
+	   
 	    SetMeasurement(Measurements.MeasureARectangle);
-        $("#headerText").html("Measure Rectangle")
-		$("#selectedIconId").attr("src","images/rectangle_breadcrumb_200x200.png")
-	//	$("#measureTypeImage").attr("src","images/RectangleImage.png")
+
+	    $("#headerText").html("Measure Rectangle")
+		$("#selectedIconId").attr("src","../images/rectangle_breadcrumb_200x200.png")
+		$("#measureTextId2").html("Take two points on a major side, then one point each of the remaining sides in a cw or a ccw and click Calculate or Arm Button 3") 
+		$("#measureTypeImage").attr("src","../images/RectangleImage.png")
+		$("#measureTypeTitle").html("Rectangle")
+		$("#measureTitleText").html("Step 2: Measure the Rectangle")
+		$("#pointsRequire2").val("3");
     	$("#resultId").html('<h2>Slot length is:</h2><h1 id="diameterId"></h1><h2>Slot width is:</h2><h1 id="diameterId"></h1>');
-
+		
+		
 	   }else if(MeasureType=="diameterOfAShaft"){
-
+	     
 	     SetMeasurement(Measurements.MeasureAnExtCircle)
 		 $("#headerText").html("Measure Shaft")
-		 $("#selectedIconId").attr("src","images/shaft_breadcrumb_200x200.png")
+		 $("#selectedIconId").attr("src","../images/shaft_breadcrumb_200x200.png")
+		 $("#measureTextId").html("Take at least 3 points on the Circle and click Next or Arm Button 3") 
+		 $("#measureTextId2").html("Take at least 3 points on the circle and click Calculate or Arm Button 3") ;
+		 $("#measureTypeImage").attr("src","../images/circle_Img.png")
+		 $("#measureTypeTitle").html("Shaft");
+		 $("#measureTitleText").html("Step 2: Measure the Shaft");
+		 $("#pointsRequire2").val("3");
 		 $("#resultId").html('<h2>Circle Diameter</h2><h1 id="diameterId"></h1>');
-
+	 
 	  }else if(MeasureType=="distanceBetweenTwoPoints"){
 	  	 
 	  	   SetMeasurement(Measurements.MeasurePtToPt);
 		   $("#headerText").html("Measure Distance Between Two Points")
-     	   $("#selectedIconId").attr("src","images/points_breadcrumb_200x200.png")
+		   $("#measureTypeTitle").html("Point")
+		   $("#measureTextId").html("Take a point and click Next or Arm Button 3") 
+		   $("#measureTextId2").html("Take a point and click Calculate or Arm Button 3") 
+     	   $("#selectedIconId").attr("src","../images/points_breadcrumb_200x200.png")
+		   $("#measureTypeImage").attr("src","../images/PointImage.png");
+		   $("#measureTitleText").html("Step 2: Measure the Distance Between Two Points");
+		   $("#pointsRequire").val("1");
+		   $("#pointsRequire2").val("1");
 		   $("#resultId").html('<h2>Distance Between points is:</h2><h1 id="diameterId"></h1>');
 
 	  }else if(MeasureType=="distanceBetweenTwoSurfaces"){
+	  	  SetMeasurement(Measurements.MeasurePlnToPln)
 	  
-	    SetMeasurement(Measurements.MeasurePlnToPln)
+	   $("#headerText").html("Measure Distance Between Two Surfaces")
+	   $("#selectedIconId").attr("src","../images/surface_breadcrumb_200x200.png")
+	   $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	   $("#measureTextId2").html("Take at least 3 points on the plane and click Calculate or Arm Button 3")
+	   $("#measureTypeImage").attr("src","../images/planePoints.png")
+	   $("#measureTypeTitle").html("Plane")
+	   $("#measureTitleText").html("Step 2: Measure the Distance Between Two Surfaces");
+	   $("#pointsRequire2").val("3");
+	   $("#resultId").html('<h2>Distance Between plane is:</h2><h1 id="diameterId"></h1>');
 	   
-	    $("#headerText").html("Measure Distance Between Two Surfaces")
-	    $("#selectedIconId").attr("src","images/surface_breadcrumb_200x200.png")
-	    $("#resultId").html('<h2>Distance Between planes is:</h2><h1 id="diameterId"></h1>');
-	 
+	   
 	  }else
-	  
 	   if(MeasureType=="distanceBetweenTwoCirclesHoles"){
 		 SetMeasurement(Measurements.MeasureCirtoCir)
 		$("#headerText").html("Measure Distance Between Two Circles")
-		$("#selectedIconId").attr("src","images/holes_breadcrumb_200x200.png")
+		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	     $("#measureTextId2").html("Take at least 3 points on the Circle and click Calculate or Arm Button 3")
+		$("#selectedIconId").attr("src","../images/holes_breadcrumb_200x200.png")
+		$("#measureTypeImage").attr("src","../images/circle_Img.png")
+		$("#measureTypeTitle").html("Circle Hole")
+		$("#measureTitleText").html("Step 2: Measure the Distance Between Two Circles Holes");
+		$("#pointsRequire2").val("3");
 		$("#resultId").html('<h2>Distance Between holes is:</h2><h1 id="diameterId"></h1>');
-	 
+		 
+	  
 	  }else if(MeasureType=="distancePointToLine"){
 	     SetMeasurement(Measurements.MeasurePtToLine)
 	     $("#headerText").html("Measure")
 	     $("#headerText").html("Measure Distance From a Point to a Line")
-		 $("#selectedIconId").attr("src","images/pointtoline_breadcrumb_200x200.png")
+	      $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	     $("#measureTextId2").html("Take a min of two poitns to define a line")
+
+
+		 $("#selectedIconId").attr("src","../images/pointtoline_breadcrumb_200x200.png")
+		 $("#measureTypeImage").attr("src","../images/line.png")
+		 $("#measureTypeTitle").html("Line")
+		 $("#measureTitleText").html("Step 2: Measure the Distance From a Point to a Line");
+		 $("#pointsRequire2").val("2");
 		 $("#resultId").html('<h2>Distance Between point and line is:</h2><h1 id="diameterId"></h1>');
 		 
 	  
 	  }else if(MeasureType=="distancePointToPlaneSurface"){
           SetMeasurement(Measurements.MeasurePtToPln) 
 		  $("#headerText").html("Measure Distance From a Point to Surface")
-		  $("#selectedIconId").attr("src","images/pointtosurface_breadcrumb_200x200.png")
+		  $("#selectedIconId").attr("src","../images/pointtosurface_breadcrumb_200x200.png")
+		  $("#measureTypeImage").attr("src","../images/planePoints.png")
+		  $("#measureTypeTitle").html("Plane")
+		  $("#measureTitleText").html("Step 2: Measure Distance From a Point to a Plane");
+		  $("#pointsRequire2").val("3");
+		  $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	      $("#measureTextId2").html("Take a single point and click Calculate or Arm Button 3")
+
 		  $("#resultId").html('<h2>Distance From a Point to a Plane is:</h2><h1 id="diameterId"></h1>');
 		  
 	
 	  }else if(MeasureType=="angleBetweenTwoSurfaces"){
 	  	  SetMeasurement(Measurements.MeasureAngle2PLn);
 		  $("#headerText").html("Measure Angle Between Two Surfaces");
-		  $("#selectedIconId").attr("src","images/angle_breadcrumb_200x200.png")
+		  $("#selectedIconId").attr("src","../images/angle_breadcrumb_200x200.png")
+		  $("#measureTypeImage").attr("src","../images/planePoints.png")
+		  $("#measureTypeTitle").html("Plane")
+		  $("#measureTitleText").html("Step 2: Measure Angle between two Surfaces");
+		  $("#pointsRequire2").val("3");
+          $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	      $("#measureTextId2").html("Take at least 3 points on the plane and click Calculate or Arm Button 3")
+
 	  	  $("#resultId").html('<h2>Angle between Surfaces is:</h2><h1 id="diameterId"><h1>');
 	  
 	  }else if(MeasureType=="angleBetweenTwoLinesEdges"){
 		 SetMeasurement(Measurements.MeasureAngle2Lines)
 
 		 $("#headerText").html("Measure Angle Between Two Lines")
-		 $("#selectedIconId").attr("src","images/angle_lines_breadcrumb_200x200.png")
-	   $("#resultId").html('<h2>Angle between Lines is:</h2><h1 id="diameterId"><h1>');
+		 $("#selectedIconId").attr("src","../images/angle_lines_breadcrumb_200x200.png")
+		 $("#measureTypeImage").attr("src","../images/line.png")
+		 $("#measureTypeTitle").html("Line");
+		 $("#measureTitleText").html("Step 2: Measure Angle between two Lines");
+		 $("#pointsRequire2").val("2");
+		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	      $("#measureTextId2").html("Take at least min of two points to define a line")
+
+		 $("#resultId").html('<h2>Angle between Lines is:</h2><h1 id="diameterId"><h1>');
+		 
 		
 	  }else if(MeasureType=="angleBetweenLineAndSurface"){
 	     SetMeasurement(Measurements.MeasureAngleLin2Pln)
 		 $("#headerText").html("Measure Angle Between Line And Surface")
-		 $("#selectedIconId").attr("src","images/angleline_breadcrumb_200x200.png")
+		 $("#selectedIconId").attr("src","../images/angleline_breadcrumb_200x200.png")
+		 $("#measureTypeImage").attr("src","../images/planePoints.png")
+		 $("#measureTypeTitle").html("Plane");
+		 $("#measureTitleText").html("Step 2: Angle between a Line and a Surface");
+		 $("#pointsRequire2").val("3");
+		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
+	      $("#measureTextId2").html("Take at least min of two points to define a line")
 		 $("#resultId").html('<h2>Angle between Lines and Surface is:</h2><h1 id="diameterId"><h1>');
 	  } 
      
       
-    /*====save result in the log file ================*/
-
    
       $("#saveCircleButton").click(function(){
           saveInLogFile($("#headerText").html(),resultString,dataArray);
       })
 
+      $("#saveAlert #closePopUp").click(function(){
+           $("#saveAlert").css("display","none");
+      })
 
-   
-        /*====save result in the log file ================*/
-
-	  $("#saveAlert #closePopUp").click(function(){
-	  
-	   $("#saveAlert").css("display","none");
-     
-       })
-
-
-   
-
+  
       readJsonFile();
 
+
+
 	});
-  
-   /*========= Read updated log files json data and push the into array ============= */
 
+   
+   
    function readJsonFile(){
-    
-       socket.emit('readJsonObject');  
-
+     socket.emit('readJsonObject');  
    }
 
 
    socket.on('logsJsonData', function(response){
-         if(response.Data.length>0){
-	             $.each(response.Data, function(idx, topic){
-	                    var obj = new Object();
-	                    obj.date = topic.date
-	                    obj.fileName = topic.fileName
-	                    dataArray.push(obj);
-	            });
-          }
+   
+      if(response.Data.length>0){
+             $.each(response.Data, function(idx, topic){
+                    var obj = new Object();
+                    obj.date = topic.date
+                    obj.fileName = topic.fileName
+                    dataArray.push(obj);
+             });
+        }
     });
-/*================*/
-
-
-
-
-
-
-
- /*========Result save string to show the result on the html page=================*/
- 
 
  	socket.on('Result', function(data){
+
+    $(".diameterContainer").show();
  	
  	if(data.Valid == 0)
  	{
-      $("#saveAlert #headingId").html("Error")
-      $("#saveAlert #popUpText").html("Calculation failed")
-      $("#saveAlert").css("display","block");
-
+ 		 string = "Calculation failed";
+		 
 	}
 	else
 	{
@@ -195,12 +255,12 @@
  		{
  			string = "\nResidual: " + data.Residual;
  			string += "\n\nSave Data?";
- 			YesNo.response = 0;
+ 			alert(string);
+ 	 		YesNo.response = 0;
  			socket.emit('client_data', YesNo);
  		}
  		else
  		{
- 			$(".diameterContainer").show(); 
  			string = "\nDiameter: " + data.Diameter;
 			string += "\nMindev: " + data.Mindev;
 			string += "\nMaxdev: " + data.Maxdev;
@@ -262,7 +322,7 @@
              
             else if(MeasureName[feature]=="MeasureARectangle"){
             
-            $("#resultId").html('<h2>Rectangle length is:</h2><h1 id="diameterId">'+resultLength+" "+dataUnits+'</h1><h2>Rectangle width is:</h2><h1 id="diameterId">'+resultWidth+" "+dataUnits+'</h1>');
+            $("#resultId").html('<h2>Slot length is:</h2><h1 id="diameterId">'+resultLength+" "+dataUnits+'</h1><h2>Slot width is:</h2><h1 id="diameterId">'+resultWidth+" "+dataUnits+'</h1>');
 
                resultString = "Rectangle length is: "+resultLength+" "+dataUnits+" Rectangle width is: "+resultWidth+" "+dataUnits  
          
@@ -281,7 +341,7 @@
 
            else if(MeasureName[feature]=="MeasurePlnToPln"){
         
-               $("#resultId").html('<h2>Distance Between planes is:</h2><h1 id="diameterId">'+resultDistance+" "+dataUnits+'</h1>');
+               $("#resultId").html('<h2>Distance Between plane is:</h2><h1 id="diameterId">'+resultDistance+" "+dataUnits+'</h1>');
                resultString = "Distance Between planes is: "+resultDistance+" "+dataUnits 
             }
             else if(MeasureName[feature]=="MeasureCirtoCir"){
@@ -305,37 +365,42 @@
             else if(MeasureName[feature]=="MeasureAngle2PLn"){
             
                $("#resultId").html('<h2>Angle between Surfaces is:</h2><h1 id="diameterId">'+resultAngle+' Degree<h1>');
-                resultString = "Angle between Surfaces is: "+resultAngle+" Degree";  
+                resultString = "ngle between Surfaces is: "+resultAngle+" Degree";  
             }
             
             else if(MeasureName[feature]=="MeasureAngle2Lines"){
               
-               $("#resultId").html('<h2>Angle between lines is:</h2><h1 id="diameterId">'+resultAngle+' Degree<h1>');
-              resultString = "Angle between lines is: "+resultAngle+" Degree";    
+               $("#resultId").html('<h2>Angle between line is:</h2><h1 id="diameterId">'+resultAngle+' Degree<h1>');
+              resultString = "Angle between line is: "+resultAngle+" Degree";    
             }
            
               
              else if(MeasureName[feature]=="MeasureAngleLin2Pln"){
             
-               $("#resultId").html('<h2>Angle between Line & Surfaces is:</h2><h1 id="diameterId">'+resultAngle+' Degree<h1>');
-                resultString = "Angle between Line & Surfaces is: "+resultAngle+" Degree";  
+               $("#resultId").html('<h2>Angle between Surfaces is:</h2><h1 id="diameterId">'+resultAngle+' Degree<h1>');
+                resultString = "Angle between line and plance is: "+resultAngle+" Degree";  
 
             }
           }
 		}
  	 });
-
-   /*========================*/
-
-
-
-
-
-   
-   /*===========Track the points take and click of Arm button 1, 2, & 3======== */
+       
     
+
     socket.on('DRO', function(data){
-   
+     
+     // alert(maxSteps[feature]);
+     //if(maxSteps[feature]>2){
+       // $("#CalculateResultId").css("display","none");
+        //$("#TempNextButton").css("display","block");
+        //$("#measureTitleText").html("Step "+Number(MeasureStep)+": Measure Angle between two Lines");
+       //$("#CalculateResultId #calAncherId").removeClass("btn btn-green")
+       //$("#CalculateResultId #calAncherId").addClass("btn btn-blue")
+    // }
+
+
+
+
     droObject.X = data.X.toFixed(3);
     droObject.Y = data.Y.toFixed(3);
     droObject.Z = data.Z.toFixed(3);
@@ -345,139 +410,65 @@
 
     localStorage["droData"] = JSON.stringify(data);
 	
-	if(data.Button2 != 0){
-	  console.log("second button press")	
-       TakeAPoint(data);
-    }	
+	if(data.Button2 != 0)
+
+		TakeAPoint(data);
 	
-	else if(data.Button1 != 0){
-     console.log("first button press")			
-	  EraseAPoint();
-	}
+	if(data.Button1 != 0)
+		EraseAPoint();
 		
-	else if(data.Button3 != 0)
-	{      
-           console.log("third button press")			
+	if(data.Button3 != 0)
 
-	    switch(MeasureStep)
-            {               
-            case 0:
+	{
 
-               if(pts1.length>=$("#pointsRequire2").val()){
-			     firstStepClick();
-			    }
-            
-              break;  
-           
-            case 1:
-             
-                if(pts2.length>=$("#pointsRequire2").val()){  
-			     secondStepClick();
-			      
-                }
-             break; 
-                 case 2:
-               
-                 if(pts3.length>=$("#pointsRequire2").val()){  
-                 thirdStepClick();
+           if(MeasureStep==0){
+              $("#measurePlaneNextButton").trigger("click");      
+	        }else if(MeasureStep==1){
+              
+               $("#CalculateResultId").trigger("click");      
 
-                 }
-                break; 
-                 
-                 case 3:
-               
-                 if(pts4.length>=$("#pointsRequire2").val()){  
-                  fourthStepClick();
-                
-                 }
-                break; 
-            }                           
-       
-	      }	      
+            }
+
+			MeasureStep++;
+			 if(MeasureStep==0){
+             var elem = document.getElementById("pointsTakenId");
+		} else
+		   {
+             elem = document.getElementById("pointsTakenId2");
+
+		   }
+			
+			elem.value = 0;
+			
+			  	if(MeasureStep == maxSteps[feature]){
+				//	MeasureFeature();
+		          }
+			else
+			{	
+			   //var f = document.getElementById("STEP");
+			    f.value = MeasureStep + 1;
+		      //var f1 = document.getElementById("FEATURE");
+			
+				switch(MeasureStep)
+				{
+				case 1:
+					f1.value = MyMeasureObject.SubFeature2;
+					break;
+				case 2:
+					f1.value = MyMeasureObject.SubFeature3;
+					break;
+				case 3:
+					f1.value = MyMeasureObject.SubFeature4;
+					break;
+
+			}
+		
+	  }
+	}
 });
-
-/*===================*/
-
-
-
-
-
-
- /*=====First step cmplete=============*/
-
-  function firstStepClick(){
-                  MakeMeasureSound();  
-                   $("#pointsTakenId2").val(0);
-                    MeasureStep++;
-                   updateImage(MyMeasureObject.SubFeature2)
-
-                    if(MeasureType=="distanceBetweenTwoPoints"){
-                      $("#measureTitleText").html("Step 2:  Take second Point");   	
-                    }else{
-                      $("#measureTitleText").html("Step 2: Measure the "+MyMeasureObject.SubFeature2) 
-                    }
-
-                   $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-                  
-   }
-
-    /*=====Second step cmplete=============*/
-  
-  function secondStepClick(){
-                    MakeMeasureSound();  
-                    $("#pointsTakenId2").val(0);
-                    MeasureStep++;
-                    if(MeasureStep==maxSteps[feature]){
-                      showResult();
-                    }else{
-                    updateImage(MyMeasureObject.SubFeature3)
-                     $("#measureTitleText").html("Step 3: Measure the "+MyMeasureObject.SubFeature3) 
-                     $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-
-                   }         
-   }
-
-  
-    /*=====Third step cmplete=============*/
-
-
-   function thirdStepClick(){
-       
-                  MakeMeasureSound();  
-                   $("#pointsTakenId2").val(0);
-                   MeasureStep++;
-                   if(MeasureStep==maxSteps[feature]){
-                      showResult();
-                   }else{
-                   updateImage(MyMeasureObject.SubFeature4)
-                   $("#measureTitleText").html("Step 4: Measure the "+MyMeasureObject.SubFeature4)
-                   $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1'); 
-                   }
-   }
-
  
-
-       /*=====fourth step cmplete=============*/
-
-   function fourthStepClick(){
-           
-               MakeMeasureSound();  
-                   $("#pointsTakenId2").val(0);
-                   MeasureStep++;
-                   if(MeasureStep==maxSteps[feature]){
-                      showResult();
-                   }
-   }
-   
-
-
-  
-
-    /*========Get setting data form the ARM==============*/ 
-
-
-
-   	socket.on('Settings', function(data){
+ 
+  	socket.on('Settings', function(data){
     settingObject.SSID = data.SSID;
     settingObject.PASSWORD = data.PASSWORD;
     settingObject.CHANNEL = data.CHANNEL;
@@ -490,18 +481,26 @@
 	if(data.HAPTIC == 0)
 	
       settingObject.HAPTIC = 0;
+    
+	
+
 	if(data.HEADLIGHT == 0)
+	
 	    settingObject.HEADLIGHT = 0;
 	
+	
+	
+
 	if(data.UNITS == 0){
-	  
-	  dataUnits="mm"
-      settingObject.dataUnits=0;
+	
+		dataUnits="mm"
+        settingObject.dataUnits=0;
 
 	}else{
 
 	    dataUnits='inch'
-        settingObject.dataUnits=1;
+
+	    settingObject.dataUnits=1;
 
 	}	
 
@@ -585,217 +584,151 @@
 /*
 	  	elem = document.getElementById("pid");
 		elem.value = data.PID;*/
+
 		probeObject.PID = data.PID
+
+
+
+
        });
  
-  socket.on('PROBESPECS', function(data){
-  
-
-  var string;
+   socket.on('PROBESPECS', function(data){
+   var string;
    			if(data.Saved == 0)
    				string = "Probe Specs not saved.";
    				else
    				string = "Probe Specs saved.";
    				//alert(string);
           });
+
       var pts1 = []; 
       var pts2 = []; 
       var pts3 = []; 
       var pts4 = []; 
-  
-
-    //});  
       
-
-/*============track point taken and update the click event and input box value==================*/
-
-
  function TakeAPoint(data)
- { 
+ {
+  
+   	TakePointSound();
 
 
-    TakePointSound();
-     var x = {"X": data.X, "Y":data.Y, "Z": data.Z, "I": data.I, "J": data.J, "K": data.K, "ANGLES": data.ANGLES, "RawPositions" : data.RawPositions};	
-     switch(MeasureStep)
-     {
-        case 0:
-      	pts1.push(x);
-	   
-	    $("#pointsTakenId2").val(pts1.length)
-	    if(pts1.length>=$("#pointsRequire2").val()){
-                   $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');
-                   $("#measurePlaneNextButton").click(function(){
-                   firstStepClick();
-                   event.preventDefault();
-          });
-        }else {
-           	$("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
+    
+   var x = {"X": data.X, "Y":data.Y, "Z": data.Z, "I": data.I, "J": data.J, "K": data.K, "ANGLES": data.ANGLES, "RawPositions" : data.RawPositions};	
+   
+     
+
+    if(MeasureStep==0){
+       var elem = document.getElementById("pointsTakenId");
+
+     }else{
+  
+     
+       elem = document.getElementById("pointsTakenId2");
+     }
+
+
+	switch(MeasureStep)
+
+	{
+		case 0:
+		 	pts1.push(x);
+            
+            $("#pointsTakenId").val(pts1.length)
+			elem.value = pts1.length;
+	     	// special case for calibration and checkout.
+
+		if(MaxPointsToTake != 0 && MaxPointsToTake == pts1.length)
+	     	MeasureFeature();
+
+		break;
+		case 1:
+		 	pts2.push(x);
+
+            elem.value = pts2.length;
+		break;
+		case 2:
+		 	pts3.push(x);
+			elem.value = pts3.length;
+		break;
+		case 3:
+		 	pts4.push(x);
+			elem.value = pts4.length;
+		break;
+	}
+   
+
+
+    
+       if(MeasureStep==0){
+         
+       $("#pointsTakenId").val(pts1.length);
+
+       if(pts1.length>=$("#pointsRequire").val()){
+            
+             $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');
+            
+             $("#measurePlaneNextButton").click(function(){
+
+				  $("#step1Id").css("display","none");
+		          $("#step2Id").css("display","block");
+		     }); 
+
+           } 
+      
         }
-       
-        break;
+      else if(MeasureStep==1){
 
-        case 1:
+         
+           
 
-          pts2.push(x);
-             $("#pointsTakenId2").val(pts2.length)
-             if(pts2.length>=$("#pointsRequire2").val()){
-             
-             if(MeasureStep==maxSteps[feature]-1){
-             
-               $("#measurePlaneNextButton").hide();
-               $("#CalculateResultId").show();
-               $(".pointsContainer .btn-green").css('background','#1db79b');
-			               $("#CalculateResultId").click(function(){
-			                  secondStepClick();
-			                  event.preventDefault();
-			                });
-              }else{
-	                    $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');
-	                    $( "#measurePlaneNextButton").unbind("click");
-		                 $("#measurePlaneNextButton").click(function(){
-		                    secondStepClick();
-		                   event.preventDefault();
-		                 });
-                   }
-             }      
-           break;
-           case 2:
-           pts3.push(x);
-           $("#pointsTakenId2").val(pts3.length)
-           if(pts3.length>=$("#pointsRequire2").val()){
+      	   $("#pointsTakenId2").val(pts2.length);
           
-           if(MeasureStep==maxSteps[feature]-1){
-           	   
-           	    $("#measurePlaneNextButton").hide();
-                $("#CalculateResultId").show();
-                $(".pointsContainer .btn-green").css('background','#1db79b');
-                $( "#CalculateResultId").unbind( "click" );
-                $("#CalculateResultId").click(function(){
-	                  thirdStepClick();
-	                  event.preventDefault();
-	               });
+           if($("#pointsTakenId2").val()>=$("#pointsRequire2").val()){
 
-
-            }else{
-             
-              $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');  
-               
-               $( "#measurePlaneNextButton").unbind( "click" );
-             
-               $("#measurePlaneNextButton").click(function(){
-                  thirdStepClick();
-                  event.preventDefault();
-               });
-            }
-         }
-           break; 
-           case 3:
-           pts4.push(x);
-           $("#pointsTakenId2").val(pts4.length)
-           if(pts4.length>=$("#pointsRequire2").val()){
+       	   $(".pointsContainer .btn-green").css('background','#1db79b');
           
-           if(MeasureStep==maxSteps[feature]-1){
-           	   
-           	    $("#measurePlaneNextButton").hide();
-                $("#CalculateResultId").show();
-                $(".pointsContainer .btn-green").css('background','#1db79b');
-                $( "#CalculateResultId").unbind( "click" );
-                $("#CalculateResultId").click(function(){
-	                  fourthStepClick();
-	                  event.preventDefault();
-	            });
-             
-            }else{
-                $("#measurePlaneNextButton .btn-blue").css('background','#0474b2');  
-            }
-          break;      
-       }
-    }
-}
+           $("#CalculateResultId").click(function(){
+            showResult();
 
+            })
+         }    
 
-
- /*=====Track deleted poitn and update the click event and input box value=============*/
-
+      }
+ }
 
  
  function EraseAPoint()
-   {
+ {
+ 	ErasePointSound();
+
+	if(MeasureStep==0){
+       var elem = document.getElementById("pointsTakenId");
+
+     }else{
   
-   	ErasePointSound();
-	elem = document.getElementById("pointsTakenId2");
-	
+       elem = document.getElementById("pointsTakenId2");
+     }
+
 	switch(MeasureStep)
 	{
 		case 0:
-		   pts1.pop();
-		   elem.value = pts1.length;
-          
-           if(pts1.length<$("#pointsRequire2").val()){
-           	       $( "#measurePlaneNextButton").unbind( "click" );
-           	    $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-           }
-
-	       break;
+		 	pts1.pop();
+		elem.value = pts1.length;
+		break;
 		case 1:
 		 	pts2.pop();
-		 	elem.value = pts2.length;
-            if(MeasureStep==maxSteps[feature]-1){
-                if(pts2.length<$("#pointsRequire2").val()){
-                   $( "#CalculateResultId").unbind( "click" );  	
-	              $(".pointsContainer .btn-green").css('background','#F1F1F1'); 
-	            }
-            }else{
-	            if(pts2.length<$("#pointsRequire2").val()){
-	            	  $( "#measurePlaneNextButton").unbind( "click" );
-	           	  $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-	            }
-            }
+			elem.value = pts2.length;
 		break;
 		case 2:
 		 	pts3.pop();
 			elem.value = pts3.length;
-             if(MeasureStep==maxSteps[feature]-1){
-                if(pts3.length<$("#pointsRequire2").val()){
-                  $( "#CalculateResultId").unbind( "click" ); 	
-	              $(".pointsContainer .btn-green").css('background','#F1F1F1'); 
-	            }
-            }else{
-	            if(pts3.length<$("#pointsRequire2").val()){
-	              $( "#measurePlaneNextButton").unbind( "click" );
-	           	  $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-	            }
-            }
-
-
 		break;
-		
 		case 3:
 		 	pts4.pop(d);
-		    elem.value = pts4.length;
-              if(MeasureStep==maxSteps[feature]-1){
-                
-                if(pts4.length<$("#pointsRequire2").val()){
-                   $( "#CalculateResultId").unbind( "click" ); 
-	              $(".pointsContainer .btn-green").css('background','#F1F1F1'); 
-	            }
-            }else{
-            	$( "#measurePlaneNextButton").unbind( "click" );
-	            if(pts4.length<$("#pointsRequire2").val()){
-	              $( "#measurePlaneNextButton").unbind( "click" ); 	
-	           	  $("#measurePlaneNextButton .btn-blue").css('background','#F1F1F1');
-	            }
-            }
-
-		    break;
+		elem.value = pts4.length;
+		break;
 	}	
-
  }
-
-
-
-
-/*==========Measure feature called===========*/
  
  function MeasureFeature()
 { 
@@ -809,6 +742,7 @@
 	MyMeasureObject.Points3 = pts3;
  	MyMeasureObject.Points4 = pts4;
     socket.emit('client_data', MyMeasureObject);
+
 	//ClearData();
 
 }
@@ -850,36 +784,25 @@ socket.emit('client_data', sound);
 
 }
 
-
-/*=======Set the measuremnt setting based on respective selection===========*/
-
 function SetMeasurement(meas)
 {	
-    ClearData();
-    feature = meas;
+	ClearData();
+ 	feature = meas;
 	MyMeasureObject = MeasureObject[meas];
-    console.log(MyMeasureObject.SubFeature1);
-   
-   if(MeasureType=="distanceBetweenTwoPoints"){
-     
-       $("#measureTitleText").html("Step 1:  Take first Point");   	
-
-   }else{
-
-    $("#measureTitleText").html("Step 1:  Measure the "+MyMeasureObject.SubFeature1)
-
-   } 
-
-    updateImage(MyMeasureObject.SubFeature1);
-    $("#measureTypeTitle").html(MyMeasureObject.SubFeature1);
 }
 
 
 function SetCheckout(meas)
 {
-     /*ClearData();
+    
+      
+
+	/*ClearData();
 	feature = meas;
+ 	
  	var	elem = document.getElementById("TYPE");
+
+
 	elem.value = CheckoutName[meas];
  	elem = document.getElementById("PTSNEEDED");
 	elem.value = maxChkPts[meas];
@@ -932,153 +855,56 @@ function GetSettings()
 	socket.emit('client_data', Update);
 }
 
+function SetSettings()
+{
 
-/*=======enable result section and called the measumrent function to get the result===========*/
-
-
-function showResult(){
-
-      $(".pointsContainer .btn-green").css('background','#F1F1F1'); 
-  	  $(".pointsContainer .btn-red").css('background','#F1F1F1'); 
-      $("#measureTextId2").addClass("grayFont");
-	    $( "#measureDetails2CancelButton").unbind( "click" );
-
-      MeasureFeature();
-   
+	/*var	elem = document.getElementById("ssid");
+	Settings.SSID = elem.value;
+	elem = document.getElementById("password");
+	Settings.PASSWORD = elem.value;
+	elem = document.getElementById("channel");
+	Settings.CHANNEL = elem.value;
+	elem = document.getElementById("volume");
+	Settings.VOLUME = elem.value;
+	elem = document.getElementById("barlength");
+	Settings.BARLENGTH = elem.value;
+	elem = document.getElementById("spherediameter");
+	Settings.SPHEREDIAMETER = elem.value;
+	
+	elem = document.getElementById("hapticon");
+	Settings.HAPTIC = 0;
+	if(elem.checked == true)
+		Settings.HAPTIC = 1;
+	Settings.HEADLIGHT = 0;
+	elem = document.getElementById("headlighton");
+	if(elem.checked == true)
+		Settings.HEADLIGHT = 1;
+	elem = document.getElementById("unitsinch");
+	Settings.UNITS = 0;
+	if(elem.checked == true)
+		Settings.UNITS = 1;
+		
+	socket.emit('client_data', Settings);*/
 }
 
-/*====save data to log file complete==================*/
-
-
-   socket.on('writeDone', function(data){
-
-        $("#saveAlert").css("display","block");
-        $("#saveCircleButton").hide();
-        $("#homeNavigateButton").show();
-        $("#homeNavigateButton").click(function(){
-              window.location = "home.html";
-        })
-   });
-
-
-
-/*====Update image and instruction on based on the current selection==============*/
-
-
-
-function updateImage(str){
-   $("#measureTypeTitle").html(str);
-
-   if(str=="Circle"){
-
-    	$("#measureTypeImage").attr("src","images/circle_Img.png");
-     	$("#pointsRequire2").val(3)
-   
-      if(MeasureStep==maxSteps[feature]-1){
-       $("#measureTextId2").html("Take at least 3 points on the "+str+" and click Calculate or Arm button 3") 
-      }else{
-       $("#measureTextId2").html("Take at least 3 points on the "+str+" and click Next or Arm button 3") 
-      }
-
-   }else if(str=="Plane"){
-   	$("#measureTypeImage").attr("src","images/planePoints.png");
-   	$("#pointsRequire2").val(3)
-  
-    if(MeasureStep==maxSteps[feature]-1){
-
-      $("#measureTextId2").html("Take at least 3 points on the "+str+" and click Calculate or Arm button 3") 
-
-    }else{
-    
-       $("#measureTextId2").html("Take at least 3 points on the "+str+" and click Next or Arm button 3") 
-
-   }
-
-   }else if(str=="Point"){
-
-   	 $("#pointsRequire2").val(1)
-   	 
-   	  if(MeasureStep==maxSteps[feature]-1){
-       
-        
-       
-      if(MeasureType!="distanceBetweenTwoPoints"){
-
-      $("#measureTypeImage").attr("src","images/cen_pointer.png");
-
-      }else{
-       $("#measureTypeImage").attr("src","images/up_point.png");
-
-       }
-  
-      $("#measureTextId2").html("Take at least 1 Point and click Calculate or Arm button 3") 
-
-       }else{
+function showResult(){
      
 
 
-       if(MeasureType!="distanceBetweenTwoPoints"){
 
-      $("#measureTypeImage").attr("src","images/cen_pointer.png");
+	  $(".pointsContainer .btn-green").css('background','#F1F1F1'); 
+	  $(".pointsContainer .btn-red").css('background','#F1F1F1'); 
+      $("#measureTextId2").addClass("grayFont");
 
-      }else{
-        $("#measureTypeImage").attr("src","images/down_point.png");
-
-        }
-
-       $("#measureTextId2").html("Take at least 1 Point and click Next or Arm button 3") 
-
-
-       } 
-
-       
-
-
-   }
-   else if(str=="Line"){
-
-   	 $("#measureTypeImage").attr("src","images/line.png");
-   	 $("#pointsRequire2").val(2)
-  
-      if(MeasureStep==maxSteps[feature]-1){
-
-   	   $("#measureTextId2").html("Take at least 2 points on the "+str+" and click Calculate or Arm button 3") 
-    
-     	}else{
-       $("#measureTextId2").html("Take at least 2 points on the "+str+" and click Next or Arm button 3") 
-      }
-   }
-   else if(str=="Rectangle"){
-      $("#measureTypeImage").attr("src","images/RectangleImage.png");
-   	 $("#pointsRequire2").val(4)
-   
-         if(MeasureStep==maxSteps[feature]-1){
-    	   $("#measureTextId2").html("Take at least 4 points on the "+str+" and click Calculate or Arm button 3") 
-  
-        	}else{
-
-            $("#measureTextId2").html("Take at least 4 points on the "+str+" and click Next or Arm button 3") 
-     	  }
-
-        }
-
-
-  else if(str=="Slot"){
-    
-      $("#measureTypeImage").attr("src","images/planePoints.png");
-      $("#pointsRequire2").val(6)
-      if(MeasureStep==maxSteps[feature]-1){
-      
-      $("#measureTextId2").html("Take at least 6 points on the "+str+" and click Calculate or Arm button 3") 
-
-     }else{
-
-      $("#measureTextId2").html("Take at least 6 points on the "+str+" and click Next or Arm button 3") 
-
-   	 }
-   }
-
-   	  
+	  $( "#measureDetails2CancelButton").unbind( "click" );
+       MeasureFeature();
+     //  $("#CalculateResultId").trigger("click");
 
 }
-/*==============*/
+
+
+socket.on('writeDone', function(data){
+
+  $("#saveAlert").css("display","block");
+
+});

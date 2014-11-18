@@ -5,17 +5,20 @@
 
 
  $(document).ready(function(){
+
+
+
    readImageJsonData();
    $("#downloadButton").click(function(){
-      downloadFiles();
-   }) 
- 
-   /*==== Serach button handling=====================*/
-  
-     $("#searchImagesButton").click(function(){
      
-       if($("#dateField").val()==""){
-      
+      downloadFiles();
+
+   }) 
+
+
+     $("#searchImagesButton").click(function(){
+   
+      if($("#dateField").val()==""){
         $("#popUpId #popUpText").html("Please select a date")
         $("#popUpId").css("display","block");
    
@@ -46,15 +49,12 @@
  }); 	
 
 
- 
-/*======read imagejson data form the server and push in the array==============*/
-
-
  function readImageJsonData(){
 
    socket.emit('readImageJson');  
    
  }
+
  
   socket.on('logsImgJsonData', function(response){
 
@@ -70,9 +70,6 @@
      viewFilesList();
 });
 
-
-
-/*=========== Search file based on the the selected ===============*/
 
 function searchFiles(datestr){
    var fileAvailabe=false;
@@ -98,10 +95,13 @@ function searchFiles(datestr){
 }
 
 
-  /*==== Show images files in the grid view  =======*/
 
 
- function viewFilesList(){
+
+
+
+
+  function viewFilesList(){
    
        for(var i=0;i<imgDataArray.length;i++){
           var str = '<div class="col-lg-3 col-md-4 col-xs-6 thumb" onclick="imageClick('+i+')"><a class="thumbnail" href="#"><img class="img-responsive" src="'+filePath+imgDataArray[i].fileName+'" alt=""> <label>'+imgDataArray[i].fileName+'</label></a><div class="checkBox"><input name="" id="check'+i+'" type="checkbox" value="0"></div></div>'
@@ -114,23 +114,18 @@ function searchFiles(datestr){
 
 
 
- /*==== check and uncheck handling of images==========*/
-
   function imageClick(num){
 
       if($("#imageContainerId #check"+num).prop('checked')==false){
+       
            $("#imageContainerId #check"+num).prop('checked',true) 
-        }else{
-         $("#imageContainerId #check"+num).prop('checked',false)
+
+      }else{
+
+          $("#imageContainerId #check"+num).prop('checked',false)
+
        }
   }
-
-
-
-
-
-
-/*=====  add files to download ==============*/ 
 
 
   function downloadFiles(){  
@@ -142,12 +137,10 @@ function searchFiles(datestr){
          } 
        }
   }
-
-
-
  
 
-/*==========Download file at the device ==============*/
+
+
 
 function SaveToDisk(fileURL, fileName) {
     if (!window.ActiveXObject) {

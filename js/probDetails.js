@@ -181,8 +181,6 @@ var testPointData6 = [
 				];
 
 
-
-
 	var point1;
  
     $(document).ready(function() {
@@ -220,11 +218,12 @@ var testPointData6 = [
       
        }else if(probType=="Plane Method"){
         console.log("ProbeType is : Plane Method");
+		myObjects[1] = "";
 		testData = testPlaneData6;
 		//testData = testPlaneData7;
         SetCalibration(Calibrations.Plane)
         continueFlag=true;
-           $("#barRequireId").hide();
+        $("#barRequireId").hide();
         $("#headerText").html("Probe Calibritaion - Plane")   
         $("#selectedIconId").attr("src","../images/plane_200x200.png")
         $("#measureTypeImage").attr("src","../images/probCal.png") 
@@ -233,13 +232,14 @@ var testPointData6 = [
 
        }else if(probType=="Single Point"){
 	 console.log("ProbeType is : Single Point Method");
+		  myObjects[1] = "";
 		testData = testPointData6;
 		//testData = testPointData7;
 		
 
         continueFlag=true;
          SetCalibration(Calibrations.Point)
-            $("#barRequireId").hide();
+         $("#barRequireId").hide();
          $("#headerText").html("Probe Calibritaion - Point")
          $("#selectedIconId").attr("src","../images/pointcheckoutBreadCrum.png")
          //$("#measureTypeImage").attr("src","../images/probCal.png") 
@@ -290,10 +290,6 @@ var testPointData6 = [
 
       $("#probAlert").css('display','block');
       $("#probAlert #popUpText").html("Please enter the require field value")
-   
-          
-       
-
 
      }
      })
@@ -502,11 +498,12 @@ var testPointData6 = [
     socket.on('DRO', function(data){
 
 
-     //console.log(" Point1: " + point1 + "And Continue flag is :" + continueFlag);
+    //console.log(" Point1: " + point1 + "And Continue flag is :" + continueFlag);
     //Commented out to implement new login for button 2 press
-    if(continueFlag){
+  
+  if(continueFlag){
 
-    //console.log( "ContinueFlag: true and Button1 value is:" +data.Button1+" Button2 value is :"+ data.Button2+ " point1 value is: " +point1);
+   console.log( "ContinueFlag: true and Button1 value is:" +data.Button1+" Button2 value is :"+ data.Button2+ " point1 value is: " +point1);
 
 	if( point1 == 0)
 	{	 data.Angles = testData[0];
@@ -514,11 +511,9 @@ var testPointData6 = [
 		point1 = 1;
                  $("#probPointsId").html("1/"+pointsNeededVal);
 		UpdateAnimationSS(data);
-                 
-
 	}
 
-   // UpdateAnimation(data);
+ // UpdateAnimation(data);
  //  console.log("I am in");
 
     droObject.X = data.X.toFixed(3);
@@ -543,8 +538,6 @@ var testPointData6 = [
   if(data.Button3 != 0)
   {
        
-       
-          
            if(MeasureStep==0){
               $("#measurePlaneNextButton").trigger("click");      
           }else if(MeasureStep==1){
@@ -635,7 +628,8 @@ var testPointData6 = [
 
   if(data.UNITS == 0){
   
-    dataUnits="mm"
+    dataUnits="mm";
+    console.log(" dataUnits are : "+dataUnits);
     settingObject.dataUnits=0;
 
     if(probType=="Sphere Method"){
@@ -645,7 +639,7 @@ var testPointData6 = [
     } 
 
   }else{
-      dataUnits='inch'
+      dataUnits='inch';
       settingObject.dataUnits=1;
       if(probType=="Sphere Method"){
       $("#barlengthText").html("Enter Sphere Size(in)")

@@ -14,12 +14,6 @@ $( document ).ready(function() {
     var socket = io.connect(); 
     socket.emit('client_data', Update);
 
-
-
-
-   /*=======Get setting from the server================*/
-
-
   	socket.on('Settings', function(data){
 
     $("#ssId").val(data.SSID)
@@ -37,6 +31,8 @@ $( document ).ready(function() {
     });
 
     $("#barlengthInput").val(data.BARLENGTH)
+
+
 
    if(data.HAPTIC==1){
    
@@ -88,9 +84,6 @@ $( document ).ready(function() {
 
    });
 
-
-  /*=====mm radio button handing =====================*/
-
    
   $("#mmId").click(function(){
 
@@ -99,28 +92,16 @@ $( document ).ready(function() {
          updateSettingForMeasurement();
 
      }else{
-         
-       if(dataUnits!=="mm"){
-         var lengthData = String(math.eval($("#barlengthInput").val()+' inch to mm')).split("mm")[0];
-         $("#barlengthInput").val(Number(lengthData).toFixed(4)); 
-        
-         var sphreData = String(math.eval($("#sphereId").val()+' inch to mm')).split("mm")[0];
 
-         $("#sphereId").val(Number(sphreData).toFixed(4)); 
-         dataUnits="mm"
-
-     }
-
-
+       var lengthData = String(math.eval($("#barlengthInput").val()+' inch to mm')).split("mm")[0];
+       $("#barlengthInput").val(Number(lengthData).toFixed(6)); 
+      
+       var sphreData = String(math.eval($("#sphereId").val()+' inch to mm')).split("mm")[0];
+       $("#sphereId").val(Number(sphreData).toFixed(6)); 
     }
    
   }); 
-
-
   
-
-  /*=====inches radio button handing =====================*/
-
 
   $("#inchesId").click(function(){
   
@@ -132,17 +113,10 @@ $( document ).ready(function() {
       } 
      else{
     
-   
-     if(dataUnits!=="inch"){
-
-
        lengthData = String(math.eval($("#barlengthInput").val()+' mm to inch')).split("inch")[0];
-       $("#barlengthInput").val(Number(lengthData).toFixed(4)); 
+       $("#barlengthInput").val(Number(lengthData).toFixed(6)); 
         sphreData = String(math.eval($("#sphereId").val()+' mm to inch')).split("inch")[0];
-       $("#sphereId").val(Number(sphreData).toFixed(4)); 
-        dataUnits="inch"
-     }
-
+       $("#sphereId").val(Number(sphreData).toFixed(6)); 
      }  
               
   }); 
@@ -151,10 +125,6 @@ $( document ).ready(function() {
 
 
  });
-
-
-
-  /*========Update the setting at the server end===================*/
 
 
 

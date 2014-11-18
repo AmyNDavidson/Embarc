@@ -1,26 +1,22 @@
   var socket = io.connect(); 
 
-
-
-  /*Click event and update settings=============*/
-
-
     $(document).ready(function(){
-          getSetting();
-          $("#inchesId").click(function(){
-         	 updateSetting(1);
-         })
 
+          getSetting();
+   
+     $("#inchesId").click(function(){
+
+     	 updateSetting(1);
+     })
+
+
+    
     $("#mmId").click(function(){
        updateSetting(0);
     }) 
   
     })
  
-
-
-  /*===========Gett setting from the server==============*/
-
     function getSetting(){
        socket.emit('client_data', Update);
 
@@ -46,9 +42,6 @@
            }    
     });
   
-/*============Update setting at the server=====================*/
-
-
   function updateSetting(unit){
     Settings.UNITS=unit;
     socket.emit('client_data', Settings); 
