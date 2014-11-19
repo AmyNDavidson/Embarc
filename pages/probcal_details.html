@@ -5,6 +5,10 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>:: Hexagon ::</title>
+<script>
+   var startTime = (new Date()).getTime();
+</script>
+
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
@@ -47,7 +51,7 @@ myObjects = [    '../stl/Table.STL',
 myPositions = [
                [initX, initY, initZ],
                [400,0,100],
-               [-730,-90,-78],
+               [-730,-90,-80],
                [0,0,89.5],
                [0,0,150],
                [0,0,137],
@@ -79,6 +83,14 @@ myAxes = [
 <script src="../js/Animate.js" type="text/javascript"></script>
 
 
+
+<script>
+   $(window).load(function () {
+       var endTime = (new Date()).getTime();
+       var millisecondsLoading = endTime - startTime;
+       console.log("millisecondsLoading : "+millisecondsLoading);
+   });
+</script>
 
 
 
@@ -178,7 +190,7 @@ myAxes = [
         <div class="inputHolder">
           <p id="popUpText">Your data has been successfully saved.</p>
         </div>
-        <div class="cancelBtns">
+        <div class="cancelBtns"> 
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
        </div>
      </div>

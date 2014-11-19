@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="format-detection" content="telephone=no">
 <title>:: Hexagon ::</title>
+<script>
+   var startTime = (new Date()).getTime();
+</script>
 <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -12,6 +15,14 @@
 <script src="../js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/../socket.io/socket.io.js"></script>
 <script src="../js/application.js" type="text/javascript"></script>
+
+<script>
+   $(window).load(function () {
+       var endTime = (new Date()).getTime();
+       var millisecondsLoading = endTime - startTime;
+       console.log("millisecondsLoading : "+millisecondsLoading);
+   });
+</script>
 
 </head>
 
