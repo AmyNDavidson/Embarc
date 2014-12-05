@@ -26,14 +26,6 @@ var initX=0, initY=-300, initZ =-150;
 var myPositions = new Array();
 var myObjects = new Array();
 var myAxes = new Array();
-var SX = prompt("enter Sphere X value", "400");
-var SY = prompt("enter Sphere Y value", "0");
-var SZ = prompt("enter Sphere Z value", "100");
-
-
-var BX = prompt("enter Base Plate X value", "-730");
-var BY = prompt("enter Base Plate Y value", "-90");
-var BZ = prompt("enter Base Plate Z value", "-80");
 
 
 myObjects = [    '../stl/Table.STL',
@@ -54,8 +46,8 @@ myObjects = [    '../stl/Table.STL',
 
 myPositions = [
                [initX, initY, initZ],
-               [SX,SY,SZ],
-               [BX,BY,BZ],
+               [400,0,100],
+               [-730,-90,-80],
                [0,0,89.5],
                [0,0,150],
                [0,0,137],
