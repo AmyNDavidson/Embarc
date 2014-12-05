@@ -21,7 +21,71 @@
 <script src="../js/three.min.js" type="text/javascript"></script>
 <script src="../js/STLLoader.js" type="text/javascript"></script>
 <script src="../js/Detector.js" type="text/javascript"></script>
-<script src="../js/Animate.js" type="text/javascript"></script>
+<script type="text/javascript">
+var initX=0, initY=-300, initZ =-150;
+var myPositions = new Array();
+var myObjects = new Array();
+var myAxes = new Array();
+var SX = prompt("enter Sphere X value", "400");
+var SY = prompt("enter Sphere Y value", "0");
+var SZ = prompt("enter Sphere Z value", "100");
+
+
+var BX = prompt("enter Base Plate X value", "-730");
+var BY = prompt("enter Base Plate Y value", "-90");
+var BZ = prompt("enter Base Plate Z value", "-80");
+
+
+myObjects = [    '../stl/Table.STL',
+                 '../stl/Sphere.stl',
+                 '../stl/BASE_PLATE.STL',
+                 '../stl/Base.STL',
+                 '../stl/A.STL',
+                 '../stl/BC25.STL',
+                 '../stl/C_FORK.STL',
+                 '../stl/DE25.STL',
+                 '../stl/F.STL',
+                 '../stl/F_AXIS.STL',
+                 '../stl/Buttons.STL',
+                 '../stl/Hard_Probe_15.STL',
+                 ];
+
+
+
+myPositions = [
+               [initX, initY, initZ],
+               [SX,SY,SZ],
+               [BX,BY,BZ],
+               [0,0,89.5],
+               [0,0,150],
+               [0,0,137],
+               [711,0,62],
+               [39,0,0],
+               [62,0,-451.5],
+               [0,0,-48.5],
+               [0,0,0],
+               [0,15,-69.5],
+               ];
+
+myAxes = [
+          " ",
+          " ",
+          " ",
+          " ",
+          "Z",
+          "Y",
+          "X",
+          "Y",
+          "Z",
+          "Y",
+          " ",
+          " ",
+          ];
+
+</script>
+
+
+<script src="../js/Checkout_Animate.js" type="text/javascript"></script>
 <script src="../js/checkOutDetails.js"></script>
 <script src="../js/measurement.js"></script>
 
@@ -56,7 +120,7 @@
 
   <div class="container" id="step2Id" style="display:block;"> <!--Body START Here-->
       <div class="row marTop">
-          <div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
+          <div class="col-lg-7 col-sm-7"  style="width:40%;"> <!--Input Boxes START Here-->
                  <div class="pointsContainer">
                    <div class="enterBarlength" id="barRequireId">
                    	<label id="lengthId" >Enter Bar Length</label>
@@ -87,7 +151,7 @@
                </div> 
             </div><!--Input Boxes END Here-->
             
-            <div class="col-lg-5 col-sm-5 circleText">
+            <div class="col-lg-5 col-sm-5 circleText"  style="width:60%;">
               <div class="planeMeasure">
 
                  <div id="animation"></div>

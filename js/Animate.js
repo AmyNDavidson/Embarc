@@ -168,7 +168,7 @@ function loadObjects()
                     var mesh0 =  new THREE.Mesh( geometry, material0 );
                     mesh0.castShadow = true;
                     mesh0.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh0.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh0;
                     break;
@@ -177,7 +177,7 @@ function loadObjects()
                     var mesh2 =  new THREE.Mesh( geometry, material2 );
                     mesh2.castShadow = true;
                     mesh2.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh2.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh2;
                     break;
@@ -186,7 +186,7 @@ function loadObjects()
                     var mesh2 =  new THREE.Mesh( geometry, material2 );
                     mesh2.castShadow = true;
                     mesh2.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh2.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh2;
                     break;
@@ -197,7 +197,7 @@ function loadObjects()
                     var mesh3 =  new THREE.Mesh( geometry, material3 );
                     mesh3.castShadow = true;
                     mesh3.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh3.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh3;
                     break;
@@ -208,7 +208,7 @@ function loadObjects()
                     var mesh4 =  new THREE.Mesh( geometry, material4 );
                     mesh4.castShadow = true;
                     mesh4.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh4.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh4;
                     break;
@@ -219,7 +219,7 @@ function loadObjects()
                     var mesh5 =  new THREE.Mesh( geometry, material5 );
                     mesh5.castShadow = true;
                     mesh5.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh5.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh5;
                     break;
@@ -230,7 +230,7 @@ function loadObjects()
                     var mesh6 =  new THREE.Mesh( geometry, material6 );
                     mesh6.castShadow = true;
                     mesh6.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh6.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh6;
                     break;
@@ -241,7 +241,7 @@ function loadObjects()
                     var mesh7 =  new THREE.Mesh( geometry, material7 );
                     mesh7.castShadow = true;
                     mesh7.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh7.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh7;
                     break;
@@ -252,7 +252,7 @@ function loadObjects()
                     var mesh8 =  new THREE.Mesh( geometry, material8 );
                     mesh8.castShadow = true;
                     mesh8.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh8.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh8;
                     break;
@@ -263,7 +263,7 @@ function loadObjects()
                     var mesh9 =  new THREE.Mesh( geometry, material9 );
                     mesh9.castShadow = true;
                     mesh9.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh9.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh9;
                     break;
@@ -274,7 +274,7 @@ function loadObjects()
                     var mesh10 =  new THREE.Mesh( geometry, material10 );
                     mesh10.castShadow = true;
                     mesh10.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh10.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh10;
                     break;
@@ -283,7 +283,7 @@ function loadObjects()
                     var mesh11 =  new THREE.Mesh( geometry, material11 );
                     mesh11.castShadow = true;
                     mesh11.receiveShadow = true;
-                    console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
+                    //console.log("mesh"+index+".position: "+ myPositions[index][0]+","+ myPositions[index][1]+","+ myPositions[index][2]);
                     mesh11.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh11;
                     break;
@@ -292,7 +292,7 @@ function loadObjects()
                     var mesh =  new THREE.Mesh( geometry, material );
                     mesh.castShadow = true;
                     mesh.receiveShadow = true;
-                    console.log("Mesh Position set : myPositions:- " + myPositions[index][0] + "==="+ + myPositions[index][1]+ "==="+ + myPositions[index][2]);
+                    //console.log("Mesh Position set : myPositions:- " + myPositions[index][0] + "==="+ + myPositions[index][1]+ "==="+ + myPositions[index][2]);
                     mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                     meshGroup[index] = mesh;
                     break;
@@ -361,7 +361,10 @@ function UpdateAnimation(data){
 }
 function UpdateAnimationSS(data){
 
-//   console.log("UpdateAnimationSS Function Called.");
+   console.log("UpdateAnimationSS Function Called.");
+   console.log("===============================");
+   console.log("Data.Angles:"+ data.Angles);
+   console.log("===============================");
 
     if(lastLoad == 0)
     return;

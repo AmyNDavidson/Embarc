@@ -11,6 +11,7 @@
  * 	Binary decoding ignores header. There doesn't seem to be much of a use for it.
  * 	There is perhaps some question as to how valid it is to always assume little-endian-ness.
  * 	ASCII decoding assumes file is UTF-8. Seems to work for the examples...
+ *
  * Usage:
  * 	var loader = new THREE.STLLoader();
  * 	loader.addEventListener( 'load', function ( event ) {

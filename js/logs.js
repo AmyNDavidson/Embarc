@@ -5,15 +5,9 @@ var currentFile="";
 var selectedDate="";
 var FileName="";
 
-
-/*=======Add click event handler==================*/
-
-
-
-
 $(document).ready(function(){
-    readJsonFile()
-    $("#searchFile").click(function(){
+  readJsonFile()
+   $("#searchFile").click(function(){
        viewFilesList($("#calanderId").val())
     })
 
@@ -67,9 +61,7 @@ $(document).ready(function(){
 
 });
 
-
-/*====read json data form the server and push that into the array===============*/
-
+  //read the json file for the logs from the server end
 
 function readJsonFile(){
     socket.emit('readJsonObject');  
@@ -93,8 +85,6 @@ socket.on('logsJsonData', function(response){
 });
 
 
-/*===show the list of total log files=============*/
-
 function viewFilesList(str){
  
   $("#listIteams").html("");
@@ -105,17 +95,14 @@ function viewFilesList(str){
   }
 
 
-/*===Get the data of a selected file from the server==============*/
-
-
 function requestFileConetent(fname){
  socket.emit('requestFileData', fname);  
 
 
 }
+ 
 
 
-/*=========Get file name and show the file content=================*/
 
 socket.on('fileContentDispatch', function(data){
   
@@ -130,9 +117,6 @@ socket.on('fileContentDispatch', function(data){
 });
 
 
-/*=======Email the content of the selected file===================*/
-
-
  function emailFile(){
  
      window.location.href = "mailto:david.matic@mobileprogramming.com?subject="+selectedDate+"-"+FileName+"&body="+fileContent;
@@ -140,17 +124,11 @@ socket.on('fileContentDispatch', function(data){
  }
 
 
-/*======open the selected file ===================*/
-
-
 function openFile(str){
   FileName = dataArray[str].fileName;
   requestFileConetent(dataArray[str].fileName);
 
 }
-
-
-/*=========Serach file based on the selected date===================*/
 
 
 
@@ -169,7 +147,6 @@ function searchFiles(datestr){
   
   }
 
-/*======no file found handler==============*/
 
   if(!fileAvailabe){
  

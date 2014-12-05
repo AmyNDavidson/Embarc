@@ -8,7 +8,7 @@
     var probeResultStr="";
     var continueFlag=false;
 
-var testData;
+ var testData;
  var testSphereData7 = [
  				  [-0.200066, -0.517034,  0.071774,  0.613872, -0.382339, -0.129901,  0.300894, 0],
  				  [-0.205871, -0.518700,  0.039142,  0.591352, -0.360505, -0.114586,  0.334030, 0],
@@ -196,7 +196,7 @@ var testPointData6 = [
        GetSettings();
     	
       if(probType=="Sphere Method"){
-	console.log("ProbeType is : Sphere Method");
+	    console.log("ProbeType is : Sphere Method");
 		testData = testSphereData6;
 		//testData = testSphereData7;
          SetCalibration(Calibrations.Sphere)
@@ -509,7 +509,7 @@ var testPointData6 = [
 	{	 data.Angles = testData[0];
 		//console.log("sending first point to the Animation");
 		point1 = 1;
-                 $("#probPointsId").html("1/"+pointsNeededVal);
+        $("#probPointsId").html("1/"+pointsNeededVal);
 		UpdateAnimationSS(data);
 	}
 
@@ -789,28 +789,27 @@ var testPointData6 = [
       pts1.push(x);
             
             $("#pointsTakenId").val(pts1.length)
-           elem.value = pts1.length;
+            elem.value = pts1.length;
 
-           if(pts1.length<pointsNeededVal){
+	          if(pts1.length < pointsNeededVal){
 
-           $("#probPointsId").html((pts1.length + 1)+"/"+pointsNeededVal);
-
-         }
+	          		 $("#probPointsId").html((pts1.length + 1)+"/"+pointsNeededVal);
+	          }
            
 
         // special case for calibration and checkout.
 
-    if(MaxPointsToTake != 0 && MaxPointsToTake == pts1.length){
+		    if(MaxPointsToTake != 0 && MaxPointsToTake == pts1.length){
 
-      $(".pointsContainer .btn-green").css('background','#1db79b'); 
+		      $(".pointsContainer .btn-green").css('background','#1db79b'); 
 
-      $("#CalculateResultId").click(function(){
-          showResult();
-      });
+		      $("#CalculateResultId").click(function(){
+		          showResult();
+		      });
 
-    }
+		    }
 
-    break;
+		    break;
     case 1:
       pts2.push(x);
 

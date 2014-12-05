@@ -1,16 +1,12 @@
 
-/*===============click button handling===========*/
-
 
 $(document).ready(function(){
     
 	 $("#holeDiameter").click(function(){		
-
- 	});
-
-
+	});
 
 	$(".navbar-brand").click(function(){			
+  
           if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
 
               window.location = "settings.html";      
@@ -95,20 +91,21 @@ $(document).ready(function(){
     }) 
 
     $("#openCameraImg").click(function(){
+   
        window.location = "cameraImg.html";
+
     })
 
     $("#cameraCanil ").click(function(){
+
      gotoHome();
+      
     })
-  
-    $("#checkoutDoneButton").click(function(){
-      gotoHome();
-    })
+    
 
+
+ 
 });
-
-
 
 function gotoHome(){
   window.location = "home.html";
@@ -141,16 +138,6 @@ function openCheckOutCalDetails(type){
 
 }
 
-/*=================*/
-
-
-
-
-
-
-
-/*=========== Save data in the log file   ===================*/
-
 function saveInLogFile(type,result,dataArray){
 
     var fileCreatedFlag;
@@ -161,11 +148,16 @@ function saveInLogFile(type,result,dataArray){
         var d = new Date();
         var dateStr = ('0' + (d.getMonth()+1)).slice(-2)+':'+('0' + d.getDate()).slice(-2)+ ':' + d.getFullYear();
         fileName = dateStr+" - "+formatAMPM(d)
+
+        //fileName =('0' + (d.getMonth()+1)).slice(-2)+'/'+('0' + d.getDate()).slice(-2)+ '/' + d.getFullYear()+"-"+formatAMPM(d)+".txt";
+
         $.session.set("fileName",fileName)
+       
       }else{
           fileCreatedFlag=false;
           fileName  = $.session.get("fileName")
       }
+
      var date = new Date();
      var dateStr = ('0' + (date.getMonth()+1)).slice(-2)+'/'+('0' + date.getDate()).slice(-2)+ '/' + date.getFullYear();
      var jsonObject  = new Object();
@@ -174,16 +166,8 @@ function saveInLogFile(type,result,dataArray){
      dataArray.push(jsonObject);
      socket.emit('writeJsonFile', dataArray, fileName,fileCreatedFlag , type,result);
      fileCreatedFlag=false; 
+
 }
-
-
-/*===============*/
-
-
-
-
-
-/*=========Time conversion ===============*/
 
 
 function formatAMPM(date) {
@@ -198,7 +182,5 @@ function formatAMPM(date) {
   return strTime;
 
 }
-
-/*============*/
 
 
