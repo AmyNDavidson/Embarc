@@ -258,8 +258,11 @@ var Update = {
 // Respond to YesNo question (ie. whether or not to save probe specs after calibration).
 
 var YesNo = {
-    "Type" : "YesNo", // every JSON will have this field
-    "Response" : 0	// 0 = no, 1 = yes
+	"Type" : "YesNo", // every JSON will have this field
+	"Response" : 0,	// 0 = no, 1 = yes
+	"PID" : 0,		// 64 bit probe id. Passed in by Probe Data.
+	"Name" : "ProbeName",	// new name for probe
+	"Residual" : 0.0	// Residual error.
 };
 /* End - HTML Commands to Dispatcher */
 

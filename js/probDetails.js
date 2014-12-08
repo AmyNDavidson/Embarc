@@ -252,10 +252,8 @@ var testPointData6 = [
         });
 
        $("#saveResult").click(function(){
-            //saveProbeData();
-         
+           saveProbeData();
            saveInLogFile("Probe - "+probType ," Residual Value: "+$("#probResultId").html(),dataArray)          
- 
         });
 
 
@@ -1076,22 +1074,18 @@ function showResult(){
 
 
 function saveProbeData(){
-
-     // YesNo.response = 0;
-     // socket.emit('client_data', YesNo);
-
-
-
-   
+	YesNo.Response = 1;
+	YesNo.PID = probeObject.PID;
+	YesNo.Residual = $("#probResultId").html(),dataArray;
+	YesNo.Name = "New Probe";
+	socket.emit('client_data', YesNo);
 }
 
 
 function discardProbeData(){
-
+    YesNo.Response = 0;
+     socket.emit('client_data', YesNo);
      gotoHome();
-    // YesNo.response = 1;
-
-     // socket.emit('client_data', YesNo);
 }
 
 
