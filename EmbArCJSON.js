@@ -256,7 +256,6 @@ var Update = {
 };
 
 // Respond to YesNo question (ie. whether or not to save probe specs after calibration).
-
 var YesNo = {
 	"Type" : "YesNo", // every JSON will have this field
 	"Response" : 0,	// 0 = no, 1 = yes
@@ -264,6 +263,16 @@ var YesNo = {
 	"Name" : "ProbeName",	// new name for probe
 	"Residual" : 0.0	// Residual error.
 };
+
+//Query for Bluetooth devices
+var RequestBTInfo = {
+    "Type" : "RequestBTInfo", // every JSON will have this field
+};
+
+var SelectBTDevice = {
+	    "Type" : "SelectBTDevice", // every JSON will have this field
+	    "Name" : "FriendlyBTName"	// Friendly name of device. Blank if none.
+	};
 /* End - HTML Commands to Dispatcher */
 
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -295,6 +304,10 @@ var Result = {
     "StandardDeviation" : 0.0
 };
 
+var BTDeviceNames = {
+	    "Type" : "BTDeviceNames", // every JSON will have this field
+	    "Names" : []	// Friendly names of devices available.
+	};
 /* End - Dispatcher Commands to HTML */
 
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -370,6 +383,9 @@ var Settings = {
     "Type" : "Settings", // every JSON will have this field
     "SSID" : "AMI1234",
     "PASSWORD" : "",
+    "BT_NAME" : "",
+    "BT_ID" : "",
+    "COUNTRY" : "US",
     "CHANNEL" : 7, // Channel 1-11 (2.5GHZ), 36, 42, 44, etc(5GHZ).
     "HAPTIC" : 0, // 0 = off, 1 = on
     "VOLUME" : 100, // 0 to 100%
@@ -377,6 +393,7 @@ var Settings = {
     "UNITS" : 0,	// 0 = mm, 1 = inches
     "BarLength"	: 0,	// Bar length for checkout
     "SphrereDiameter" : 0	// Sphere diameter for checkout and probe cal
+    "FwVersion" : 0	// Linux version.
 };
 
 /* End - Dual Use Objects */
