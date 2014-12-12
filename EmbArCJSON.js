@@ -273,6 +273,11 @@ var SelectBTDevice = {
 	    "Type" : "SelectBTDevice", // every JSON will have this field
 	    "Name" : "FriendlyBTName"	// Friendly name of device. Blank if none.
 	};
+
+var UpdateFW = {
+	    "Type" : "UpdateFW", // every JSON will have this field
+	    "Name" : "FWFileName"	// tar file with update archive
+	};
 /* End - HTML Commands to Dispatcher */
 
 // ////////////////////////////////////////////////////////////////////////////////////////
