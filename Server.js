@@ -19,7 +19,7 @@ server = my_http.createServer(function(request, response) {
 	path.exists(full_path, function(exists) {
 		if (!exists) {
 			console.log("Path not exists");
-			response.writeHeader(404, {0
+			response.writeHeader(404, {
 				"Content-Type" : "text/plain"
 			});
 			response.write("404 Not Found\n");
