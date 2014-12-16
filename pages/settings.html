@@ -27,6 +27,20 @@
        console.log("millisecondsLoading : "+millisecondsLoading);
    });
 </script>
+<style>
+  
+  #spinner{
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: url(../images/spinner.gif) 50% 25% no-repeat rgba(237, 233, 223, 0.35);
+  }
+
+
+</style>
 
 </head>
 <body id="setting">
@@ -40,8 +54,8 @@
       </div>	
      </div><!--Navigation END Here-->
     
-     
- <div class="container"> <!--Body START Here-->
+ <div id="spinner" style="display:none;"></div>  
+ <div class="container" id="SettingsContainer"> <!--Body START Here-->
     	<div class="row marTop settingForm">
         	<div class="col-md-6"> <!--Left Form START Here-->
                

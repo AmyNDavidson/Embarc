@@ -1,6 +1,9 @@
 var dataUnits = ""
 $( document ).ready(function() {
 
+    $("#SettingsContainer").css("display", "none");
+    $("#spinner").css("display", "block");
+
     $('#hapticId').click(function() {
          $(this).find('.btn').toggleClass('btn-primary');
     });
@@ -80,7 +83,8 @@ $( document ).ready(function() {
   
      }
 
-
+  $("#spinner").css("display", "none");
+  $("#SettingsContainer").css("display", "block");
 
    });
 
