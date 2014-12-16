@@ -397,7 +397,7 @@ var Settings = {
     "HEADLIGHT" : 0, // //0 = off, 1 = on
     "UNITS" : 0,	// 0 = mm, 1 = inches
     "BarLength"	: 0,	// Bar length for checkout
-    "SphrereDiameter" : 0	// Sphere diameter for checkout and probe cal
+    "SphrereDiameter" : 0,	// Sphere diameter for checkout and probe cal
     "FwVersion" : 0	// Linux version.
 };
 
