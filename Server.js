@@ -28,6 +28,13 @@ server = my_http.createServer(function(request, response) {
 			console.log("Path exists");
 			filesys.readFile(full_path, "binary", function(err, file) {
 				if (err) {
+
+					if(my_path == '/'){
+						response.writeHead(303, {
+ 							 'Location': '/pages/home.html'
+						});
+						response.end();
+					}
 					response.writeHeader(500, {
 						"Content-Type" : "text/plain"
 					});
