@@ -20,7 +20,7 @@
 <script src="../js/application.js" type="text/javascript"></script>
 <script src="../EmbArCJSON.js"></script>
 <script src="../js/measurement.js" type="text/javascript"></script>
-<script src="../js/math.js" type="text/javascript"></script>
+<script src="../js/math.min.js" type="text/javascript"></script>
 
 <script>
    $(window).load(function () {
@@ -47,8 +47,8 @@
     <div class="container"> <!--Body START Here-->
     	<div class="row marTop20 marTop35 measurement"> <!--First ROW START Here-->
      		<div class="col-xs-6 col-md-3">
-            	<div class="thumbnail">
-               	<div class="measure blueBox" id="holeDiameter" onClick="openMeasureDetails('holeDiameter')">
+            	<div class="thumbnail" onClick="openMeasureDetails('holeDiameter')">
+               	<div class="measure blueBox" id="holeDiameter" >
                     	<img src="../images/Hole_Diameter.png" alt="">
                     	<span>Hole Diameter</span>
                     </div>
@@ -64,8 +64,8 @@
                 </div>
             </div>
             
-            <div class="col-xs-6 col-md-3" onClick="openMeasureDetails('rectangleDimensions')">
-            	<div class="thumbnail">
+            <div class="col-xs-6 col-md-3" >
+            	<div class="thumbnail" onClick="openMeasureDetails('rectangleDimensions')">
                 	<div class="camera blueBox">
                     	<img src="../images/Rectangle_Dimensions.png" alt="">
                     	<span class="blockSpan">Rectangle Dimensions</span>
