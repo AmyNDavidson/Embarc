@@ -5,6 +5,7 @@ js/jquery-1.11.1.min.js
 js/bootstrap.min.js
 js/math.min.js
 js/three.min.js
+js/math.map
 images/Angle_Between_Two_Surfaces.png
 images/Angle_Between_Two_Lines_Edges.png
 images/Angle_Between_Line_and_Surface.png
