@@ -269,6 +269,11 @@ var UpdateFW = {
 	    "Type" : "UpdateFW", // every JSON will have this field
 	    "Name" : "FWFileName"	// tar file with update archive
 	};
+
+// Cancel current probe calibration 
+var CancelProbeCal = {
+    "Type" : "CancelProbeCal", // every JSON will have this field
+};
 /* End - HTML Commands to Dispatcher */
 
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -370,6 +375,14 @@ var Saved = {
 	"Type" : "PROBESPECS",
 	"Saved" : 0	// 0 = not saved, 1 = saved
 };
+
+// Probe calibration status
+var ProbeCalStatus = {
+		"Type" : "ProbeCalStatus",
+		"Residual" : 0.0,	// Residual error. - passed by service during probe calibration
+		"CurrentStep": 0,	// Current step in cal process - passed by service during probe calibration
+		"MaxStep" : 0		// Max number of steps. - passed by service during probe calibration
+	};
 /* End - RA7 Data for HTML */
 
 /* Begin - Dual Use Objects */
@@ -393,9 +406,7 @@ var Settings = {
 };
 
 // Multiuse
-// 1. Provides updates from the service during probe calibration calculation phase
-// 2. Allows the user to cancel the probe calibration calculation
-// 3. Allows the user to save the results of a probe calibration
+// 1. Allows the user to save the results of a probe calibration
 var YesNo = {
 	"Type" : "YesNo", // every JSON will have this field
 	"Response" : 0,	// 0 = no, 1 = yes 
@@ -404,7 +415,5 @@ var YesNo = {
 	"PID" : 0,		// 64 bit probe id. Passed in by Probe Data.
 	"Name" : "ProbeName",	// new name for probe
 	"Residual" : 0.0,	// Residual error. - passed by service during probe calibration
-	"CurrentStep": 0,	// Current step in cal process - passed by service during probe calibration
-	"MaxStep" : 0		// Max number of steps. - passed by service during probe calibration
 };
 /* End - Dual Use Objects */
