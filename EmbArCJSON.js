@@ -255,15 +255,6 @@ var Update = {
     "Type" : "Update", // every JSON will have this field
 };
 
-// Respond to YesNo question (ie. whether or not to save probe specs after calibration).
-var YesNo = {
-	"Type" : "YesNo", // every JSON will have this field
-	"Response" : 0,	// 0 = no, 1 = yes
-	"PID" : 0,		// 64 bit probe id. Passed in by Probe Data.
-	"Name" : "ProbeName",	// new name for probe
-	"Residual" : 0.0	// Residual error.
-};
-
 //Query for Bluetooth devices
 var RequestBTInfo = {
     "Type" : "RequestBTInfo", // every JSON will have this field
@@ -278,6 +269,11 @@ var UpdateFW = {
 	    "Type" : "UpdateFW", // every JSON will have this field
 	    "Name" : "FWFileName"	// tar file with update archive
 	};
+
+// Cancel current probe calibration 
+var CancelProbeCal = {
+    "Type" : "CancelProbeCal", // every JSON will have this field
+};
 /* End - HTML Commands to Dispatcher */
 
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -379,6 +375,14 @@ var Saved = {
 	"Type" : "PROBESPECS",
 	"Saved" : 0	// 0 = not saved, 1 = saved
 };
+
+// Probe calibration status
+var ProbeCalStatus = {
+		"Type" : "ProbeCalStatus",
+		"Residual" : 0.0,	// Residual error. - passed by service during probe calibration
+		"CurrentStep": 0,	// Current step in cal process - passed by service during probe calibration
+		"MaxStep" : 0		// Max number of steps. - passed by service during probe calibration
+	};
 /* End - RA7 Data for HTML */
 
 /* Begin - Dual Use Objects */
@@ -401,4 +405,15 @@ var Settings = {
     "FwVersion" : 0	// Linux version.
 };
 
+// Multiuse
+// 1. Allows the user to save the results of a probe calibration
+var YesNo = {
+	"Type" : "YesNo", // every JSON will have this field
+	"Response" : 0,	// 0 = no, 1 = yes 
+					// During calculation, App can cancel by sending this object with a 0
+					// After calculation is complete (ie. a Result object is received) Send back 1 to save result, 0 to discard
+	"PID" : 0,		// 64 bit probe id. Passed in by Probe Data.
+	"Name" : "ProbeName",	// new name for probe
+	"Residual" : 0.0,	// Residual error. - passed by service during probe calibration
+};
 /* End - Dual Use Objects */
