@@ -88,6 +88,15 @@ myAxes = [
        var endTime = (new Date()).getTime();
        var millisecondsLoading = endTime - startTime;
        console.log("millisecondsLoading : "+millisecondsLoading);
+
+       if(probType == "Plane Method" || probType == "Single Point")
+       {
+          setTimeout(function(){
+            $("#probPointsId").html("1/"+pointsNeededVal);
+            UpdateAnimationSS(firstData);
+          },200);
+        
+       }
    });
 </script>
 

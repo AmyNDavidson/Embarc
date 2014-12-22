@@ -11,6 +11,12 @@
  // var inputFlag=false;
     var checkOutType =  localStorage.getItem('CheckOutType');
 
+    var firstData;
+    var firstSphereData = {"Type":"DRO","X":-634.498,"Y":-374.078,"Z":53.178,"I":0,"J":0,"K":0,"Angles":[-0.004866,-0.427465,0.015376,0.505727,-0.279357,-0.180619,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+    var firstPlaneData = {"Type":"DRO","X":-121.071,"Y":-428.443,"Z":0.501,"I":0,"J":0,"K":0,"Angles":[-0.042997,-0.272257,-0.049351,0.354835,1.565268,0.012169,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+    var firstPointData = {"Type":"DRO","X":95.764,"Y":-401.696,"Z":8.807,"I":0,"J":0,"K":0,"Angles":[-1.050477,0.350163,1.178647,0.985467,2.132676,1.299407,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+    var firstLengthData = {"Type":"DRO","X":95.764,"Y":-401.696,"Z":8.807,"I":0,"J":0,"K":0,"Angles":[-1.66071,0.422301,0.524274,0.200471,2.206462,0.779029,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0}; 
+    
     var testData;
     var testSphereData6 = [ 
                 [-0.004866, -0.427465,  0.015376,  0.505727, -0.279357, -0.180619, 0],
@@ -233,7 +239,8 @@ $(document).ready(function(){
                 $("#pointsRequire2").removeClass("grayBg");
                 $("#checkOutCancelButton .btn-red").css('background','#df443f');
                 $("#instructionText").html('  Take at least '+pointNeededVal+' points and click Calculate or Arm Button 3 to see the result. ')
-
+                $("#calPointsId").html("1/"+ pointNeededVal);
+                UpdateAnimationSS(firstData);
              }
              else
              {
@@ -284,6 +291,8 @@ $(document).ready(function(){
             console.log("=====Sphere Checkout======");
             testData = testSphereData6;
             //testData = testSphereData7;
+
+            firstData = firstSphereData;
                $("#r12").hide();
                $("#aveDevi").hide();
                $("#r22").hide();  
@@ -294,8 +303,9 @@ $(document).ready(function(){
          }else if (checkOutType=="Length Checkout"){
             console.log("=====Length Checkout======");
             testData = testLengthData6;
-           
             //testData = testLengthData7;
+            firstData = firstLengthData;
+
                $("#r10").html("Minimum");
                $("#r11").html("Maximum");
                $("#r12").html("Average");
@@ -307,8 +317,9 @@ $(document).ready(function(){
          }else if(checkOutType=="Point Checkout"){
             console.log("=====Point Checkout======");
             testData = testPointData6;
-          
             //testData = testPointData7;
+            firstData = firstPointData;
+
                $("#secondRow").hide(); 
                $("#thirdRow").hide(); 
                $("#r10").html("Range Over 2-X");
@@ -318,8 +329,9 @@ $(document).ready(function(){
          }else if(checkOutType=="Plane Checkout"){
             console.log("=====Plane Checkout======");
             testData = testPlaneData6;
-          
             //testData = testPlaneData7;
+            firstData = firstPlaneData;
+
                $("#r12").hide();
                $("#aveDevi").hide();
                $("#r22").hide();  

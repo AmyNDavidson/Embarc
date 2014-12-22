@@ -84,6 +84,14 @@ myAxes = [
        var endTime = (new Date()).getTime();
        var millisecondsLoading = endTime - startTime;
        console.log("millisecondsLoading : "+millisecondsLoading);
+
+       if(checkOutType == "Plane Checkout" || checkOutType == "Point Checkout")
+       {
+          setTimeout(function(){
+            $("#calPointsId").html("1/"+ pointNeededVal);
+            UpdateAnimationSS(firstData);
+          },200);
+       }
    });
 </script>
 

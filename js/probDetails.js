@@ -7,6 +7,11 @@
     var dataArray = new Array();
     var probeResultStr="";
     var continueFlag=false;
+    var firstData;
+    var firstSphereData = {"Type":"DRO","X":-145.13739,"Y":-369.68768,"Z":40.82619,"I":-0.28302,"J":0.09389,"K":0.95451,"Angles":[0.017343,-0.373664,0.022971,0.403598,1.715187,0.058023,0],"RawPositions":[197814366,511546544,511129770,82757319,271951044,494937407,507539223,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+    var firstPlaneData = {"Type":"DRO","X":-406.904,"Y":330.517,"Z":-5.825,"I":0,"J":0,"K":0,"Angles":[-0.042997,-0.272257,-0.049351,0.354835,1.565268,0.012169,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+    var firstPointData = {"Type":"DRO","X":-381.479,"Y":327.538,"Z":67.493,"I":0,"J":0,"K":0,"Angles":[0.131632,-0.277477,0.012158,0.316782,1.518734,1.027166,0],"RawPositions":[0,0,0,0,0,0,0,0],"Rate":1000,"Button1":0,"Button2":0,"Button3":0};
+
 
  var testData;
  var testSphereData7 = [
@@ -199,6 +204,7 @@ var testPointData6 = [
 	    console.log("ProbeType is : Sphere Method");
 		testData = testSphereData6;
 		//testData = testSphereData7;
+		firstData = firstSphereData;
          SetCalibration(Calibrations.Sphere)
         
          $("#headerText").html("Probe Calibritaion - Sphere")
@@ -221,6 +227,7 @@ var testPointData6 = [
 		myObjects[1] = "";
 		testData = testPlaneData6;
 		//testData = testPlaneData7;
+		firstData = firstPlaneData;
         SetCalibration(Calibrations.Plane)
         continueFlag=true;
         $("#barRequireId").hide();
@@ -235,7 +242,7 @@ var testPointData6 = [
 		  myObjects[1] = "";
 		testData = testPointData6;
 		//testData = testPointData7;
-		
+		firstData = firstPointData;
 
         continueFlag=true;
          SetCalibration(Calibrations.Point)
@@ -282,7 +289,8 @@ var testPointData6 = [
       $("#ptsReq").removeClass("lableClass"); 
 
      // $("#instructionText").html('  Take at least '+pointNeededVal+' points and click Calculate or Arm Button 3 to see the result. ')
-
+      $("#probPointsId").html("1/"+pointsNeededVal);
+        UpdateAnimationSS(firstData);
 
     }else{
 
