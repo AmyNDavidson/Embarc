@@ -119,8 +119,8 @@ socket.on('fileContentDispatch', function(data){
 
  function emailFile(){
  
-     window.location.href = "mailto:david.matic@mobileprogramming.com?subject="+selectedDate+"-"+FileName+"&body="+fileContent;
- 
+    //window.location.href = "mailto:david.matic@mobileprogramming.com?subject="+selectedDate+"-"+FileName+"&body="+fileContent;
+     window.location.href = "mailto:?subject="+selectedDate+"-"+FileName+"&body="+fileContent;
  }
 
 
