@@ -100,7 +100,27 @@ myAxes = [
    });
 </script>
 
+<style type="text/css">
 
+ 
+   #modalmessage{
+    background-color: white;
+    position: fixed;
+    border-radius: 5px;
+    padding: 26px;
+    z-index: 50;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    height: auto;
+   }
+ 
+  #modaldone, #modalcancel{
+    width: 49.9%;
+    float: left;
+  }
+  
+</style>
 
 
 </head>
@@ -185,6 +205,21 @@ myAxes = [
         </div>
     </div><!--Body END Here-->
 
+   <!-- Modal Dialog -->
+    <div id="modal" style="display:none">      
+           <div id="modalmessage">
+               <p style="padding: 5% 5% 10% 5%;border: 1px solid #ccc; border-radius: 15px;"> Please wait.. Calculating</p>
+           <div style="text-align:center;">
+               <div  id="modalcancel">
+                    <a href="/pages/home.html" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+               </div>
+               <div  id="modaldone">
+                    <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Done </a>
+               </div>
+           </div>
+      </div>      
+    </div>
+<!-- Modal Dialog ENDS here -->
 
    <div class="popup_div" id="probAlert" style="display:none;">
     <div  class="import_contact" >

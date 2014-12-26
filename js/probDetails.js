@@ -810,7 +810,8 @@ var testPointData6 = [
 		      $(".pointsContainer .btn-green").css('background','#1db79b'); 
 
 		      $("#CalculateResultId").click(function(){
-		          showResult();
+		      	  enableModal();
+		          //showResult();
 		      });
 
 		    }
@@ -857,8 +858,7 @@ var testPointData6 = [
            $(".pointsContainer .btn-green").css('background','#1db79b');
           
            $("#CalculateResultId").click(function(){
-            showResult();
-
+           	 showResult();
             })
          }    
 
@@ -1067,6 +1067,23 @@ function SetSettings()
     Settings.UNITS = 1;
     
   socket.emit('client_data', Settings);*/
+}
+
+
+function enableModal(){
+	$('#modal').show();
+	$(".container").css("opacity", 0.3);
+	$(".container").css("pointer-events", "none");	
+	$('#modal #modaldone').click(function(){
+	    $(".container").css("opacity", 1);
+	    $(".container").css("pointer-events", "auto");
+	    $('#modal').hide();	    
+	    showResult();
+	});
+	$('#modal #modalcancel').click(function(){		
+		window.location.href='/pages/home.html';
+	});
+
 }
 
 function showResult(){
