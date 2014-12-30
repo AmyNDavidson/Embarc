@@ -115,10 +115,9 @@ myAxes = [
     height: auto;
    }
  
-  #modaldone, #modalcancel{
-    width: 49.9%;
-    float: left;
-  }
+   #modalcancel{
+     width: 100%;
+   }
   
 </style>
 
@@ -208,14 +207,12 @@ myAxes = [
    <!-- Modal Dialog -->
     <div id="modal" style="display:none">      
            <div id="modalmessage">
-               <p style="padding: 5% 5% 10% 5%;border: 1px solid #ccc; border-radius: 15px;"> Please wait.. Calculating</p>
+               <p id="modalmessage-p" style="padding: 5% 5% 10% 5%;border: 1px solid #ccc; border-radius: 15px;"></p>
            <div style="text-align:center;">
                <div  id="modalcancel">
                     <a href="/pages/home.html" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
                </div>
-               <div  id="modaldone">
-                    <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Done </a>
-               </div>
+              
            </div>
       </div>      
     </div>

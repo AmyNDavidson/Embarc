@@ -363,8 +363,13 @@ var testPointData6 = [
   
   socket.on('Result', function(data){
   
-    
+ console.log('Result function called..'+data.toString());
 
+    /*Display Show Result Function*/
+        $(".container").css("opacity", 1);
+	    $(".container").css("pointer-events", "auto");
+	    $('#modal').hide();	    	   
+	    showResult();
 
   if(data.Valid == 0)
   {
@@ -810,7 +815,9 @@ var testPointData6 = [
 		      $(".pointsContainer .btn-green").css('background','#1db79b'); 
 
 		      $("#CalculateResultId").click(function(){
-		      	  enableModal();
+
+		      	  MeasureFeature();
+		      	  //enableModal();
 		          //showResult();
 		      });
 
@@ -915,6 +922,7 @@ var testPointData6 = [
  
  function MeasureFeature()
 {  
+  enableModal();	
   MakeMeasureSound();
   //var elem = document.getElementById("diameter");
   MyMeasureObject.ProbeDiameter =  probeObject.Diameter;
@@ -1071,29 +1079,23 @@ function SetSettings()
 
 
 function enableModal(){
+
 	$('#modal').show();
 	$(".container").css("opacity", 0.3);
 	$(".container").css("pointer-events", "none");	
-	$('#modal #modaldone').click(function(){
-	    $(".container").css("opacity", 1);
-	    $(".container").css("pointer-events", "auto");
-	    $('#modal').hide();	    
-	    showResult();
-	});
-	$('#modal #modalcancel').click(function(){		
+	
+	$('#modal #modalcancel').click(function(){
+		YesNo.Response = 0;
+		socket.emit('client_data', YesNo);		
 		window.location.href='/pages/home.html';
 	});
 
 }
 
-function showResult(){
-  
+function showResult(){	
     $(".diameterContainer").show();
     $("#CalculateResultId .btn-green").css('background','#F1F1F1');
     $("#probCancelButton .btn-red").css('background','#F1F1F1');
-
-
-    MeasureFeature();
   
 }
 
@@ -1141,4 +1143,9 @@ function discardProbeData(){
 
 });
 
+
+socket.on('YesNo',function(data){
+console.log(data);
+$('#modalmessage-p').text('Probe cal in process.Step %i of %i Residual = %f');
+});
   
