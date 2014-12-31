@@ -127,26 +127,25 @@ function loadObjects()
 
           chklen = true;
           myObjects = [
-                    
-                     '../stl/BASE_PLATE.STL',
-                     '../stl/Base.STL',
-                     '../stl/A.STL',
-                     '../stl/BC25.STL',
-                     '../stl/C_FORK.STL',
-                     '../stl/DE25.STL',
-                     '../stl/F.STL',
-                     '../stl/F_AXIS.STL',
-                     '../stl/Buttons.STL',
-                     '../stl/Hard_Probe_15.STL',
-                     
-                     ];
-            myObjects2 = ['../stl/StepBar.STL',];
+                 '../stl/StepBar.STL',
+                 '../stl/BASE_PLATE.STL',
+                 '../stl/Base.STL',
+                 '../stl/A.STL',
+                 '../stl/BC25.STL',
+                 '../stl/C_FORK.STL',
+                 '../stl/DE25.STL',
+                 '../stl/F.STL',
+                 '../stl/F_AXIS.STL',
+                 '../stl/Buttons.STL',
+                 '../stl/Hard_Probe_15.STL',
+                 ];
+
 
 
 
         myPositions = [
-              
-               [-300,1650,-300],
+               [-300,-10,-50],
+               [-10,1000,-10],
                [0,0,89.5],
                [0,0,150],
                [0,0,137],
@@ -156,25 +155,21 @@ function loadObjects()
                [0,0,-48.5],
                [0,0,0],
                [0,15,-69.5],
-             
                ];
-        myPositions2 = [ [-400,-600,-50],];
 
-        myAxes = [
-                  " ",
-                  " ",
-                  "Z",
-                  "Y",
-                  "X",
-                  "Y",
-                  "Z",
-                  "Y",
-                  " ",
-                  " ",
-              
-                ];
-
-          myAxes2 = [" ",];
+    myAxes = [
+              " ",
+              " ",
+              " ",
+              "Z",
+              "Y",
+              "X",
+              "Y",
+              "Z",
+              "Y",
+              " ",
+              " ",
+            ];
         }
 
     }
@@ -191,34 +186,48 @@ function loadObjects()
       	var index = event.index;
        	var geometry = event.content;
       	var materials = [
-                                    new THREE.MeshPhongMaterial( { ambient: 0x262B30, color: 0x262B30, specular: 0x111111, shininess: 200 }), //0 -- brown
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }), //1 -- blue
-                                    new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }), //2 -- gray
-                                    new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }), //3
-                                    new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 }),
-                                    new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 })
-                                ];
-           
-	    if(chklen == true){
-               materials[0] = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 });
-            }
+                            new THREE.MeshPhongMaterial( { ambient: 0x262B30, color: 0x262B30, specular: 0x111111, shininess: 200 }), //0 -- brown
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }), //1 -- blue
+                            new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }), //2 -- gray
+                            new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }), //3
+                            new THREE.MeshPhongMaterial( { ambient: 0x797F85, color: 0x797F85, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x184369, color: 0x184369, specular: 0x111111, shininess: 200 }),
+                            new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 })
+                        ];
 
-             
-                var mesh =  new THREE.Mesh( geometry, materials[index] );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
+           
+  	     if(chklen == true){
+               materials[0] = new THREE.MeshPhongMaterial( { ambient: 0x3B95E3, color: 0x3B95E3, specular: 0x111111, shininess: 200 });
+
+               var mesh =  new THREE.Mesh( geometry, materials[index] );
+               mesh.castShadow = true;
+               mesh.receiveShadow = true;
+
+                if(index == 0){
+                    mesh.rotation.y = 0.8;
+                }else if(index == 1){
+                    mesh.rotation.y = -0.8;
+                }
                 mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                 meshGroup[index] = mesh;
-  	   
 
-           if(count ==  myObjects.length)
+        }else{
+             var mesh =  new THREE.Mesh( geometry, materials[index] );
+             mesh.castShadow = true;
+             mesh.receiveShadow = true;
+             mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
+             meshGroup[index] = mesh;
+        }
+        
+            
+        	   
+        if(count ==  myObjects.length)
   	    {
         		scene.add(meshGroup[0]);
         		for(var j = 0; j < myObjects.length - 1; j++)
@@ -230,13 +239,10 @@ function loadObjects()
     for(var j = 0; j < myObjects.length; j++)
     {
   	      loader.load(myObjects[j], 0, j);
+          
     }
 
 }
-
-
-
-
 
 function UpdateAnimation(data){
 
