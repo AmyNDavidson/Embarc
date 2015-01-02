@@ -144,8 +144,8 @@ function loadObjects()
 
 
         myPositions = [
-               [-300,-10,-50],
-               [-10,1000,-10],
+               [-400,-500,-50],
+               [10,1240,-10],
                [0,0,89.5],
                [0,0,150],
                [0,0,137],
@@ -210,9 +210,9 @@ function loadObjects()
                mesh.receiveShadow = true;
 
                 if(index == 0){
-                    mesh.rotation.y = 0.8;
+                    mesh.rotation.y = 0.4;
                 }else if(index == 1){
-                    mesh.rotation.y = -0.8;
+                    mesh.rotation.y = -0.4;
                 }
                 mesh.position.set(myPositions[index][0], myPositions[index][1], myPositions[index][2]);
                 meshGroup[index] = mesh;
