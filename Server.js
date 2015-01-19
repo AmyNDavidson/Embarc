@@ -184,6 +184,17 @@ var io = require('socket.io').listen(server);
          });     
     }); 
 
+    ioSocket.on('requestLoggingData', function(fileName) {
+         fs.readFile(fileName, 'utf8', function (err,data) {
+         	if(err)
+	    	{
+	    		console.log("requestLoggingData error:"+ err);
+	    		throw err;
+	    	}
+	    	console.log("ServerJS@requestLoggingData:"+data);
+              	ioClient.emit('LoggingDataDispatch',data);
+         });     
+    });
 
     ioSocket.on('writeJsonFile', function(myData,fileName,flag,type,value) {
 
