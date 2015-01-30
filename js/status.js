@@ -30,8 +30,10 @@
 
    
      $(".batteryPer .battery em font").css("width",Math.floor(per)+"%");
-    
-      $("#temperatureInput").val(data.Ambient+" Celsius")
+    if(data.Ambient == 255)
+      $("#temperatureInput").val("N/A")
+	else	
+     $("#temperatureInput").val(data.Ambient+" Celsius")
 
 
 

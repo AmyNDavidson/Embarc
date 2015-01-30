@@ -104,7 +104,7 @@ socket.on('DRO', function(data){
 
    }
 
-   UpdateAnimation(droData);
+   UpdateAnimationSS(droData);
 
 
  }/*==============*/   

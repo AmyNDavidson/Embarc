@@ -364,22 +364,21 @@ var testPointData6 = [
   socket.on('Result', function(data){
   
  console.log('Result function called..'+data.toString());
+	    
 
-    /*Display Show Result Function*/
-        $(".container").css("opacity", 1);
-	    $(".container").css("pointer-events", "auto");
-	    $('#modal').hide();	    	   
-	    showResult();
-
+	
   if(data.Valid == 0)
-  {
-     string = "Calculation failed";
-     alert("calculation failed");
-     
+{
+	$('#modalmessage-p').text('Cannot calibrate reference probe or bad data');
   }
   else
   {
-  
+    /*Display Show Result Function*/
+ 	$('#modal').hide();
+       $(".container").show();        
+	$(".container").css("opacity", 1);
+	$(".container").css("pointer-events", "auto");
+	showResult(); 
 
     if(MyMeasureObject.Type == "Calibration")
     {
@@ -533,10 +532,8 @@ var testPointData6 = [
     droObject.I = data.I.toFixed(3);
     droObject.J = data.J.toFixed(3);
     droObject.K = data.K.toFixed(3);
- 
 
     localStorage["droData"] = JSON.stringify(data);
-
 
   if(data.Button2 != 0){
    // console.log("Sending to TakeAPoint func...");
@@ -548,64 +545,15 @@ var testPointData6 = [
   }
   if(data.Button3 != 0)
   {
-       
-           if(MeasureStep==0){
-              $("#measurePlaneNextButton").trigger("click");      
-          }else if(MeasureStep==1){
-              
-               $("#CalculateResultId").trigger("click");      
-               
-            }
-       MeasureStep++;
-   
-       if(MeasureStep==0){
-
-             var elem = document.getElementById("pointsTakenId");
-
-
-    }else
-    {
-             elem = document.getElementById("pointsTakenId2");
-
-    }
-      
-           elem.value = 0;
-      
-          if(MeasureStep == maxSteps[feature]){
-          showResult();
-
-          }
-      else
-      { 
-         //var f = document.getElementById("STEP");
-          f.value = MeasureStep + 1;
-          //var f1 = document.getElementById("FEATURE");
-      
-        switch(MeasureStep)
-        {
-        case 1:
-          f1.value = MyMeasureObject.SubFeature2;
-          break;
-        case 2:
-          f1.value = MyMeasureObject.SubFeature3;
-          break;
-        case 3:
-          f1.value = MyMeasureObject.SubFeature4;
-          break;
-
-      }
-    
-    }
+	  if(MaxPointsToTake != 0 && MaxPointsToTake <= pts1.length)
+		  $("#CalculateResultId").trigger("click");      
   }
-  }else{
-    
+  }
+  else
+  {
      //$("#probAlert #popUpText").html("Please click continue to take points")  
      //$("#probAlert").css('display','block');
-
   }
-
-
-
 });
  
  
@@ -1081,12 +1029,11 @@ function SetSettings()
 function enableModal(){
 
 	$('#modal').show();
-	$(".container").css("opacity", 0.3);
+	$(".container").hide();
 	$(".container").css("pointer-events", "none");	
 	
 	$('#modal #modalcancel').click(function(){
-		YesNo.Response = 0;
-		socket.emit('client_data', YesNo);		
+		socket.emit('client_data', CancelProbeCal);		
 		window.location.href='/pages/home.html';
 	});
 
@@ -1096,7 +1043,6 @@ function showResult(){
     $(".diameterContainer").show();
     $("#CalculateResultId .btn-green").css('background','#F1F1F1');
     $("#probCancelButton .btn-red").css('background','#F1F1F1');
-  
 }
 
 
@@ -1144,8 +1090,8 @@ function discardProbeData(){
 });
 
 
-socket.on('YesNo',function(data){
+socket.on('ProbeCalStatus',function(data){
 console.log(data);
-$('#modalmessage-p').text('Probe cal in process.Step %i of %i Residual = %f');
+$('#modalmessage-p').text('Probe cal in process.Step ' + data.CurrentStep + ' of ' + data.MaxStep + ' Residual: ' + data.Residual);
 });
   

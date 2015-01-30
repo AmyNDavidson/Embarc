@@ -544,59 +544,10 @@ if(continueFlag)
     
   if(data.Button3 != 0)
   {   
-  
-      if(MeasureStep==0){
-        $("#measurePlaneNextButton").trigger("click");      
-      }
-      else if(MeasureStep==1)
-      {
+	if(MaxPointsToTake != 0 && MaxPointsToTake == pts1.length)
         $("#CalculateResultId").trigger("click");      
-      }
-
-      MeasureStep++;
-
-      if(MeasureStep==0){
-          var elem = document.getElementById("pointsTakenId");
-      }
-      else
-      {
-          elem = document.getElementById("pointsTakenId2");
-      }
-      
-      elem.value = 0;
-      
-      if(MeasureStep == maxSteps[feature]){
-         showResult();
-      }
-      else
-      { 
-         //var f = document.getElementById("STEP");
-          f.value = MeasureStep + 1;
-          //var f1 = document.getElementById("FEATURE");
-      
-        switch(MeasureStep)
-        {
-        case 1:
-          f1.value = MyMeasureObject.SubFeature2;
-          break;
-        case 2:
-          f1.value = MyMeasureObject.SubFeature3;
-          break;
-        case 3:
-          f1.value = MyMeasureObject.SubFeature4;
-          break;
-        }
-      }
   }
-
 }
-else
-{
- 
-  //  $("#popUpId #popUpText").html("Please click continue to take points")   
-    //$("#popUpId").css("display","block");
-}
-
 });
  
  

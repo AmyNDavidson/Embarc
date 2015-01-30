@@ -246,8 +246,9 @@ function loadObjects()
 
 function UpdateAnimation(data){
 
-  console.log("UpdateAnimation Function Called.");
+  	//console.log("UpdateAnimation Function Called.");
 
+	// cannot do this for DRO (live action) since buttons may or may not be pressed.
      if((data.Button1 == 0) && (data.Button2 == 0) && (data.Button3 == 0)){
       return;
      }
@@ -286,7 +287,7 @@ function UpdateAnimation(data){
 
 function UpdateAnimationSS(data){
 
-    console.log("UpdateAnimationSS Function Called.");
+   // console.log("UpdateAnimationSS Function Called.");
 
     if(lastLoad == 0)
     return;

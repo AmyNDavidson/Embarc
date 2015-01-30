@@ -15,17 +15,17 @@ server = my_http.createServer(function(request, response) {
 //	process.stdout.write("path\n");
 
 	var full_path = path.join(process.cwd(), my_path);
-	console.log("Fullpath:" +full_path);
+	//console.log("Fullpath:" +full_path);
 	path.exists(full_path, function(exists) {
 		if (!exists) {
-			console.log("Path not exists");
+			console.log("Path doesn't exists");
 			response.writeHeader(404, {
 				"Content-Type" : "text/plain"
 			});
 			response.write("404 Not Found\n");
 			response.end();
 		} else {
-			console.log("Path exists");
+			//console.log("Path exists");
 			filesys.readFile(full_path, "binary", function(err, file) {
 				if (err) {
 
@@ -184,6 +184,7 @@ var io = require('socket.io').listen(server);
          });     
     }); 
 
+// this can be used to view any text file (ie. MyStatus.txt or rlog.txt).
     ioSocket.on('requestLoggingData', function(fileName) {
          fs.readFile(fileName, 'utf8', function (err,data) {
          	if(err)
@@ -222,8 +223,24 @@ var io = require('socket.io').listen(server);
           ioClient.emit("writeDone","yes");
       });  
   	 });   
-        
-     ioSocket.on('saveImageFile', function(imgURL,fileName) {
+     
+// Note: New way doesn't work on Embarc but does on Ubuntu.
+      ioSocket.on('saveImageFile', function(imgURL,fileName) {
+        var http = require('http');
+         var fs = require('fs');
+
+     	if (!fs.existsSync('./cameraimages')){
+     		console.log("Creating /cameraimages directory @saveImageFile");
+    		fs.mkdirSync('./cameraimages');
+		}
+          var file = fs.createWriteStream("cameraimages/"+fileName);
+         var request = http.get(imgURL, function(response) {
+            response.pipe(file);
+              ioClient.emit("imageSaveComplete");
+          });   
+	});   
+
+ /*    ioSocket.on('saveImageFile', function(imgURL,fileName) {
 
      	if (!fs.existsSync('./cameraimages')){
      		console.log("Creating /cameraimages directory @saveImageFile");
@@ -241,7 +258,7 @@ var io = require('socket.io').listen(server);
           }));
           ioClient.emit("imageSaveComplete");
          
-     });   
+     });  */ 
 
     ioSocket.on('saveImageJson', function(data) {
        var outputFilename = 'imagedata.json';

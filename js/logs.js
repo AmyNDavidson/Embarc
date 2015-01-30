@@ -97,12 +97,16 @@ function viewFilesList(str){
 
 function requestFileConetent(fname){
  socket.emit('requestFileData', fname);  
-
-
 }
  
-
-
+function requestMyStatus(fname){
+	 socket.emit('requestLoggingData', "/home/MyStatus.txt");  
+	}
+	 
+function requestrlog(fname){
+	 socket.emit('requestLoggingData', "/home/rlog.txt");  
+	}
+	 
 
 socket.on('fileContentDispatch', function(data){
   
@@ -116,6 +120,18 @@ socket.on('fileContentDispatch', function(data){
 
 });
 
+
+socket.on('LoggingDataDispatch', function(data){
+	  
+    $("#containerOne").css("display","none");
+    $("#containerTwo").css("display","block");
+   
+    $("#fileNameId").html(FileName)
+   // $("#textArea").val(data)
+    $("#fileData").html(data)
+    fileContent = data;
+
+});
 
  function emailFile(){
  
@@ -133,6 +149,18 @@ function openFile(str){
 
 
 function searchFiles(datestr){
+	
+	// special log retrievals
+	if(datestr == "01/01/2000")
+	{
+	requestMyStatus("abc");
+	return;
+	}
+	if(datestr == "02/02/2000")
+	{
+	requestrlog("abc");
+	return;
+	}
   var fileAvailabe=false;
   
   $("#listIteams").html("");
