@@ -255,6 +255,10 @@ var Update = {
     "Type" : "Update", // every JSON will have this field
 };
 
+var IsRunning = {
+    "Type" : "IsRunning", // every JSON will have this field
+};
+
 //Query for Bluetooth devices
 var RequestBTInfo = {
     "Type" : "RequestBTInfo", // every JSON will have this field
@@ -304,6 +308,11 @@ var Result = {
     "BestFit" : 0.0,
     "StandardDeviation" : 0.0
 };
+
+var Running = {
+	    "Type" : "Running", // every JSON will have this field
+	    "IsRunning" : 0	 //0 = running
+	};
 
 var BTDeviceNames = {
 	    "Type" : "BTDeviceNames", // every JSON will have this field

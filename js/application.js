@@ -1,111 +1,17 @@
 
 
 $(document).ready(function(){
-    
-	 $("#holeDiameter").click(function(){		
+	$("#HomeContainer").css("opacity", ".4");
+	$("#waitForArmId").css("display","block");
+
+  			var socket = io.connect();
+			socket.emit('client_data', IsRunning);
+			socket.on('Running', function(data)
+			{
+				if(data.IsRunning == 0)
+					EnablePage();
+	});	  
 	});
-
-	$(".navbar-brand").click(function(){			
-  
-          if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
-
-              window.location = "settings.html";      
-          }else{
-             gotoHome();      
-          }
-	});
-		
-	$(".settingsTop").click(function(){			
-			window.location = "settings.html";				
-	});
-	
-	$("#statusPage").click(function(){
-			window.location = "status.html";
-	});
-	
-	$(".btn-green, .btn-red").click(function(){
-		//gotoHome();
-	});
-	
-	$("#probeCali").click(function(){
-		window.location = "probe_cali.html";
-	});
-	
-	$("#droPage").click(function(){
-		window.location = "dro.html";
-	});
-	
-	$("#cameraPage").click(function(){
-		window.location = "camera.html";
-	});
-	
-	$("#checkoutPage").click(function(){
-		window.location = "checkout.html";
-	});
-	
-	$("#meaurementPage").click(function(){
-		gotoMeasurePage();
-	});
-
-    
-    $("#measurePlaneCancelButton").click(function(){
-		gotoMeasurePage();
-	});
-
-  
-    $("#measureDetails2CancelButton").click(function(){
-		gotoMeasurePage();
-	});
-   
-
-     $("#measureDetailsDoneButton").click(function(){
-		 window.location = "Measurement.html";
-	});
-
-
-   
-     $("#statusDoneButton").click(function(){
-		gotoHome();
-	});
-
-    $("#probCancelButton").click(function(){
-		gotoHome();
-	});
-
-    $("#checkOutCancelButton").click(function(){
-         gotoHome();
-	});
-
-    $("#settingCancilButton").click(function(){
-        gotoHome();
-    })
-
-    $("#openLogFiles").click(function(){
-        window.location = "logfile.html";
-
-    })
-
-    $("#cancelCameraButton").click(function(){
-        gotoHome();
-
-    }) 
-
-    $("#openCameraImg").click(function(){
-   
-       window.location = "cameraImg.html";
-
-    })
-
-    $("#cameraCanil ").click(function(){
-
-     gotoHome();
-      
-    })
-    
-
-
- 
-});
 
 function gotoHome(){
   window.location = "home.html";
@@ -183,4 +89,110 @@ function formatAMPM(date) {
 
 }
 
+function EnablePage()
+{
 
+	$("#HomeContainer").css("opacity", "1");
+	$("#waitForArmId").css("display","none");
+
+	$(".settingsTop").click(function(){			
+	window.location = "settings.html";				
+	});
+	$("#holeDiameter").click(function(){		
+	});
+
+	$(".navbar-brand").click(function(){			
+
+	if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
+
+	window.location = "settings.html";      
+	}else{
+	gotoHome();      
+	}
+	});
+
+
+	$("#statusPage").click(function(){
+	window.location = "status.html";
+	});
+
+	$(".btn-green, .btn-red").click(function(){
+	//gotoHome();
+	});
+
+	$("#probeCali").click(function(){
+	window.location = "probe_cali.html";
+	});
+
+	$("#droPage").click(function(){
+	window.location = "dro.html";
+	});
+
+	$("#cameraPage").click(function(){
+	window.location = "camera.html";
+	});
+
+	$("#checkoutPage").click(function(){
+	window.location = "checkout.html";
+	});
+
+	$("#meaurementPage").click(function(){
+	gotoMeasurePage();
+	});
+
+
+	$("#measurePlaneCancelButton").click(function(){
+	gotoMeasurePage();
+	});
+
+
+	$("#measureDetails2CancelButton").click(function(){
+	gotoMeasurePage();
+	});
+
+
+	$("#measureDetailsDoneButton").click(function(){
+	window.location = "Measurement.html";
+	});
+
+
+
+	$("#statusDoneButton").click(function(){
+	gotoHome();
+	});
+
+	$("#probCancelButton").click(function(){
+	gotoHome();
+	});
+
+	$("#checkOutCancelButton").click(function(){
+	gotoHome();
+	});
+
+	$("#settingCancilButton").click(function(){
+	gotoHome();
+	});
+
+	$("#openLogFiles").click(function(){
+	window.location = "logfile.html";
+
+	});
+
+	$("#cancelCameraButton").click(function(){
+	gotoHome();
+
+	});
+
+	$("#openCameraImg").click(function(){
+
+	window.location = "cameraImg.html";
+
+	});
+
+	$("#cameraCanil ").click(function(){
+
+	gotoHome();
+
+	});
+
+}
