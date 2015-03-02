@@ -43,9 +43,14 @@ $(document).ready(function() {
 
 function captureImage(){
  
+  // Save the snap shot at the time the Capture button was pressed to currentImage.jpg
+  socket.emit('saveCurrImage',"http://" + document.domain+ ":8080/?action=snapshot.jpg","currentImage.jpg");
+
   var myImage = document.getElementById("photo");
   myImage.src="http://" + document.domain+ ":8080/?action=snapshot.jpg";
- 
+
+  // Not sure why the below line does not work - it would ensure what is captured is what is displayed.
+  //myImage.src = "http://127.0.0.1:8001/cameraimages/currentImage.jpg";
 }
 
 
@@ -64,15 +69,12 @@ function saveImageServer(){
    imgDataArray.push(imageJsonObject);
 
    if(saveFlag){
-    socket.emit('saveImageJson',imgDataArray); 
-    socket.emit('saveImageFile',"http://" + document.domain+ ":8080/?action=snapshot.jpg",fileName); 
-  
-   // socket.emit('saveImageFile',"http://127.0.0.1:8001/cameraimages/09:15:2014_4:26pm.jpg",fileName);   
+   	socket.emit('saveImageJson',imgDataArray); 
+    	socket.emit('saveImageFile',"http://127.0.0.1:8001/currentImage.jpg",fileName);
 
-
-    saveFlag=false;
+   	// socket.emit('saveImageFile',"http://127.0.0.1:8001/cameraimages/09:15:2014_4:26pm.jpg",fileName);   
+	saveFlag=false;
    }
-    
 }
 
 

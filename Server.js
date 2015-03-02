@@ -240,6 +240,16 @@ var io = require('socket.io').listen(server);
           });   
 	});   
 
+      ioSocket.on('saveCurrImage', function(imgURL,fileName) {
+        var http = require('http');
+         var fs = require('fs');
+
+         var file = fs.createWriteStream(fileName);
+         var request = http.get(imgURL, function(response) {
+           response.pipe(file);
+          });   
+	});   
+
  /*    ioSocket.on('saveImageFile', function(imgURL,fileName) {
 
      	if (!fs.existsSync('./cameraimages')){
