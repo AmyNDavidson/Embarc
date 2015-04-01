@@ -1,0 +1,1 @@
+more /sys/class/gpio/gpio68/value | grep 0

@@ -1,0 +1,1 @@
+dmesg | grep "mmc0: new"
