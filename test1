@@ -1,6 +1,0 @@
-echo "1" > /sys/class/gpio/gpio178/value
-sleep 2
-echo "0" > /sys/class/gpio/gpio178/value
-echo "1" > /sys/class/gpio/gpio102/value
-sleep 2
-echo "0" > /sys/class/gpio/gpio102/value
