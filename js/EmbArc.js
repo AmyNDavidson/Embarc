@@ -12,7 +12,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$(".settingsTop").click(function(){			
+	$("#settingsTop").click(function(){			
 			window.location = "settings.html";				
 	});
 	

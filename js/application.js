@@ -3,15 +3,19 @@
 $(document).ready(function(){
 	$("#HomeContainer").css("opacity", ".4");
 	$("#waitForArmId").css("display","block");
-
-  			var socket = io.connect();
-			socket.emit('client_data', IsRunning);
-			socket.on('Running', function(data)
-			{
-				if(data.IsRunning == 0)
-					EnablePage();
-	});	  
-	});
+  	var socket = io.connect();
+	/*socket.emit('client_data', IsRunning);
+	socket.on('Running', function(data)
+	{
+		console.log("socket.on Running function");
+		if(data.IsRunning == 0)
+			EnablePage();
+	});	  */
+	EnablePage();
+	$('#openCameraImg').attr('href','/pages/cameraImg.html');
+	$('#openLogFiles').attr('href','/pages/logfile.html');
+	$('#settingsTop').attr('href','/pages/settings.html');
+});
 
 function gotoHome(){
   window.location = "home.html";
