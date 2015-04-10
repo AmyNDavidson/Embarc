@@ -1,4 +1,11 @@
 CACHE MANIFEST
+#Updated at 2015-04-9 version-1.0.0
+#Updated by Dream Orbit
+
+CACHE
+pages/home.html
+pages/probe_cali.html
+pages/checkout.html
 css/bootstrap.min.css
 css/style.css
 js/jquery-1.11.1.min.js
@@ -99,47 +106,7 @@ stl/Sphere.stl
 NETWORK:
 *
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-  
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-                             
-                               
-
-
+FALLBACK
+pages/home_Offline.html
+pages/probe_cali_Offline.html
 
