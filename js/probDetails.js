@@ -302,6 +302,7 @@ var testPointData6 = [
 
       $("#saveAlert #closePopUp").click(function(){
            $("#saveAlert").css("display","none");
+           $("#saveResult").hide();
       })
 
 

@@ -212,6 +212,7 @@
 
       $("#saveAlert #closePopUp").click(function(){
            $("#saveAlert").css("display","none");
+           $("#saveCircleButton").hide();
       })
 
   

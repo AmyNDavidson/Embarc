@@ -106,13 +106,13 @@ function EnablePage()
 	});
 
 	$(".navbar-brand").click(function(){			
-
-	if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
+	gotoHome();
+	/*if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
 
 	window.location = "settings.html";      
 	}else{
 	gotoHome();      
-	}
+	}*/
 	});
 
 

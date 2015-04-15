@@ -284,6 +284,7 @@ $(document).ready(function(){
 
         $("#saveAlert #closePopUp").click(function(){
              $("#saveAlert").css("display","none");
+             $("#saveCheckOutButton").hide();
         })
 
 
