@@ -34,7 +34,7 @@ $(document).ready(function()
 			socket.emit('requestLoggingData', "/home/version.txt");
 			socket.on('LoggingDataDispatch', function(data)
 			{
-				$("#swInputLo").val(data[0] + '.' + data[2] + '.' +data[4]);
+				$("#swInputLo").val(data[2] + '.' + data[4] + '.' + data[6]);
 				if(hasArmData == 1)
 				{
 				$("#spinner").css("display", "none");
