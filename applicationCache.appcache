@@ -1,11 +1,8 @@
 CACHE MANIFEST
-#Updated at 2015-04-9 version-1.0.0
+#Updated at 2015-05-14 version-1.0.0
 #Updated by Dream Orbit
 
 CACHE
-pages/home.html
-pages/probe_cali.html
-pages/checkout.html
 css/bootstrap.min.css
 css/style.css
 js/jquery-1.11.1.min.js
@@ -84,6 +81,8 @@ images/file_100x100.png
 images/search.png
 images/pat.png
 images/spinner.gif
+images/camera100x10032x32.png
+images/file100x10032x32.png
 stl/Arm.asy
 stl/A.STL
 stl/ballbar.STL

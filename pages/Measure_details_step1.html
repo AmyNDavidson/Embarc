@@ -44,12 +44,12 @@
 </div>	
  </div><!--Navigation END Here-->
     
-     
+  <!--Step 1-->   
     <div class="container" id="step1Id" style="display:block;"> <!--Body START Here-->
     	<div class="row marTop">
         	<div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
             	<div class="pointsContainer">
-                    <h1>Step 1:  Measure the Plane</h1>
+                    <h1 id="step1_measureTitleText">Step 1:  Measure the Plane</h1>
                     <div class="pointsRequired">
                         <label>Points Required</label>
                         <input name="" stype="text" id="pointsRequire" placeholder="c" value="3" readonly>
@@ -75,14 +75,14 @@
             </div><!--Input Boxes END Here-->
             
             <div class="col-lg-5 col-sm-5 circleText">
-            	<div class="planeMeasure"><p><img src="../images/planePoints.png" alt=""></p></div>
-                <p>Plane</p>
+            	<div class="planeMeasure" ><p><img id="step1_measureTypeImage" src="../images/planePoints.png" alt=""></p></div>
+                <p id="step1_measureTypeTitle">Plane</p>
             </div>
             
         </div>
     </div><!--Body END Here-->
 
-
+<!--Step 2-->
   <div class="container" id="step2Id" style="display:none;"> <!--Body START Here-->
       <div class="row marTop">
           <div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
@@ -128,12 +128,112 @@
                 <p id="measureTypeTitle">Circle Hole</p>
             </div>
             
-            <div class="diameterContainer">
+
+            
+        </div>
+    </div>
+<!--Step 3-->
+  <div class="container" id="step3Id" style="display:none;"> <!--Body START Here-->
+      <div class="row marTop">
+          <div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
+              <div class="pointsContainer">
+                   <h1 id="step3_measureTitleText"></h1>
+                    <div class="pointsRequired">
+                        <label>Points Required</label>
+                        <input name="" id="pointsRequire3" stype="text" placeholder="c" value="" readonly>
+                    </div>
+                    <div class="pointsRequired">
+                        <label>Points Taken</label>
+                        <input name="" id="pointsTakenId3" type="text" placeholder="0" readonly>
+                    </div>
+                <!--<div class="clearfix"></div>-->
+                <em class="pointText" id="measureTextId3"></em>
+                <div class="clearfix"></div>
+                <div class="marTop20">
+                <div class="pointsRequired" id="measureDetails3CancelButton">
+                <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+                </div>
+                
+                <div class="pointsRequired" id="CalculateResultId3">
+                  <a href="#" class="btn btn-green">
+                    <span class="glyphicon glyphicon-chevron-right">
+                  <img src="../images/btn_Icon.png" alt="" ></span>Calculate</a>
+                </div>
+                
+               <div class="pointsRequired" id="TempNextButton3" style="display:none">
+                  
+                  <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right">
+                  <img src="../images/nextIcon.png" alt="" ></span> Next </a>
+               </div>
+
+
+
+              </div>
+                
+               </div> 
+            </div><!--Input Boxes END Here-->
+            
+            <div class="col-lg-5 col-sm-5 circleText">
+              <div class="planeMeasure"><p><img src="" alt="" id="step3_measureTypeImage"></p></div>
+                <p id="step3_measureTypeTitle">Circle Hole</p>
+            </div>            
+            
+        </div>
+    </div>
+<!--Step 4-->
+      <div class="container" id="step4Id" style="display:none;"> <!--Body START Here-->
+      <div class="row marTop">
+          <div class="col-lg-7 col-sm-7"> <!--Input Boxes START Here-->
+              <div class="pointsContainer">
+                   <h1 id="step4_measureTitleText"></h1>
+                    <div class="pointsRequired">
+                        <label>Points Required</label>
+                        <input name="" id="pointsRequire4" stype="text" placeholder="c" value="" readonly>
+                    </div>
+                    <div class="pointsRequired">
+                        <label>Points Taken</label>
+                        <input name="" id="pointsTakenId4" type="text" placeholder="0" readonly>
+                    </div>
+                <!--<div class="clearfix"></div>-->
+                <em class="pointText" id="measureTextId4"></em>
+                <div class="clearfix"></div>
+                <div class="marTop20">
+                <div class="pointsRequired" id="measureDetails4CancelButton">
+                <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+                </div>
+                
+                <div class="pointsRequired" id="CalculateResultId4">
+                  <a href="#" class="btn btn-green">
+                    <span class="glyphicon glyphicon-chevron-right">
+                  <img src="../images/btn_Icon.png" alt="" ></span>Calculate</a>
+                </div>
+                
+               <!--<div class="pointsRequired" id="TempNextButton4" style="display:none">
+                  
+                  <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right">
+                  <img src="../images/nextIcon.png" alt="" ></span> Next </a>
+               </div>-->
+
+
+
+              </div>
+                
+               </div> 
+            </div><!--Input Boxes END Here-->
+            
+            <div class="col-lg-5 col-sm-5 circleText">
+              <div class="planeMeasure"><p><img src="" alt="" id="step4_measureTypeImage"></p></div>
+                <p id="step4_measureTypeTitle">Circle Hole</p>
+            </div>
+            
+        </div>
+    </div>
+                <div class="diameterContainer">
               <div class="diameterInfo" id="resultId">
                 <!--  <h2>Circle Diameter</h2>
                     <h1 id="diameterId">12.112122212</h1>-->
                 </div>
-               <div class="diameterButtons">
+                 <div class="diameterButtons">
                   <div class="pointsRequired" id="saveCircleButton">
                     <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Save </a>
                   </div>
@@ -143,10 +243,8 @@
                </div> 
                 
             </div>
-            
-        </div>
-    </div>
 
+              
 
 
     <div class="popup_div" id="saveAlert" style="display:none;">
