@@ -1,20 +1,33 @@
-
+var ArmAxis_value;
 
 $(document).ready(function(){
 	$("#HomeContainer").css("opacity", ".4");
 	$("#waitForArmId").css("display","block");
   	var socket = io.connect();
-	/*socket.emit('client_data', IsRunning);
+  	socket.emit('client_data', Update);
+	socket.on('ARM', function(data)
+	    {
+	      ArmAxis_value = data.Axes;
+	      localStorage.setItem("axes",ArmAxis_value);
+
+	    });
+    
+	/*
+	socket.emit('client_data', IsRunning);
 	socket.on('Running', function(data)
 	{
 		console.log("socket.on Running function");
 		if(data.IsRunning == 0)
 			EnablePage();
-	});	  */
+	});
+	*/
 	EnablePage();
 	$('#openCameraImg').attr('href','/pages/cameraImg.html');
 	$('#openLogFiles').attr('href','/pages/logfile.html');
 	$('#settingsTop').attr('href','/pages/settings.html');
+	$('.navbar-brand').attr('href','/pages/home.html');
+
+
 });
 
 function gotoHome(){
@@ -105,15 +118,16 @@ function EnablePage()
 	$("#holeDiameter").click(function(){		
 	});
 
-	$(".navbar-brand").click(function(){			
+	/*$(".navbar-brand").click(function(){			
 	gotoHome();
-	/*if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
+	if(($("body").attr("id")=="cameraImg") || ($("body").attr("id")=="logfile")){
 
 	window.location = "settings.html";      
 	}else{
 	gotoHome();      
-	}*/
+	}
 	});
+    */
 
 
 	$("#statusPage").click(function(){
@@ -154,9 +168,18 @@ function EnablePage()
 	gotoMeasurePage();
 	});
 
+	$("#measureDetails3CancelButton").click(function(){
+	gotoMeasurePage();
+	});
+
+	$("#measureDetails4CancelButton").click(function(){
+	gotoMeasurePage();
+	});
+
 
 	$("#measureDetailsDoneButton").click(function(){
-	window.location = "Measurement.html";
+		//	window.location = "Measurement.html";
+		gotoHome();
 	});
 
 

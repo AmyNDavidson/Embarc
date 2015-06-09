@@ -109,7 +109,7 @@
                     <label for="text-input" class="col-md-5 control-label">Haptic:</label>
                     <div class="col-md-7">
                        <div class="btn-group btn-toggle" id="hapticId"> 
-                            <button class="btn btn-lg btn-default" id="hapticOn">ON</button>
+                            <button class="btn btn-lg" id="hapticOn">ON</button>
                             <button class="btn btn-lg btn-primary active" id="hapticOff">OFF</button>
                        </div>
   
@@ -122,7 +122,7 @@
                     <label for="text-input" class="col-md-5 control-label">Headlight:</label>
                     <div class="col-md-7">
             <div class="btn-group btn-toggle" id="headlightId"> 
-            <button class="btn btn-lg btn-default" id="headlightOn">ON</button>
+            <button class="btn btn-lg" id="headlightOn">ON</button>
                             <button class="btn btn-lg btn-primary active" id="headlightOff">OFF</button>
                        </div>
   
@@ -178,8 +178,28 @@
             <div class="pointsRequired" id="settingCancilButton">
             	<a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
             </div>
-            <div class="pointsRequired" onClick="setSettings()" >
+            <div class="pointsRequired" id="setting_button_set" onClick="setSettings()" >
             	<a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span>Set</a>
+            </div>
+
+            <div class="popup_div" id="saveAlert" style="display:none;">
+                <div  class="import_contact" >
+                    <div class="heaading_bg">
+                        <div class="div_1_heading">
+                          SUCCESS
+                        </div>
+                         
+                     </div>
+                    
+                    <div class="inputHolder">
+                      <p id="popUpText">Settings have been successfully saved.</p>
+                    </div>
+                    <div class="cancelBtns">
+                        <a href="#" title="Close" onClick="gotoHome();" id="closePopUp">Close</a>
+                   </div>
+                  
+                 </div>
+                    
             </div>
  
         </div>

@@ -1,32 +1,39 @@
 var socket = io.connect();
 var imgDataArray = new Array();
 var saveFlag=true;
+var ArmAxis_value = localStorage.getItem('axes');
 
 $(document).ready(function() {
-    var myImage = document.getElementById("picture");
-    myImage.src="http://" + document.domain+ ":8080/?action=stream";
-    readImageJsonData();
-  
-    $("#saveAlert #closePopUp").click(function(){
-        $("#saveAlert").css("display","none");
-        saveFlag=true;
-    })
-  
-    $("#cameraSaveButton").click(function(){
-        saveImageServer();
-    });
 
-        $("#cameraCaptureButton").click(function(){
-        captureImage();
-    })
+    console.log("ArmAxis_value:"+ArmAxis_value)
 
+    if(ArmAxis_value == 7){
+      $("#cameraBody").hide();
+      $("#axesAlert").css("display","block");
+    }else{
+
+      var myImage = document.getElementById("picture");
+      myImage.src="http://" + document.domain+ ":8080/?action=stream";
+      readImageJsonData();
+    
+      $("#saveAlert #closePopUp").click(function(){
+          $("#saveAlert").css("display","none");
+          saveFlag=true;
+      })
+    
+      $("#cameraSaveButton").click(function(){
+          saveImageServer();
+      });
+
+      $("#cameraCaptureButton").click(function(){
+          captureImage();
+      });
+    }
 });
 
-  function readImageJsonData(){
-
+function readImageJsonData(){
      socket.emit('readImageJson');  
-   
- }
+}
 
   socket.on('logsImgJsonData', function(response){
        
@@ -81,7 +88,7 @@ function saveImageServer(){
  socket.on('imageSaveComplete', function(){
      $("#saveAlert").css("display","block");
 
- }) 
+ });
 
 
   

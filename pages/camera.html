@@ -25,6 +25,7 @@
    });
 </script>
 
+
 </head>
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
@@ -49,8 +50,8 @@
             
          </div>	
      </div><!--Navigation END Here-->
-	 
-	    <div class=""> <!--Body START Here-->
+	 <div id="cameraBody">
+	    <div class="" > <!--Body START Here-->
     	<div class="marTop20 marTop35">
             <div class="login-box">
                 
@@ -80,7 +81,7 @@
             	<a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span> Save </a>
             </div>
     </div>
-
+    </div>
 
 
    
@@ -98,6 +99,26 @@
         </div>
         <div class="cancelBtns">
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
+       </div>
+      
+     </div>
+        
+    </div>
+
+    <div class="popup_div" id="axesAlert" style="display:none;">
+    <div  class="import_contact" >
+        <div class="heaading_bg">
+            <div class="div_1_heading">
+              RESTRICTED
+            </div>
+             
+         </div>
+        
+        <div class="inputHolder">
+          <p id="popUpText2">Camera is disabled for the Axes:7</p>
+        </div>
+        <div class="cancelBtns">
+            <a href="#" style="background:#df443f !important" title="Close" onClick="gotoHome();" id="closePopUp2">Close</a>
        </div>
       
      </div>

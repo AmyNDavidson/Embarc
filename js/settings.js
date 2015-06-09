@@ -170,14 +170,19 @@ $( document ).ready(function() {
    socket.emit('client_data', Settings);
   // gotoHome();
 
+  $("#saveAlert").css("display","block");
+
+   /*
    $("#saveDoneMessageId").css("display","block");
 
    var interval = setInterval(function(){
+                   
                    $("#saveDoneMessageId").css("display","none");  
                    clearInterval(interval);
     
     },2000);
 
+  */
 
 
  }

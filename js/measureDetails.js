@@ -44,6 +44,7 @@
 	    SetMeasurement(Measurements.MeasureACircle);
 		
 		$("#headerText").html("Measure Circle")
+		$("#step1_measureTitleText").html("Step 1: Measure the Plane of the Surface");
 		$("#selectedIconId").attr("src","../images/circle_breadcrumb_200x200.png")
 		$("#measureTextId2").html("Take at least 3 points on the Circle and click Calculate or Arm Button 3")
 		$("#measureTypeImage").attr("src","../images/circle_Img.png")
@@ -57,24 +58,27 @@
 
 	 	SetMeasurement(Measurements.MeasureASlot)
 	    $("#headerText").html("Measure Slot")
-		$("#measureTextId").html("Measure Atleast 6 points on the slot") 
-		$("#selectedIconId").attr("src","../images/measure_slot_200x200.png")
+	    $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Slot");
+		$("#measureTextId").html("Take at least 3 points on the Plane and click Next or Arm Button 3");
+		$("#selectedIconId").attr("src","../images/measure_slot_200x200.png");
 		$("#measureTypeImage").attr("src","../images/slotImage.png")
 		$("#measureTypeTitle").html("Slot")
 		$("#measureTitleText").html("Step 2: Measure the Slot")
-		$("#pointsRequire2").val("6");
+		$("#measureTextId2").html("Take at least 10 points on the Slot and click Calculate or Arm Button 3");
+		$("#pointsRequire2").val("10");
 		$("#resultId").html('<h2>Slot length is</h2><h1 id="diameterId"></h1><h2>Slot width is</h2><h1 id="diameterId"></h1>');
 	   }else if(MeasureType=="rectangleDimensions"){
 	   
 	    SetMeasurement(Measurements.MeasureARectangle);
 
 	    $("#headerText").html("Measure Rectangle")
+	    $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Rectangle");
 		$("#selectedIconId").attr("src","../images/rectangle_breadcrumb_200x200.png")
 		$("#measureTextId2").html("Take two points on a major side, then one point each of the remaining sides in a cw or a ccw and click Calculate or Arm Button 3") 
 		$("#measureTypeImage").attr("src","../images/RectangleImage.png")
 		$("#measureTypeTitle").html("Rectangle")
 		$("#measureTitleText").html("Step 2: Measure the Rectangle")
-		$("#pointsRequire2").val("4"); //Should be 4 here for rectangle 
+		$("#pointsRequire2").val("5"); //Should be 4 here for rectangle 
     	$("#resultId").html('<h2>Slot length is:</h2><h1 id="diameterId"></h1><h2>Slot width is:</h2><h1 id="diameterId"></h1>');
 		
 		
@@ -82,9 +86,10 @@
 	     
 	     SetMeasurement(Measurements.MeasureAnExtCircle)
 		 $("#headerText").html("Measure Shaft")
+		 $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Shaft");
 		 $("#selectedIconId").attr("src","../images/shaft_breadcrumb_200x200.png")
-		 $("#measureTextId").html("Take at least 3 points on the Circle and click Next or Arm Button 3") 
-		 $("#measureTextId2").html("Take at least 3 points on the circle and click Calculate or Arm Button 3") ;
+		 $("#measureTextId").html("Take at least 3 points on the Plane and click Next or Arm Button 3") 
+		 $("#measureTextId2").html("Take at least 3 points on the Plane and click Calculate or Arm Button 3") ;
 		 $("#measureTypeImage").attr("src","../images/circle_Img.png")
 		 $("#measureTypeTitle").html("Shaft");
 		 $("#measureTitleText").html("Step 2: Measure the Shaft");
@@ -96,14 +101,14 @@
 	  	   SetMeasurement(Measurements.MeasurePtToPt);
 		   $("#headerText").html("Measure Distance Between Two Points");
 		   $("#step1_measureTypeTitle").html("Point");		   
-		   $("#measureTypeTitle").html("Point");
-		   $("#step1_measureTitleText").html("Step 1: Take a point");
+		   //$("#measureTypeTitle").html("Point");
+		   $("#step1_measureTitleText").html("Step 1: Take a Point");
 		   $("#step1_measureTypeImage").attr("src","../images/PointImage.png");
 		   $("#measureTextId").html("Take a point and click Next or Arm Button 3") 
 		   $("#measureTextId2").html("Take a point and click Calculate or Arm Button 3") 
      	   $("#selectedIconId").attr("src","../images/points_breadcrumb_200x200.png")
 		   $("#measureTypeImage").attr("src","../images/PointImage.png");
-		   $("#measureTitleText").html("Step 2: Measure the Distance Between Two Points");
+		   $("#measureTitleText").html("Step 2: Take the next Point");
 		   $("#pointsRequire").val("1");
 		   $("#pointsRequire2").val("1");
 		   $("#resultId").html('<h2>Distance Between points is:</h2><h1 id="diameterId"></h1>');
@@ -112,12 +117,13 @@
 	  	  SetMeasurement(Measurements.MeasurePlnToPln)
 	  
 	   $("#headerText").html("Measure Distance Between Two Surfaces")
+	   $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Surface");
 	   $("#selectedIconId").attr("src","../images/surface_breadcrumb_200x200.png")
 	   $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
 	   $("#measureTextId2").html("Take at least 3 points on the plane and click Calculate or Arm Button 3")
 	   $("#measureTypeImage").attr("src","../images/planePoints.png")
 	   $("#measureTypeTitle").html("Plane")
-	   $("#measureTitleText").html("Step 2: Measure the Distance Between Two Surfaces");
+	   $("#measureTitleText").html("Step 2: Measure the next Plane");
 	   $("#pointsRequire2").val("3");
 	   $("#resultId").html('<h2>Distance Between plane is:</h2><h1 id="diameterId"></h1>');
 	   
@@ -126,46 +132,47 @@
 	   if(MeasureType=="distanceBetweenTwoCirclesHoles"){
 		 SetMeasurement(Measurements.MeasureCirtoCir)
 		$("#headerText").html("Measure Distance Between Two Circles")
+		$("#step1_measureTitleText").html("Step 1: Measure the Plane of the first Circle");
 		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
-	     $("#measureTextId2").html("Take at least 3 points on the Circle and click Calculate or Arm Button 3")
+	     $("#measureTextId2").html("Take at least 3 points on the Circle and click Next or Arm Button 3")
 		$("#selectedIconId").attr("src","../images/holes_breadcrumb_200x200.png")
 		$("#measureTypeImage").attr("src","../images/circle_Img.png")
 		$("#measureTypeTitle").html("Circle Hole")
-		$("#measureTitleText").html("Step 2: Measure the Distance Between Two Circles Holes");
+		$("#measureTitleText").html("Step 2: Measure the First Circle");
 		$("#pointsRequire2").val("3");
 		$("#pointsRequire3").val("3");
 		$("#pointsRequire4").val("3");
 		$("#measureTextId3").html("Take at least 3 points on the plane and click Next or Arm Button 3");
 	     $("#step3_measureTypeImage").attr("src","../images/planePoints.png"); 
-	     $("#step3_measureTitleText").html("Step 3: Measure the Distance Between Two Circles Holes");
+	     $("#step3_measureTitleText").html("Step 3: Measure the Plane of the second Circle");
 	     $("#step3_measureTypeTitle").html("Plane");		 
 		 $("#measureTextId4").html("Take at least 3 points on the Circle and click Calculate or Arm Button 3");
 	     $("#step4_measureTypeImage").attr("src","../images/circle_Img.png"); 
-	     $("#step4_measureTitleText").html("Step 4: Measure the Distance Between Two Circles Holes");
+	     $("#step4_measureTitleText").html("Step 4: Measure the second Circle");
 	     $("#step4_measureTypeTitle").html("Circle Hole");
 		$("#resultId").html('<h2>Distance Between holes is:</h2><h1 id="diameterId"></h1>');
 		 
 	  
 	  }else if(MeasureType=="distancePointToLine"){
-	     SetMeasurement(Measurements.MeasurePtToLine)
-	     $("#headerText").html("Measure")
+	     SetMeasurement(Measurements.MeasurePtToLine)	     
 	     $("#headerText").html("Measure Distance From a Point to a Line")
+	     $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Line");
 	      $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
 	     $("#measureTextId2").html("Take a min of two poitns to define a line")
 		 $("#selectedIconId").attr("src","../images/pointtoline_breadcrumb_200x200.png")
 		 $("#measureTypeImage").attr("src","../images/line.png")
 		 $("#measureTypeTitle").html("Line")
-		 $("#measureTitleText").html("Step 2: Measure the Distance From a Point to a Line");
+		 $("#measureTitleText").html("Step 2: Measure the Line");
 		 $("#pointsRequire2").val("2");
 		 $("#pointsRequire3").val("3");
 		 $("#pointsRequire4").val("1");
 		 $("#measureTextId3").html("Take at least 3 points on the plane and click Next or Arm Button 3");
 	     $("#step3_measureTypeImage").attr("src","../images/planePoints.png"); 
-	     $("#step3_measureTitleText").html("Step 3: Measure the Distance From a Point to a Line");
+	     $("#step3_measureTitleText").html("Step 3: Measure the Plane of the Point");
 	     $("#step3_measureTypeTitle").html("Plane");		 
 		 $("#measureTextId4").html("Take a point and click Next or Arm Button 3");
 	     $("#step4_measureTypeImage").attr("src","../images/PointImage.png"); 
-	     $("#step4_measureTitleText").html("Step 4: Measure the Distance From a Point to a Line");
+	     $("#step4_measureTitleText").html("Step 4: Take a Point");
 	     $("#step4_measureTypeTitle").html("Point");
 		 $("#resultId").html('<h2>Distance Between point and line is:</h2><h1 id="diameterId"></h1>');
 		 
@@ -173,13 +180,15 @@
 	  }else if(MeasureType=="distancePointToPlaneSurface"){
           SetMeasurement(Measurements.MeasurePtToPln) 
 		  $("#headerText").html("Measure Distance From a Point to Surface")
+		  $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Surface");
 		  $("#selectedIconId").attr("src","../images/pointtosurface_breadcrumb_200x200.png")
 		  $("#measureTypeImage").attr("src","../images/planePoints.png")
 		  $("#measureTypeTitle").html("Plane")
-		  $("#measureTitleText").html("Step 2: Measure Distance From a Point to a Plane");
+		  $("#measureTitleText").html("Step 2: Measure the Plane of the Point");
 		  $("#pointsRequire2").val("3");
-		  $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
-	      $("#measureTextId2").html("Take a single point and click Calculate or Arm Button 3");
+		  $("#measureTextId").html("Take at least 3 points on the Plane and click Next or Arm Button 3");
+	      $("#measureTextId2").html("Take at least 3 points on the Plane and click Next or Arm Button 3");
+	      $("#measureTextId3").html("Take a single point and click Calculate or Arm Button 3");
           $("#pointsRequire3").val("1");
           $("#measureTextId3").html("Take a point");
           $("#step3_measureTypeImage").attr("src","../images/PointImage.png");
@@ -191,10 +200,11 @@
 	  }else if(MeasureType=="angleBetweenTwoSurfaces"){
 	  	  SetMeasurement(Measurements.MeasureAngle2PLn);
 		  $("#headerText").html("Measure Angle Between Two Surfaces");
+		  $("#step1_measureTitleText").html("Step 1: Measure the Plane of the first Surface");
 		  $("#selectedIconId").attr("src","../images/angle_breadcrumb_200x200.png")
 		  $("#measureTypeImage").attr("src","../images/planePoints.png")
 		  $("#measureTypeTitle").html("Plane")
-		  $("#measureTitleText").html("Step 2: Measure Angle between two Surfaces");
+		  $("#measureTitleText").html("Step 2: Measure the Plane of the second Surface");
 		  $("#pointsRequire2").val("3");
           $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
 	      $("#measureTextId2").html("Take at least 3 points on the plane and click Calculate or Arm Button 3")
@@ -204,21 +214,22 @@
 	  }else if(MeasureType=="angleBetweenTwoLinesEdges"){
 		 SetMeasurement(Measurements.MeasureAngle2Lines)
 
-		 $("#headerText").html("Measure Angle Between Two Lines")
+		 $("#headerText").html("Measure Angle Between Two Lines");
+		 $("#step1_measureTitleText").html("Step 1: Measure the Plane of the First Line");
 		 $("#selectedIconId").attr("src","../images/angle_lines_breadcrumb_200x200.png")
 		 $("#measureTypeImage").attr("src","../images/line.png")
 		 $("#measureTypeTitle").html("Line");
-		 $("#measureTitleText").html("Step 2: Measure Angle between two Lines");
+		 $("#measureTitleText").html("Step 2: Measure the first Line");
 		 $("#pointsRequire2").val("2");
 		 $("#pointsRequire3").val("3");
 		 $("#measureTextId3").html("Take at least 3 points on the plane and click Next or Arm Button 3");
 	     $("#step3_measureTypeImage").attr("src","../images/planePoints.png"); 
-	     $("#step3_measureTitleText").html("Step 3: Measure Angle between two Lines");
+	     $("#step3_measureTitleText").html("Step 3: Measure the Plane of the second Line");
 	     $("#step3_measureTypeTitle").html("Plane");
 		 $("#pointsRequire4").val("2");
 		 $("#measureTextId4").html("Take at least min of two points to define a line");
 	     $("#step4_measureTypeImage").attr("src","../images/line.png"); 
-	     $("#step4_measureTitleText").html("Step 4: Measure Angle between two Lines");
+	     $("#step4_measureTitleText").html("Step 4: Measure the second Line");
 	     $("#step4_measureTypeTitle").html("Line");
 		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3")
 	     $("#measureTextId2").html("Take at least min of two points to define a line")
@@ -229,17 +240,18 @@
 	  }else if(MeasureType=="angleBetweenLineAndSurface"){
 	     SetMeasurement(Measurements.MeasureAngleLin2Pln)
 		 $("#headerText").html("Measure Angle Between Line And Surface")
+		 $("#step1_measureTitleText").html("Step 1: Measure the Plane of the Surface");
 		 $("#selectedIconId").attr("src","../images/angleline_breadcrumb_200x200.png")
 		 $("#measureTypeImage").attr("src","../images/planePoints.png")
 		 $("#measureTypeTitle").html("Plane");
-		 $("#measureTitleText").html("Step 2: Angle between a Line and a Surface");
+		 $("#measureTitleText").html("Step 2: Measure the Plane of the Line");
 		 $("#pointsRequire2").val("3");
 		 $("#measureTextId").html("Take at least 3 points on the plane and click Next or Arm Button 3");
 	     $("#measureTextId2").html("Take at least 3 points on the plane and click Next or Arm Button 3");
 	     $("#pointsRequire3").val("2");
 	     $("#measureTextId3").html("Take at least min of two points to define a line");
 	     $("#step3_measureTypeImage").attr("src","../images/line.png"); 
-	     $("#step3_measureTitleText").html("Step 3: Angle between a Line and a Surface");
+	     $("#step3_measureTitleText").html("Step 3: Measure the Line");
 	     $("#step3_measureTypeTitle").html("Line");
 		 $("#resultId").html('<h2>Angle between Lines and Surface is:</h2><h1 id="diameterId"><h1>');
 	  } 
@@ -282,13 +294,13 @@
     });
 
  	socket.on('Result', function(data){
-
+    
     $(".diameterContainer").show();
  	
  	if(data.Valid == 0)
- 	{
- 		 string = "Calculation failed";
-		 
+ 	{	
+ 		alert("Invalid Data");
+ 		string = "Calculation failed";
 	}
 	else
 	{
@@ -461,6 +473,7 @@
 	if(data.Button3 != 0)
 
 	{
+		console.log("I am Button 3");
             /* Increment current measure step conditionally*/
             var curTaken,curRequired;
             if(MeasureStep==0){
@@ -499,8 +512,8 @@
             }else if(MeasureStep==3){
                $("#CalculateResultId4").trigger("click");            	
             }
-            NextStepSound();
-			MeasureStep++;		
+            //NextStepSound();
+			//MeasureStep++;		
 			if(MeasureStep==0){
              var elem = document.getElementById("pointsTakenId");
 		    } else if(MeasureStep==1)
@@ -511,7 +524,12 @@
 		    } else if(MeasureStep==3){
              elem = document.getElementById("pointsTakenId4");
 		    }			
+			//elem.value = 0;
+			if(elem){		    
+            NextStepSound();
+			MeasureStep++;		
 			elem.value = 0;
+		    }
 			return;
 			}else{				
 				return;
@@ -685,6 +703,7 @@
       
  function TakeAPoint(data)
  {
+ 	console.log("I am Button 2, taking new point");
   
    	TakePointSound();
 
@@ -815,6 +834,7 @@
  
  function EraseAPoint()
  {
+ 	console.log("I am Button 1, erasing a  point");
  	ErasePointSound();
 
 	if(MeasureStep==0){
@@ -824,7 +844,7 @@
        elem = document.getElementById("pointsTakenId2");
      }else if(MeasureStep==2){
        elem = document.getElementById("pointsTakenId3");
-     }else if(Measurestep==3){
+     }else if(MeasureStep==3){
        elem = document.getElementById("pointsTakenId4");
      }
 
@@ -860,7 +880,11 @@
 	MyMeasureObject.Points2 = pts2;
 	MyMeasureObject.Points3 = pts3;
  	MyMeasureObject.Points4 = pts4;
-    socket.emit('client_data', MyMeasureObject);
+
+ 	console.log(MyMeasureObject);
+    var hasListeners = socket.emit('client_data', MyMeasureObject);
+    console.log(hasListeners);
+
 
 	//ClearData();
 
@@ -1036,3 +1060,65 @@ socket.on('writeDone', function(data){
   $("#saveAlert").css("display","block");
 
 });
+
+function showGrayedCalculateOrGrayedResult(){
+	if(MeasureStep < maxSteps[feature] - 1){
+      $(".pointsContainer:visible .btn-green").hide();
+      $(".pointsContainer:visible .btn-blue").show();
+	}
+}
+
+function GrayOutNextorCalButtonWhenNotSufficientPoints(givenStep){
+  var notSufficientPoints = null, isFinalStep = null;
+  switch(givenStep){
+  	case 1:
+  	  if(pts1.length>=$("#pointsRequire").val()){
+  	  	notSufficientPoints = false;
+  	  }else{
+  	  	notSufficientPoints = true;
+  	  }
+  	break;
+  	case 2:
+  	  if($("#pointsTakenId2").val()>=$("#pointsRequire2").val()){
+  	  	notSufficientPoints = false;
+  	  }else{
+  	  	notSufficientPoints = true;
+  	  }
+  	break;
+  	case 3:
+  	  if($("#pointsTakenId3").val()>=$("#pointsRequire3").val()){
+  	  	notSufficientPoints = false;
+  	  }else{
+  	  	notSufficientPoints = true;
+  	  }
+  	break;
+  	case 4:
+  	  if($("#pointsTakenId4").val()>=$("#pointsRequire4").val()){
+  	  	notSufficientPoints = false;
+  	  }else{
+  	  	notSufficientPoints = true;
+  	  }
+  	break;  	
+  }
+
+  if(MeasureStep == maxSteps[feature] - 1){
+  	isFinalStep = true;
+  }else{
+  	isFinalStep = false;
+  }
+
+
+  if(isFinalStep == true){
+    if(notSufficientPoints == true){
+      $(".pointsContainer:visible .btn-green").css("background","#F1F1F1");
+    }else if(notSufficientPoints == false){
+     /*do nothing really*/
+    }
+  }else if(isFinalStep == false){
+    if(notSufficientPoints == true){
+      $(".pointsContainer:visible .btn-blue").css("background","#F1F1F1");
+    }else if(notSufficientPoints == false){
+     /*do nothing really*/
+    }
+  }  
+}
