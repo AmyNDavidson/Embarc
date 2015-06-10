@@ -6,12 +6,15 @@ $(document).ready(function(){
   	var socket = io.connect();
   	socket.emit('client_data', Update);
 	socket.on('ARM', function(data)
-	    {
-	      ArmAxis_value = data.Axes;
-	      localStorage.setItem("axes",ArmAxis_value);
+    {
+      ArmAxis_value = data.Axes;
+      localStorage.setItem("axes",ArmAxis_value);
 
-	    });
-    
+    });
+    //For catching image save success event on any open tab
+    socket.on('imageSaveComplete', function(){
+      localStorage.setItem('imageSaveComplete',new Date().getTime());     
+    });
 	/*
 	socket.emit('client_data', IsRunning);
 	socket.on('Running', function(data)

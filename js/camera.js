@@ -90,6 +90,13 @@ function saveImageServer(){
 
  });
 
+ //used to detect image save event from other tabs
+ $(window).bind('storage', function(e) {
+  if(e.originalEvent.key == 'imageSaveComplete'){
+    $("#saveAlert").css("display","block");
+  }              
+ });
+
 
   
 function SaveToDisk(fileURL, fileName) {

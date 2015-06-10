@@ -22,6 +22,9 @@
 
 <script>
    $(window).load(function () {
+   
+		$("#hapticOn").removeClass("btn-default");
+		$("#headlightOn").removeClass("btn-default");
        var endTime = (new Date()).getTime();
        var millisecondsLoading = endTime - startTime;
        console.log("millisecondsLoading : "+millisecondsLoading);
