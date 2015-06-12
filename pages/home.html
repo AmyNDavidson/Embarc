@@ -1,118 +1,89 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head><meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="format-detection" content="telephone=no">
-<title>:: Hexagon ::</title>
-<script>
-   	var startTime = (new Date()).getTime();
-</script>
-<script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-   });
-</script>
-
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no">
+  <title>:: Hexagon ::</title>
+  <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../EmbArCJSON.js"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
 </head>
-
 <body>
-	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar">    
-               <!--<a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a> -->    
-                <h3 class="brand">RDS Mobile</h3>
-               
-               <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
-                  <img src="../images/camera100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
-                  <img src="../images/file100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
-                  <img src="../images/settingsIcon.png" alt="">
-                </a>
-                
-             </div>
-            
-         </div>	
-     </div><!--Navigation END Here-->
-    
-     
-    <div class="container" id="HomeContainer"> <!--Body START Here-->
-
-
-    	<div class="row marTop20 marTop35 EmbArcThumb">
-     		<div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="measure" id="meaurementPage">
-                    	<img src="../images/Measure.png" alt="">
-                    	<span>Measure</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="probe" id="probeCali">
-                    	<img src="../images/probeIcon.png" alt="">
-                    	<span>Probe Calibration</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="camera" id="cameraPage">
-                    	<img src="../images/cameraIcon.png" alt="">
-                    	<span>Camera</span>
-                    </div>
-                </div>
-            </div>
-  
-             	<div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="dro" id="droPage">
-                    	<img src="../images/droIcon.png" alt="">
-                    	<span>DRO</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="status" id="statusPage">
-                    	<img src="../images/statusIcon.png" alt="">
-                    	<span>Status</span>
-                    </div>
-                </div>
-            </div>
-            
-      
-        <div class="col-sm-6 col-md-4">
-            	<div class="thumbnail">
-                	<div class="checkout" id="checkoutPage">
-                    	<img src="../images/checkoutIcon.png" alt="">
-                    	<span>Checkout</span>
-                    </div>
-                </div>
-            </div>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar">    
+        <h3 class="brand">RDS Mobile</h3>
+        <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
+          <img src="../images/camera100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
+          <img src="../images/file100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
+          <img src="../images/settingsIcon.png" alt="">
+        </a>
+      </div>
+    </div>	
+  </div>
+  <div class="container" id="HomeContainer">
+    <div class="row marTop20 marTop35 EmbArcThumb">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="measure" id="meaurementPage">
+            <img src="../images/Measure.png" alt="">
+            <span>Measure</span>
+          </div>
         </div>
-                     <label class="alertLable" style="display:none" id="waitForArmId">Measuring device is busy.....</label>        
-                  </div>          
-    
-    </div><!--Body END Here-->
-    
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="probe" id="probeCalibrationPage">
+            <img src="../images/probeIcon.png" alt="">
+            <span>Probe Calibration</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="camera" id="cameraPage">
+            <img src="../images/cameraIcon.png" alt="">
+            <span>Camera</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="dro" id="droPage">
+            <img src="../images/droIcon.png" alt="">
+            <span>DRO</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="status" id="statusPage">
+            <img src="../images/statusIcon.png" alt="">
+            <span>Status</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="checkout" id="checkoutPage">
+            <img src="../images/checkoutIcon.png" alt="">
+            <span>Checkout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <label class="alertLable" style="display:none" id="waitForArmId">Measuring device is busy.....</label>        
+  </div>          
+</div>    
 </body>
 </html>

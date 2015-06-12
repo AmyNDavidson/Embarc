@@ -1,11 +1,7 @@
 (function($){
-
     $.session = {
-
         _id: null,
-
         _cookieCache: undefined,
-
         _init: function()
         {
             if (!window.name) {
@@ -13,9 +9,7 @@
             }
             this._id = window.name;
             this._initCache();
-
             // See if we've changed protcols
-
             var matches = (new RegExp(this._generatePrefix() + "=([^;]+);")).exec(document.cookie);
             if (matches && document.location.protocol !== matches[1]) {
                this._clearSession();
@@ -25,16 +19,12 @@
                    } catch (e) {};
                }
             }
-
             document.cookie = this._generatePrefix() + "=" + document.location.protocol + ';path=/;expires=' + (new Date((new Date).getTime() + 120000)).toUTCString();
-
         },
-
         _generatePrefix: function()
         {
             return '__session:' + this._id + ':';
         },
-
         _initCache: function()
         {
             var cookies = document.cookie.split(';');
@@ -46,7 +36,6 @@
                 }
             }
         },
-
         _setFallback: function(key, value, onceOnly)
         {
             var cookie = this._generatePrefix() + key + "=" + value + "; path=/";
@@ -57,7 +46,6 @@
             this._cookieCache[key] = value;
             return this;
         },
-
         _getFallback: function(key)
         {
             if (!this._cookieCache) {
@@ -65,7 +53,6 @@
             }
             return this._cookieCache[key];
         },
-
         _clearFallback: function()
         {
             for (var i in this._cookieCache) {
@@ -73,18 +60,15 @@
             }
             this._cookieCache = {};
         },
-
         _deleteFallback: function(key)
         {
             document.cookie = this._generatePrefix() + key + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             delete this._cookieCache[key];
         },
-
         get: function(key)
         {
             return window.sessionStorage.getItem(key) || this._getFallback(key);
         },
-
         set: function(key, value, onceOnly)
         {
             try {
@@ -93,11 +77,9 @@
             this._setFallback(key, value, onceOnly || false);
             return this;
         },
-        
         'delete': function(key){
             return this.remove(key);
         },
-
         remove: function(key)
         {
             try {
@@ -106,7 +88,6 @@
             this._deleteFallback(key);
             return this;
         },
-
         _clearSession: function()
         {
           try {
@@ -117,16 +98,12 @@
                 }
             }
         },
-
         clear: function()
         {
             this._clearSession();
             this._clearFallback();
             return this;
         }
-
     };
-
     $.session._init();
-
 })(jQuery);

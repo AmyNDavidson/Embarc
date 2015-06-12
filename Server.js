@@ -4,18 +4,10 @@ net = require('net');
 var tcpClient, ioClient;
 var req = require("request");
 var fs = require("fs");
-
-// TCP side
 var sockets = [];
-// HTTP Server
 server = my_http.createServer(function(request, response) {
-    
     var my_path = url.parse(request.url).pathname;
-//	process.chdir('/usr/htdocs');
-//	process.stdout.write("path\n");
-
 	var full_path = path.join(process.cwd(), my_path);
-	//console.log("Fullpath:" +full_path);
 	path.exists(full_path, function(exists) {
 		if (!exists) {
 			console.log("Path doesn't exists");
@@ -25,10 +17,8 @@ server = my_http.createServer(function(request, response) {
 			response.write("404 Not Found\n");
 			response.end();
 		} else {
-			//console.log("Path exists");
 			filesys.readFile(full_path, "binary", function(err, file) {
 				if (err) {
-
 					if(my_path == '/'){
 						response.writeHead(303, {
  							 'Location': '/pages/home.html'
@@ -52,20 +42,11 @@ server = my_http.createServer(function(request, response) {
 }).listen(8001);
 sys.puts("Server Running on 8001");
 
-// end HTTP server
-
-
-
 function ParseJSON(string) {
-
-  
-	
- var obj = JSON.parse(string);
+	var obj = JSON.parse(string);
 	if (ioClient) {
 	    ioClient.emit(obj.Type, obj);
-
 	}
-
 }
 
 // Create a TCP socket listener
@@ -96,11 +77,6 @@ var s = net.Server(function(tcpSocket) {
 	    }		
 		
 	});
-     
-    
-    
-
-
 	// Use splice to get rid of the socket that is ending.
 	// The 'end' event means tcp client has disconnected.
 	tcpSocket.on('end', function() {
@@ -134,26 +110,19 @@ var io = require('socket.io').listen(server);
 	});
  
    ioSocket.on('readJsonObject', function() {
-
 	    fs.readFile("Data.json", 'utf8', function (err,data) {
-
 	    	if(err)
 	    	{
 	    		console.log("readJsonObject error:"+ err);
 	    		throw err;
 	    	}
-
              var jsonObject = JSON.parse(data);
              ioClient.emit('logsJsonData',jsonObject);
          });
-		
-		
 	});
    
     ioSocket.on('readImageJson', function() {
-
 	      fs.readFile("imagedata.json", 'utf8', function (err,data) {
-
 	      	if(err)
 	    	{
 	    		console.log("readImageJson error:"+ err);
@@ -165,46 +134,42 @@ var io = require('socket.io').listen(server);
          });   
 	});
 
-
     ioSocket.on('requestFileData', function(fileName) {
-
     	if (!fs.existsSync('./logs')){
     		console.log("Creating /logs directory @requestFileData");
     		fs.mkdirSync('./logs', 0775);
 		}
-
-         fs.readFile("logs/"+fileName, 'utf8', function (err,data) {
+        fs.readFile("logs/"+fileName, 'utf8', function (err,data) {
          	if(err)
 	    	{
 	    		console.log("requestFileData error:"+ err);
 	    		throw err;
 	    	}
-	    	  console.log("ServerJS@requestFileData:"+data);
-              ioClient.emit('fileContentDispatch',data);
-         });     
+	        console.log("ServerJS@requestFileData:"+data);
+            ioClient.emit('fileContentDispatch',data);
+        });     
     }); 
 
 // this can be used to view any text file (ie. MyStatus.txt or rlog.txt).
     ioSocket.on('requestLoggingData', function(fileName) {
-         fs.readFile(fileName, 'utf8', function (err,data) {
+        fs.readFile(fileName, 'utf8', function (err,data) {
          	if(err)
 	    	{
 	    		console.log("requestLoggingData error:"+ err);
 	    		throw err;
 	    	}
 	    	console.log("ServerJS@requestLoggingData:"+data);
-              	ioClient.emit('LoggingDataDispatch',data);
-         });     
+           	ioClient.emit('LoggingDataDispatch',data);
+        });     
     });
 
     ioSocket.on('writeJsonFile', function(myData,fileName,flag,type,value) {
-
-    	if (!fs.existsSync('./logs')){
+    	if (!fs.existsSync('./logs'))
+    	{
     		console.log("Creating /logs directory @writeJsonFile");
     		fs.mkdirSync('./logs', 0775);
 		}
 
-       //console.log(myData);
        console.log("ServerJS@writeJsonFile:"+myData);
        if(flag){
 	       var outputFilename = 'Data.json';
@@ -216,59 +181,36 @@ var io = require('socket.io').listen(server);
 	    	}
 	       });  
 	    }   
-            
         var logFileName = fileName;
         var str = "Type = "+type+", value ="+value
         fs.appendFile("logs/"+logFileName,"\n"+str, function(err) {
-          ioClient.emit("writeDone","yes");
-      });  
-  	 });   
+     	   ioClient.emit("writeDone","yes");
+        });  
+    });   
      
 // Note: New way doesn't work on Embarc but does on Ubuntu.
-      ioSocket.on('saveImageFile', function(imgURL,fileName) {
+    ioSocket.on('saveImageFile', function(imgURL,fileName) {
         var http = require('http');
-         var fs = require('fs');
-
+        var fs = require('fs');
      	if (!fs.existsSync('./cameraimages')){
      		console.log("Creating /cameraimages directory @saveImageFile");
     		fs.mkdirSync('./cameraimages');
 		}
-          var file = fs.createWriteStream("cameraimages/"+fileName);
-         var request = http.get(imgURL, function(response) {
-            response.pipe(file);
-              ioClient.emit("imageSaveComplete");
-          });   
+        var file = fs.createWriteStream("cameraimages/"+fileName);
+        var request = http.get(imgURL, function(response) {
+		    response.pipe(file);
+        	ioClient.emit("imageSaveComplete");
+        });   
 	});   
 
-      ioSocket.on('saveCurrImage', function(imgURL,fileName) {
+    ioSocket.on('saveCurrImage', function(imgURL,fileName) {
         var http = require('http');
-         var fs = require('fs');
-
-         var file = fs.createWriteStream(fileName);
-         var request = http.get(imgURL, function(response) {
-           response.pipe(file);
-          });   
+        var fs = require('fs');
+        var file = fs.createWriteStream(fileName);
+        var request = http.get(imgURL, function(response) {
+    	    response.pipe(file);
+        });   
 	});   
-
- /*    ioSocket.on('saveImageFile', function(imgURL,fileName) {
-
-     	if (!fs.existsSync('./cameraimages')){
-     		console.log("Creating /cameraimages directory @saveImageFile");
-    		fs.mkdirSync('./cameraimages');
-		}
-     	
-     	 console.log("ServerJS@saveImageFile: FileName is "+fileName +", ImgaeUrl is "+imgURL);
-          req(imgURL).pipe(fs.createWriteStream("cameraimages/"+fileName, function(err){
-          	if(err)
-	    	{
-	    		console.log("saveImageFile error:"+ err);
-	    		throw err;
-	    	}
-          	
-          }));
-          ioClient.emit("imageSaveComplete");
-         
-     });  */ 
 
     ioSocket.on('saveImageJson', function(data) {
        var outputFilename = 'imagedata.json';
@@ -279,9 +221,6 @@ var io = require('socket.io').listen(server);
 	    		console.log("saveImageJson error:"+ err);
 	    		throw err;
 	    	}
-
 	    }); 
-
   	 });
-
 });

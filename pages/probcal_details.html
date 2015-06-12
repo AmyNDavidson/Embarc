@@ -1,109 +1,86 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../js/session.js"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/math.min.js"></script>
-<script src="../js/three.min.js" type="text/javascript"></script>
-<script src="../js/STLLoader.js" type="text/javascript"></script>
-<script src="../js/Detector.js" type="text/javascript"></script>
-<script src="../js/probDetails.js"></script>
-<script src="../js/measurement.js"></script>
-
-
-<script type="text/javascript">
-var initX=0, initY=-300, initZ =-150;
-var myPositions = new Array();
-var myObjects = new Array();
-var myAxes = new Array();
-
-myObjects = [    '../stl/Table.STL',
-                 '../stl/Sphere.stl',
-                 '../stl/BASE_PLATE.STL',
-                 '../stl/Base.STL',
-                 '../stl/A.STL',
-                 '../stl/BC25.STL',
-                 '../stl/C_FORK.STL',
-                 '../stl/DE25.STL',
-                 '../stl/F.STL',
-                 '../stl/F_AXIS.STL',
-                 '../stl/Buttons.STL',
-                 '../stl/Hard_Probe_15.STL',
-                 ];
-
-
-
-myPositions = [
-               [initX, initY, initZ],
-               [400,0,100],
-               [-730,-90,-80],
-               [0,0,89.5],
-               [0,0,150],
-               [0,0,137],
-               [711,0,62],
-               [39,0,0],
-               [62,0,-451.5],
-               [0,0,-48.5],
-               [0,0,0],
-               [0,15,-69.5],
-               ];
-
-myAxes = [
-          " ",
-          " ",
-          " ",
-          " ",
-          "Z",
-          "Y",
-          "X",
-          "Y",
-          "Z",
-          "Y",
-          " ",
-          " ",
-          ];
-
-</script>
-
-<script src="../js/Animate.js" type="text/javascript"></script>
-
-
-
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-
-       if(probType == "Plane Method" || probType == "Single Point")
-       {
-          setTimeout(function(){
-            $("#probPointsId").html("1/"+pointsNeededVal);
-            UpdateAnimationSS(firstData);
-          },200);
-        
-       }
-   });
-</script>
-
-<style type="text/css">
-
- 
-   #modalmessage{
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>:: Hexagon ::</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/session.js"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../EmbArCJSON.js"></script>
+  <script src="../js/math.min.js"></script>
+  <script src="../js/three.min.js" type="text/javascript"></script>
+  <script src="../js/STLLoader.js" type="text/javascript"></script>
+  <script src="../js/Detector.js" type="text/javascript"></script>
+  <script src="../js/probDetails.js"></script>
+  <script src="../js/measurement.js"></script>
+  <script type="text/javascript">
+  var initX=0, initY=-300, initZ =-150;
+  var myPositions = new Array();
+  var myObjects = new Array();
+  var myAxes = new Array();
+  myObjects = [  
+  '../stl/Table.STL',
+  '../stl/Sphere.stl',
+  '../stl/BASE_PLATE.STL',
+  '../stl/Base.STL',
+  '../stl/A.STL',
+  '../stl/BC25.STL',
+  '../stl/C_FORK.STL',
+  '../stl/DE25.STL',
+  '../stl/F.STL',
+  '../stl/F_AXIS.STL',
+  '../stl/Buttons.STL',
+  '../stl/Hard_Probe_15.STL',
+  ];
+  myPositions = [
+  [initX, initY, initZ],
+  [400,0,100],
+  [-730,-90,-80],
+  [0,0,89.5],
+  [0,0,150],
+  [0,0,137],
+  [711,0,62],
+  [39,0,0],
+  [62,0,-451.5],
+  [0,0,-48.5],
+  [0,0,0],
+  [0,15,-69.5],
+  ];
+  myAxes = [
+  " ",
+  " ",
+  " ",
+  " ",
+  "Z",
+  "Y",
+  "X",
+  "Y",
+  "Z",
+  "Y",
+  " ",
+  " ",
+  ];
+  </script>
+  <script src="../js/Animate.js" type="text/javascript"></script>
+  <script>
+  $(window).load(function () {
+    if(probType == "Plane Method" || probType == "Single Point")
+    {
+      setTimeout(function(){
+        $("#probPointsId").html("1/"+pointsNeededVal);
+        UpdateAnimationSS(firstData);
+      },200);
+    }
+  });
+  </script>
+  <style type="text/css">
+  #modalmessage{
     background-color: white;
     position: fixed;
     border-radius: 5px;
@@ -113,152 +90,130 @@ myAxes = [
     left: 30%;
     width: 40%;
     height: auto;
-   }
- 
-   #modalcancel{
-     width: 100%;
-   }
-  
-</style>
-
-
+  }
+  #modalcancel{
+    width: 100%;
+  }
+  </style>
 </head>
-
 <body id="measurePage1">
-
-<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar">
-            	 <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
-                <h3 class="brand" id="headerText"></h3>
-                <ul class="topRgtIcon">
-               	<li><img id="selectedIconId" src="../images/measureTopRgtIcon.png" alt=""></li>
-                </ul>               
-         </div>            
-</div>	
- </div><!--Navigation END Here-->
-  
-  <div class="container" id="step2Id" style="display:block;"> <!--Body START Here-->
-      <div class="row marTop">
-          <div class="col-lg-7 col-sm-7" style="width:40%;">  <!--Input Boxes START Here-->
-              <div class="pointsContainer">
-
-                  <div class="enterBarlength" id="barRequireId">
-                    <label id="barlengthText"></label>
-                    <input name="" id="continueText" stype="tel" placeholder="" value=""> 
-                    <div class="lenBtn" id="continueButton"><a href="#" class="btn btn-green"> Continue </a></div>
-                   </div> 
-
-                <div class="pointsRequired">
-                        <label class="lableClass" id="ptsReq">Points Required</label>
-                        <input name="" id="pointsRequire2" stype="text" placeholder="c" value="" readonly>
-                    </div>
-                    <div class="pointsRequired">
-                        <label class="lableClass" id="ptsTk">Points Taken</label>
-                        <input name="" id="pointsTakenId2" type="text" placeholder="0" readonly>
-                    </div>
-                <!--<div class="clearfix"></div>-->
-                <em class="pointText" id="measureTextId2"></em>
-                <div class="clearfix"></div>
-                <div class="marTop20">
-                <div class="pointsRequired" id="probCancelButton">
-                   <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
-                </div>
-                
-                  
-
-
-                <div class="pointsRequired" id="CalculateResultId">
-                  <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right">
-                  <img src="../images/btn_Icon.png" alt="" ></span> Calculate </a>
-                </div></div>
-                
-               </div> 
-            </div><!--Input Boxes END Here-->
-            
-            <div class="col-lg-5 col-sm-5 circleText" style="width:60%;">
-              <div class="planeMeasure">
-                
-                  <div id="animation"></div>
-              
-              	<div class="dynamicText" id="probPointsId">1/15</div>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar">
+        <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
+        <h3 class="brand" id="headerText"></h3>
+        <ul class="topRgtIcon">
+          <li><img id="selectedIconId" src="../images/measureTopRgtIcon.png" alt=""></li>
+        </ul>               
+      </div>            
+    </div>	
+  </div>
+  <div class="container" id="step2Id" style="display:block;">
+    <div class="row marTop">
+      <div class="col-lg-7 col-sm-7" style="width:40%;">
+        <div class="pointsContainer">
+          <div class="enterBarlength" id="barRequireId">
+            <label id="barlengthText"></label>
+            <input name="" id="continueText" stype="tel" placeholder="" value=""> 
+            <div class="lenBtn" id="continueButton"><a href="#" class="btn btn-green"> Continue </a></div>
+          </div> 
+          <div class="pointsRequired">
+            <label class="lableClass" id="ptsReq">Points Required</label>
+            <input name="" id="pointsRequire2" stype="text" placeholder="c" value="" readonly>
+          </div>
+          <div class="pointsRequired">
+            <label class="lableClass" id="ptsTk">Points Taken</label>
+            <input name="" id="pointsTakenId2" type="text" placeholder="0" readonly>
+          </div>
+          <em class="pointText" id="measureTextId2"></em>
+          <div class="clearfix"></div>
+          <div class="marTop20">
+            <div class="pointsRequired" id="probCancelButton">
+              <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+            </div>
+            <div class="pointsRequired" id="CalculateResultId">
+              <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right">
+                <img src="../images/btn_Icon.png" alt="" ></span> Calculate </a>
+              </div></div>
+            </div> 
+          </div>
+          <div class="col-lg-5 col-sm-5 circleText" style="width:60%;">
+            <div class="planeMeasure">
+              <div id="animation"></div>
+              <div class="dynamicText" id="probPointsId">1/15</div>
+            </div>
+            <p id="measureTypeTitle">Follow this guide for best results</p>
+          </div>
+          <div class="diameterContainer">
+            <div class="diameterInfo" id="resultId">
+              <h2>Residual Value:</h2>
+              <h1 id="probResultId"></h1>
+            </div>
+            <div class="diameterButtons">
+              <div class="pointsRequired" id="discardResult">
+                <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Discard </a>
               </div>
-                <p id="measureTypeTitle">Follow this guide for best results</p>
-            </div>
-            
-            <div class="diameterContainer">
-              <div class="diameterInfo" id="resultId">
-               <h2>Residual Value:</h2>
-                    <h1 id="probResultId"></h1>
-                </div>
-               <div class="diameterButtons">
-                  <div class="pointsRequired" id="discardResult">
-                    <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Discard </a>
-                  </div>
-                  <div class="pointsRequired" id="saveResult">
-                  <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Save Calibration </a>
-                  </div>
-               </div> 
-            </div>
-            
+              <div class="pointsRequired" id="saveResult">
+                <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Save Calibration </a>
+              </div>
+            </div> 
+          </div>
         </div>
-    </div><!--Body END Here-->
-
-   <!-- Modal Dialog -->
-    <div id="modal" style="display:none">      
-           <div id="modalmessage">
-               <p id="modalmessage-p" style="padding: 5% 5% 10% 5%;border: 1px solid #ccc; border-radius: 15px;"></p>
-           <div style="text-align:center;">
-               <div  id="modalcancel">
-                    <a href="/pages/home.html" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
-               </div>
-              
-           </div>
-      </div>      
-    </div>
-<!-- Modal Dialog ENDS here -->
-
-   <div class="popup_div" id="probAlert" style="display:none;">
-    <div  class="import_contact" >
-        <div class="heaading_bg">
+      </div>
+      <div id="modal" style="display:none">      
+        <div id="modalmessage">
+          <p id="modalmessage-p" style="padding: 5% 5% 10% 5%;border: 1px solid #ccc; border-radius: 15px;"></p>
+          <div style="text-align:center;">
+            <div  id="modalcancel">
+              <a href="/pages/home.html" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+            </div>
+          </div>
+        </div>      
+      </div>
+      <div class="popup_div" id="probAlert" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
             <div class="div_1_heading">
               SUCCESS
             </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText">Your data has been successfully saved.</p>
-        </div>
-        <div class="cancelBtns"> 
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText">Your data has been successfully saved.</p>
+          </div>
+          <div class="cancelBtns"> 
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-     </div>
-    </div>
-
-
-    
-    <div class="popup_div" id="saveAlert" style="display:none;">
-    <div  class="import_contact" >
-        <div class="heaading_bg">
+          </div>
+        </div>
+      </div>
+      <div class="popup_div" id="noProbe" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
+            <div class="div_1_heading">
+              ALERT
+            </div>
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText"></p>
+          </div>
+          <div class="cancelBtns">
+            <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
+          </div>
+        </div>
+      </div>
+      <div class="popup_div" id="saveAlert" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
             <div class="div_1_heading">
               SUCCESS
             </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText">Your data has been successfully saved.</p>
-        </div>
-        <div class="cancelBtns">
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText">Your data has been successfully saved.</p>
+          </div>
+          <div class="cancelBtns">
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-      
-     </div>
-        
-    </div>
-
-
-
-</body>
-</html>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>

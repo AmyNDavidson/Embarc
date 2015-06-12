@@ -1,156 +1,74 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/math.min.js"></script>
-<script src="../js/cameralogs.js"></script>
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-   });
-</script>
-
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>:: Hexagon ::</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../EmbArCJSON.js"></script>
+  <script src="../js/math.min.js"></script>
+  <script src="../js/cameralogs.js"></script>
 </head>
-
 <body id="cameraImg">
-<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar">
-            	 <a class="navbar-brand" href="#"><img src="../images/back.png" alt=""></a>
-                <h3 class="brand" id="headerText">Camera Images</h3>
-              <!--  <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
-                  <img src="../images/camera100x10032x32.png" alt="">
-                </a> -->
-                <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
-                  <img src="../images/file100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
-                  <img src="../images/settingsIcon.png" alt="">
-                </a>
-         </div>            
-</div>	
-</div> 
-
-<div class="container" id="containerOne">
- 
-        <div class="col-lg-7 center-table">
-          
-           <div class="form-group marTop">
-          <div class="col-sm-3 labelHead">Date Taken</div>
-          <div class="col-sm-5"><input type="date" placeholder="Name" id="dateField" class="form-control" style="height:48px"></div>
-                <div class="col-sm-4" id="searchImagesButton">
-                	<a class="btn btn-red big_btn" href="#" style="float:right"><span class="glyphicon glyphicon-chevron-right">
-                	<img alt="" src="../images/search.png"></span> Search Files </a>
-                </div>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar">
+        <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
+        <h3 class="brand" id="headerText">Camera Images</h3>
+        <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
+          <img src="../images/file100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
+          <img src="../images/settingsIcon.png" alt="">
+        </a>
+      </div>            
+    </div>	
+  </div> 
+  <div class="container" id="containerOne">
+    <div class="col-lg-7 center-table">
+      <div class="form-group marTop">
+        <div class="col-sm-3 labelHead">Date Taken</div>
+        <div class="col-sm-5"><input type="date" placeholder="Name" id="dateField" class="form-control" style="height:48px"></div>
+        <div class="col-sm-4" id="searchImagesButton">
+          <a class="btn btn-red big_btn" href="#" style="float:right"><span class="glyphicon glyphicon-chevron-right">
+            <img alt="" src="../images/search.png"></span> Search Files </a>
           </div>
-        <!--   <div class="form-group"> -->
-          	
-           <div class="row">
-            	<div class="listBox" id="imageContainerId"><!--Scroll Box Start Here-->
-                 <!--  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                        <label>08/28/2014</label>
-                    </a>
-                    
-                    <div class="checkBox"><input name="" type="checkbox" value=""></div>
-                  </div>
-                    
-                  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                        <label>08/28/2014</label>
-                    </a>
-                    
-                    <div class="checkBox"><input name="" type="checkbox" value=""></div>
-                  </div>
-                  
-                  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                        <label>08/28/2014</label>
-                    </a>
-                    
-                    <div class="checkBox"><input name="" type="checkbox" value=""></div>
-                  </div>
-                  
-                  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                        <label>08/28/2014</label>
-                    </a>
-                    
-                    <div class="checkBox"><input name="" type="checkbox" value=""></div>
-                  </div>
-                  
-                  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                        <label>08/28/2014</label>
-                    </a>
-                    
-                    <div class="checkBox"><input name="" type="checkbox" value=""></div>
-                  </div> -->
-                </div><!--Scroll END-->
-                
-                <button class="btn btn-green small_Btn" id="downloadButton"><span class="glyphicon glyphicon-chevron-right"><img src="../images/download_100x100.png" alt=""></span>Download</button>
-                
-           </div>
-          </div>
-          <div class="form-group">
-       
-          </div>
-       
         </div>
-
-</div>
-
-
-    <div class="popup_div" id="popUpId" style="display:none;">
-    <div  class="import_contact" >
-        <div class="heaading_bg">
-            <div class="div_1_heading">
-              ALERT!
-            </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText">Your data has been successfully saved.</p>
+        <div class="row">
+          <div class="listBox" id="imageContainerId">
+          </div>
+          <button class="btn btn-green small_Btn" id="downloadButton">
+            <span class="glyphicon glyphicon-chevron-right">
+              <img src="../images/download_100x100.png" alt="">
+            </span>
+            Download
+          </button>
         </div>
-        <div class="cancelBtns">
-            <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-      
-     </div>
-        
+      </div>
+      <div class="form-group">
+      </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
+  </div>
+  <div class="popup_div" id="popUpId" style="display:none;">
+    <div  class="import_contact" >
+      <div class="heaading_bg">
+        <div class="div_1_heading">
+          ALERT!
+        </div>
+      </div>
+      <div class="inputHolder">
+        <p id="popUpText">Your data has been successfully saved.</p>
+      </div>
+      <div class="cancelBtns">
+        <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

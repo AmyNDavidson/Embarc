@@ -1,148 +1,120 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="format-detection" content="telephone=no">
-
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/measurement.js" type="text/javascript"></script>
-<script src="../js/three.min.js" type="text/javascript"></script>
-<script src="../js/math.min.js" type="text/javascript"></script>
-<script src="../js/STLLoader.js" type="text/javascript"></script>
-<script src="../js/Detector.js" type="text/javascript"></script>
-
-<script src="../js/dro.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-var initX=0, initY=-300, initZ =-150;
-var myPositions = new Array();
-var myObjects = new Array();
-var myAxes = new Array();
-
-myObjects = [    '../stl/Table.STL',
-                 '../stl/BASE_PLATE.STL',
-                 '../stl/Base.STL',
-                 '../stl/A.STL',
-                 '../stl/BC25.STL',
-                 '../stl/C_FORK.STL',
-                 '../stl/DE25.STL',
-                 '../stl/F.STL',
-                 '../stl/F_AXIS.STL',
-                 '../stl/Buttons.STL',
-                 '../stl/Hard_Probe_15.STL',
-                 ];
-
-myPositions = [
-               [initX, initY, initZ],
-               [200,0,0],
-               [0,0,89.5],
-               [0,0,150],
-               [0,0,137],
-               [711,0,62],
-               [39,0,0],
-               [62,0,-451.5],
-               [0,0,-48.5],
-               [0,0,0],
-               [0,15,-69.5],
-               ];
-
-myAxes = [
-          " ",
-          " ",
-          " ",
-          "Z",
-          "Y",
-          "X",
-          "Y",
-          "Z",
-          "Y",
-          " ",
-          " ",
-          ];
-
-
-</script>
-<script src="../js/Animate.js" type="text/javascript"></script>
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-   });
-</script>
-
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no">
+  <title>:: Hexagon ::</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../EmbArCJSON.js"></script>
+  <script src="../js/measurement.js" type="text/javascript"></script>
+  <script src="../js/three.min.js" type="text/javascript"></script>
+  <script src="../js/math.min.js" type="text/javascript"></script>
+  <script src="../js/STLLoader.js" type="text/javascript"></script>
+  <script src="../js/Detector.js" type="text/javascript"></script>
+  <script src="../js/dro.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var initX=0, initY=-300, initZ =-150;
+  var myPositions = new Array();
+  var myObjects = new Array();
+  var myAxes = new Array();
+  myObjects = [   
+  '../stl/Table.STL',
+  '../stl/BASE_PLATE.STL',
+  '../stl/Base.STL',
+  '../stl/A.STL',
+  '../stl/BC25.STL',
+  '../stl/C_FORK.STL',
+  '../stl/DE25.STL',
+  '../stl/F.STL',
+  '../stl/F_AXIS.STL',
+  '../stl/Buttons.STL',
+  '../stl/Hard_Probe_15.STL',
+  ];
+  myPositions = [
+  [initX, initY, initZ],
+  [200,0,0],
+  [0,0,89.5],
+  [0,0,150],
+  [0,0,137],
+  [711,0,62],
+  [39,0,0],
+  [62,0,-451.5],
+  [0,0,-48.5],
+  [0,0,0],
+  [0,15,-69.5],
+  ];
+  myAxes = [
+  " ",
+  " ",
+  " ",
+  "Z",
+  "Y",
+  "X",
+  "Y",
+  "Z",
+  "Y",
+  " ",
+  " ",
+  ];
+  </script>
+  <script src="../js/Animate.js" type="text/javascript"></script>
+  <style type="text/css">
+  .cursor-class{
+    cursor:default;
+  }
+  </style>
 </head>
-
 <body>
-  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar">
-              <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
-                <h3 class="brand">DRO</h3>
-               <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
-                  <img src="../images/camera100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
-                  <img src="../images/file100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
-                  <img src="../images/settingsIcon.png" alt="">
-                </a>
-            </div>
-      </div>  
-     </div><!--Navigation END Here-->
-     
-    <div class="container"> <!--Body START Here-->
-      <div class="row marTop">
-          <div class="col-sm-4"> <!--Radio Buttons BOX START Here-->
-                
-                <div class="unitsBox">
-                    <div class="panel-heading"><h2>Measurement Units</h2></div>
-                    
-                    <div class="form-group" id="inputRadioButtons">
-                        <label class="radio-inline"><input type="radio" value="option2" id="inchesId" name="optionsRadios"> Inches</label>
-                        <label class="radio-inline"><input type="radio" value="option2" id="mmId" name="optionsRadios"> Millimeters</label>
-                    </div>
-                </div>
-                
-            </div><!--Radio Buttons BOX END Here-->
-            
-            <div class="clearfix"></div>
-            
-            <div class="col-sm-8">
-              <div class="droImgContainer"> <!--Big IMAGE Container START Here-->
-
-                  <div id="animation"></div>
-
-                </div><!--Big IMAGE Container END Here-->
-            </div>
-            
-            <div class="col-sm-4">
-               
-              <div class="droBtns">
-                    <span class="droBtnBlue"><a href="#"><em>X</em><SPAN ID="droXId"></SPAN></a></span>
-                    <span class="droBtnGreen"><a href="#"><em>Y</em><SPAN ID="droYId"></SPAN></a></span>
-                    <span class="droBtnBlue"><a href="#"><em>Z</em><SPAN ID="droZId"></SPAN></a></span>
-                    <span class="droBtnGreen"><a href="#"><em>Probe</em><SPAN ID="probeDataId"></SPAN></a></span>
-                 </div>
-
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar">
+        <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
+        <h3 class="brand">DRO</h3>
+        <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
+          <img src="../images/camera100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
+          <img src="../images/file100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
+          <img src="../images/settingsIcon.png" alt="">
+        </a>
+      </div>
+    </div>  
+  </div>
+  <div class="container">
+    <div class="row marTop">
+      <div class="col-sm-4">
+        <div class="unitsBox">
+          <div class="panel-heading"><h2>Measurement Units</h2></div>
+          <div class="form-group" id="inputRadioButtons">
+            <label class="radio-inline"><input type="radio" value="option2" id="inchesId" name="optionsRadios"> Inches</label>
+            <label class="radio-inline"><input type="radio" value="option2" id="mmId" name="optionsRadios"> Millimeters</label>
           </div>
-            
         </div>
-    </div><!--Body END Here-->
-    
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-8">
+        <div class="droImgContainer">
+          <div id="animation"></div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="droBtns">
+          <span class="droBtnBlue"><a class="cursor-class" href="#"><em>X</em><SPAN ID="droXId"></SPAN></a></span>
+          <span class="droBtnGreen"><a class="cursor-class" href="#"><em>Y</em><SPAN ID="droYId"></SPAN></a></span>
+          <span class="droBtnBlue"><a class="cursor-class" href="#"><em>Z</em><SPAN ID="droZId"></SPAN></a></span>
+          <span class="droBtnGreen"><a class="cursor-class" href="#"><em>Probe</em><SPAN ID="probeDataId"></SPAN></a></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

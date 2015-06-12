@@ -1,129 +1,92 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="format-detection" content="telephone=no">
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
- <link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../js/camera.js" type="text/javascript"></script>
-<script src="../EmbArCJSON.js"></script>
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-   });
-</script>
-
-
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no">
+  <title>:: Hexagon ::</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../js/camera.js" type="text/javascript"></script>
+  <script src="../EmbArCJSON.js"></script>
 </head>
 <body>
-	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar"> 
-            	<a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>           	
-                <h3 class="brand">Camera</h3>
-              
-
-               <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
-                  <img src="../images/camera100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
-                  <img src="../images/file100x10032x32.png" alt="">
-                </a>
-                <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
-                  <img src="../images/settingsIcon.png" alt="">
-                </a>
-
-                
-             </div>
-            
-         </div>	
-     </div><!--Navigation END Here-->
-	 <div id="cameraBody">
-	    <div class="" > <!--Body START Here-->
-    	<div class="marTop20 marTop35">
-            <div class="login-box">
-                
-                <img id="picture" width="320" height="240">
-                <canvas id="canvasId" style="display:none"></canvas>
-                <img  id="photo" width="320px" height="240">
-
-            </div>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar"> 
+        <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>           	
+        <h3 class="brand">Camera</h3>
+        <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
+          <img src="../images/camera100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
+          <img src="../images/file100x10032x32.png" alt="">
+        </a>
+        <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
+          <img src="../images/settingsIcon.png" alt="">
+        </a>
+      </div>
+    </div>	
+  </div>
+  <div id="cameraBody">
+    <div class="" >
+      <div class="marTop20 marTop35">
+        <div class="login-box">
+          <img id="picture" width="320" height="240">
+          <canvas id="canvasId" style="display:none"></canvas>
+          <img  id="photo" width="320px" height="240">
         </div>
-       <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
       <div class="row">     		
         <div class="diameterContainer" id="cameraCaptureButton" style="width:40.5%">
-           <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right bigIcon"><img src="../images/camera_100x100.png" alt=""></span>Capture</a>
+          <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right bigIcon"><img src="../images/camera_100x100.png" alt=""></span>Capture</a>
         </div>
-     </div>
-        
+      </div>
     </div> 
-	
-
-    <div class="diameterContainer"> <!--Buttons Container START Here-->
-        	
-            <div class="pointsRequired" id="cameraCanil">
-            	<a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
-            </div>
-			
-            <div class="pointsRequired" id="cameraSaveButton">
-            	<a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span> Save </a>
-            </div>
+    <div class="diameterContainer">
+      <div class="pointsRequired" id="cameraCancel">
+        <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+      </div>
+      <div class="pointsRequired" id="cameraSaveButton">
+        <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span> Save </a>
+      </div>
     </div>
-    </div>
-
-
-   
-    <div class="popup_div" id="saveAlert" style="display:none;">
+  </div>
+  <div class="popup_div" id="saveAlert" style="display:none;">
     <div  class="import_contact" >
-        <div class="heaading_bg">
-            <div class="div_1_heading">
-              SUCCESS
-            </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText">Image has been successfully saved.</p>
+      <div class="heaading_bg">
+        <div class="div_1_heading">
+          SUCCESS
         </div>
-        <div class="cancelBtns">
-            <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-      
-     </div>
-        
+      </div>
+      <div class="inputHolder">
+        <p id="popUpText">Image has been successfully saved.</p>
+      </div>
+      <div class="cancelBtns">
+        <a href="#" title="Close" id="closePopUp">Close</a>
+      </div>
     </div>
-
-    <div class="popup_div" id="axesAlert" style="display:none;">
+  </div>
+  <div class="popup_div" id="axesAlert" style="display:none;">
     <div  class="import_contact" >
-        <div class="heaading_bg">
-            <div class="div_1_heading">
-              RESTRICTED
-            </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText2">Camera is disabled for the Axes:7</p>
+      <div class="heaading_bg">
+        <div class="div_1_heading">
+          RESTRICTED
         </div>
-        <div class="cancelBtns">
-            <a href="#" style="background:#df443f !important" title="Close" onClick="gotoHome();" id="closePopUp2">Close</a>
-       </div>
-      
-     </div>
-        
+      </div>
+      <div class="inputHolder">
+        <p id="popUpText2">Camera is disabled for a 7 axis arm</p>
+      </div>
+      <div class="cancelBtns">
+        <a href="#" style="background:#df443f !important" title="Close" onClick="gotoHome();" id="closePopUp2">Close</a>
+      </div>
     </div>
-    
+  </div>
 </body>
 </html>

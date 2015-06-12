@@ -1,191 +1,156 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="format-detection" content="telephone=no">
-
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/measurement.js" type="text/javascript"></script>
-<script src="../js/math.min.js" type="text/javascript"></script>
-
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-   });
-</script>
-
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>:: Hexagon ::</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/../socket.io/socket.io.js"></script>
+    <script src="../js/application.js" type="text/javascript"></script>
+    <script src="../EmbArCJSON.js"></script>
+    <script src="../js/measurement.js" type="text/javascript"></script>
+    <script src="../js/math.min.js" type="text/javascript"></script>
 </head>
 <body>
-	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
             <div class="navbar"> 
-            	<a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>           	
+                <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>           	
                 <h3 class="brand">Measurement</h3>
                 <a href="#" class="settingsTop" style="margin: -44px 80px;"  id="openCameraImg" title="Camera images">
-                  <img src="../images/camera100x10032x32.png" alt="">
+                    <img src="../images/camera100x10032x32.png" alt="">
                 </a>
                 <a href="#" class="settingsTop" style="margin: -44px 40px;" id="openLogFiles" title="Log files">
-                  <img src="../images/file100x10032x32.png" alt="">
+                    <img src="../images/file100x10032x32.png" alt="">
                 </a>
                 <a href="#" class="settingsTop" id="settingsTop" style="margin: -44px 0px;" title="Settings">
-                  <img src="../images/settingsIcon.png" alt="">
+                    <img src="../images/settingsIcon.png" alt="">
                 </a>
-             </div>
-            
-         </div>	
-     </div><!--Navigation END Here-->
-    
-     
-    <div class="container"> <!--Body START Here-->
-    	<div class="row marTop20 marTop35 measurement"> <!--First ROW START Here-->
-     		<div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('holeDiameter')">
-               	<div class="measure blueBox" id="holeDiameter" >
-                    	<img src="../images/Hole_Diameter.png" alt="">
-                    	<span>Hole Diameter</span>
-                    </div>
-                </div>
             </div>
-            
+        </div>	
+    </div>
+    <div class="container">
+        <div class="row marTop20 marTop35 measurement">
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('slotDimensions')">
-                	<div class="probe greenBox">
-                    	<img src="../images/Slot_Dimensions.png" alt="">
-                    	<span>Slot Dimensions</span>
+                <div class="thumbnail" onClick="openMeasureDetails('holeDiameter')">
+                    <div class="measure blueBox" id="holeDiameter" >
+                        <img src="../images/Hole_Diameter.png" alt="">
+                        <span>Hole Diameter</span>
                     </div>
                 </div>
             </div>
-            
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail" onClick="openMeasureDetails('slotDimensions')">
+                    <div class="probe greenBox">
+                        <img src="../images/Slot_Dimensions.png" alt="">
+                        <span>Slot Dimensions</span>
+                    </div>
+                </div>
+            </div>
             <div class="col-xs-6 col-md-3" >
-            	<div class="thumbnail" onClick="openMeasureDetails('rectangleDimensions')">
-                	<div class="camera blueBox">
-                    	<img src="../images/Rectangle_Dimensions.png" alt="">
-                    	<span class="blockSpan">Rectangle Dimensions</span>
+                <div class="thumbnail" onClick="openMeasureDetails('rectangleDimensions')">
+                    <div class="camera blueBox">
+                        <img src="../images/Rectangle_Dimensions.png" alt="">
+                        <span class="blockSpan">Rectangle Dimensions</span>
                     </div>
                 </div>
             </div>
-            
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('diameterOfAShaft')">
-                	<div class="camera greenBox">
-                    	<img src="../images/Diameter_of_a_Shaft.png" alt="">
-                    	<span class="blockSpan">Diameter of a Shaft</span>
+                <div class="thumbnail" onClick="openMeasureDetails('diameterOfAShaft')">
+                    <div class="camera greenBox">
+                        <img src="../images/Diameter_of_a_Shaft.png" alt="">
+                        <span class="blockSpan">Diameter of a Shaft</span>
                     </div>
                 </div>
             </div>
-            
-        </div><!--First ROW END Here-->
-        
-        <div class="row measurement"> <!--2nd ROW START Here-->
-     		<div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoPoints')">
-                	<div class="measure blueBox">
-                    	<img src="../images/Distance_Between_Two_Points.png" alt="">
-                    	<span>Distance Between Two Points</span>
-                    </div>
-                </div>
-            </div>
-            
+        </div>
+        <div class="row measurement">
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoSurfaces')">
-                	<div class="probe greenBox">
-                    	<img src="../images/Distance_Between_Two_Surfaces.png" alt="">
-                    	<span>Distance Between Two Surfaces</span>
+                <div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoPoints')">
+                    <div class="measure blueBox">
+                        <img src="../images/Distance_Between_Two_Points.png" alt="">
+                        <span>Distance Between Two Points</span>
                     </div>
                 </div>
             </div>
-            
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoCirclesHoles')">
-                	<div class="camera blueBox">
-                    	<img src="../images/Distance_Between_Two_Circles_Holes.png" alt="">
-                    	<span>Distance Between Two Circles (Holes)</span>
+                <div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoSurfaces')">
+                    <div class="probe greenBox">
+                        <img src="../images/Distance_Between_Two_Surfaces.png" alt="">
+                        <span>Distance Between Two Surfaces</span>
                     </div>
                 </div>
             </div>
-            
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('distancePointToLine')">
-                	<div class="camera greenBox">
-                    	<img src="../images/Distance_Point_To_Line.png" alt="">
-                    	<span>Distance Point To Line</span>
+                <div class="thumbnail" onClick="openMeasureDetails('distanceBetweenTwoCirclesHoles')">
+                    <div class="camera blueBox">
+                        <img src="../images/Distance_Between_Two_Circles_Holes.png" alt="">
+                        <span>Distance Between Two Circles (Holes)</span>
                     </div>
                 </div>
             </div>
-        </div><!--2nd ROW END Here-->
-        
-        <div class="row measurement"> <!--3rd ROW START Here-->
-     		<div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('distancePointToPlaneSurface')">
-                	<div class="measure blueBox">
-                    	<img src="../images/Distance_Point_to_Plane_Surface.png" alt="">
-                    	<span>Distance Point to Plane (Surface)</span>
-                    </div>
-                </div>
-            </div>
-            
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('angleBetweenTwoSurfaces')">
-                	<div class="probe greenBox">
-                    	<img src="../images/Angle_Between_Two_Surfaces.png" alt="">
-                    	<span>Angle Between Two Surfaces</span>
+                <div class="thumbnail" onClick="openMeasureDetails('distancePointToLine')">
+                    <div class="camera greenBox">
+                        <img src="../images/Distance_Point_To_Line.png" alt="">
+                        <span>Distance Point To Line</span>
                     </div>
                 </div>
             </div>
-            
+        </div>
+        <div class="row measurement">
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail" onClick="openMeasureDetails('angleBetweenTwoLinesEdges')">
-                	<div class="camera blueBox">
-                    	<img src="../images/Angle_Between_Two_Lines_Edges.png" alt="">
-                    	<span>Angle Between Two Lines (Edges)</span>
+                <div class="thumbnail" onClick="openMeasureDetails('distancePointToPlaneSurface')">
+                    <div class="measure blueBox">
+                        <img src="../images/Distance_Point_to_Plane_Surface.png" alt="">
+                        <span>Distance Point to Plane (Surface)</span>
                     </div>
                 </div>
             </div>
-            
             <div class="col-xs-6 col-md-3">
-            	<div class="thumbnail"  onClick="openMeasureDetails('angleBetweenLineAndSurface')">
-                	<div class="camera greenBox">
-                    	<img src="../images/Angle_Between_Line_and_Surface.png" alt="">
-                    	<span>Angle Between Line and Surface</span>
+                <div class="thumbnail" onClick="openMeasureDetails('angleBetweenTwoSurfaces')">
+                    <div class="probe greenBox">
+                        <img src="../images/Angle_Between_Two_Surfaces.png" alt="">
+                        <span>Angle Between Two Surfaces</span>
                     </div>
                 </div>
             </div>
-            
-        </div><!--3rd ROW START Here-->
-        
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail" onClick="openMeasureDetails('angleBetweenTwoLinesEdges')">
+                    <div class="camera blueBox">
+                        <img src="../images/Angle_Between_Two_Lines_Edges.png" alt="">
+                        <span>Angle Between Two Lines (Edges)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail"  onClick="openMeasureDetails('angleBetweenLineAndSurface')">
+                    <div class="camera greenBox">
+                        <img src="../images/Angle_Between_Line_and_Surface.png" alt="">
+                        <span>Angle Between Line and Surface</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="clearfix"></div>
-            <div class="row"> <!--Measurement Units START Here-->
-                <div class="col-lg-12">
-                    	 <div class="form-group">
-                        <label>Measurement Units</label>
-                        <label class="radio-inline">
-                          <input type="radio" checked="" value="option1" id="inchesId" name="optionsRadiosInline"> Inches
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" value="option2" id="mmId" name="optionsRadiosInline"> Millimeters
-                        </label>           
-                   </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Measurement Units</label>
+                    <label class="radio-inline">
+                        <input type="radio" checked="" value="option1" id="inchesId" name="optionsRadiosInline"> Inches
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="option2" id="mmId" name="optionsRadiosInline"> Millimeters
+                    </label>           
                 </div>
-              </div><!--Measurement Units END Here-->
-        
-        
-    </div><!--Body END Here-->
-    
+            </div>
+        </div>
+    </div>
 </body>
 </html>

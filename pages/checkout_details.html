@@ -1,282 +1,245 @@
 <!DOCTYPE html>
 <html manifest="../applicationCache.appcache">
 <head>
-<meta charset="UTF-8">
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<title>:: Hexagon ::</title>
-<script>
-   var startTime = (new Date()).getTime();
-</script>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../js/math.min.js"></script>
-<script src="../js/three.min.js" type="text/javascript"></script>
-<script src="/../socket.io/socket.io.js"></script>
-<script src="../js/session.js"></script>
-<script src="../EmbArCJSON.js"></script>
-<script src="../js/application.js" type="text/javascript"></script>
-<script src="../js/STLLoader.js" type="text/javascript"></script>
-<script src="../js/Detector.js" type="text/javascript"></script>
-<script type="text/javascript">
-var initX=0, initY=-300, initZ =-150;
-var myPositions = new Array();
-var myObjects = new Array();
-var myAxes = new Array();
-
-myObjects = [    '../stl/Table.STL',
-                 '../stl/Sphere.stl',
-                 '../stl/BASE_PLATE.STL',
-                 '../stl/Base.STL',
-                 '../stl/A.STL',
-                 '../stl/BC25.STL',
-                 '../stl/C_FORK.STL',
-                 '../stl/DE25.STL',
-                 '../stl/F.STL',
-                 '../stl/F_AXIS.STL',
-                 '../stl/Buttons.STL',
-                 '../stl/Hard_Probe_15.STL',
-                 ];
-
-
-
-myPositions = [
-               [initX, initY, initZ],
-               [400,0,100],
-               [-730,-90,-80],
-               [0,0,89.5],
-               [0,0,150],
-               [0,0,137],
-               [711,0,62],
-               [39,0,0],
-               [62,0,-451.5],
-               [0,0,-48.5],
-               [0,0,0],
-               [0,15,-69.5],
-               ];
-
-myAxes = [
-          " ",
-          " ",
-          " ",
-          " ",
-          "Z",
-          "Y",
-          "X",
-          "Y",
-          "Z",
-          "Y",
-          " ",
-          " ",
-          ];
-
-</script>
-
-
-<script src="../js/Animate.js" type="text/javascript"></script>
-<script src="../js/checkOutDetails.js"></script>
-<script src="../js/measurement.js"></script>
-
-<script>
-   $(window).load(function () {
-       var endTime = (new Date()).getTime();
-       var millisecondsLoading = endTime - startTime;
-       console.log("millisecondsLoading : "+millisecondsLoading);
-
-       if(checkOutType == "Plane Checkout" || checkOutType == "Point Checkout")
-       {
-          setTimeout(function(){
-            $("#calPointsId").html("1/"+ pointNeededVal);
-            UpdateAnimationSS(firstData);
-          },200);
-       }
-   });
-</script>
-
-
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>:: Hexagon ::</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/math.min.js"></script>
+  <script src="../js/three.min.js" type="text/javascript"></script>
+  <script src="/../socket.io/socket.io.js"></script>
+  <script src="../js/session.js"></script>
+  <script src="../EmbArCJSON.js"></script>
+  <script src="../js/application.js" type="text/javascript"></script>
+  <script src="../js/STLLoader.js" type="text/javascript"></script>
+  <script src="../js/Detector.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var initX=0, initY=-300, initZ =-150;
+  var myPositions = new Array();
+  var myObjects = new Array();
+  var myAxes = new Array();
+  myObjects = [    
+  '../stl/Table.STL',
+  '../stl/Sphere.stl',
+  '../stl/BASE_PLATE.STL',
+  '../stl/Base.STL',
+  '../stl/A.STL',
+  '../stl/BC25.STL',
+  '../stl/C_FORK.STL',
+  '../stl/DE25.STL',
+  '../stl/F.STL',
+  '../stl/F_AXIS.STL',
+  '../stl/Buttons.STL',
+  '../stl/Hard_Probe_15.STL',
+  ];
+  myPositions = [
+  [initX, initY, initZ],
+  [400,0,100],
+  [-730,-90,-80],
+  [0,0,89.5],
+  [0,0,150],
+  [0,0,137],
+  [711,0,62],
+  [39,0,0],
+  [62,0,-451.5],
+  [0,0,-48.5],
+  [0,0,0],
+  [0,15,-69.5],
+  ];
+  myAxes = [
+  " ",
+  " ",
+  " ",
+  " ",
+  "Z",
+  "Y",
+  "X",
+  "Y",
+  "Z",
+  "Y",
+  " ",
+  " ",
+  ];
+  </script>
+  <script src="../js/Animate.js" type="text/javascript"></script>
+  <script src="../js/checkOutDetails.js"></script>
+  <script src="../js/measurement.js"></script>
+  <script>
+  $(window).load(function () {
+    if(checkOutType == "Plane Checkout" || checkOutType == "Point Checkout")
+    {
+      setTimeout(function(){
+        $("#calPointsId").html("1/"+ pointNeededVal);
+        UpdateAnimationSS(firstData);
+      },200);
+    }
+  });
+  </script>
 </head>
-
 <body id="measurePage1">
-
-<div class="navbar navbar-fixed-top navbar-inverse" role="navigation"> <!--Navigation START Here-->
-         <div class="container">
-            <div class="navbar">
-            	 <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
-                <h3 class="brand" id="headerText">Test</h3>
-                <ul class="topRgtIcon">
-               	<li><img id="selectedIconId" src="../images/circle_breadcrumb_200x200.png" alt=""></li>
-                </ul>               
-         </div>            
-</div>	
- </div><!--Navigation END Here-->
-    
-     
-
-
-
-  <div class="container" id="step2Id" style="display:block;"> <!--Body START Here-->
-      <div class="row marTop">
-          <div class="col-lg-7 col-sm-7"  style="width:40%;"> <!--Input Boxes START Here-->
-                 <div class="pointsContainer">
-                   <div class="enterBarlength" id="barRequireId">
-                   	<label id="lengthId" >Enter Bar Length</label>
-                    <input name="" id="continueText" stype="tel" placeholder="" value=""> 
-                    <div class="lenBtn" id="continueButton"><a href="#" class="btn btn-green"> Continue </a></div>
-                   </div>
-                    <div class="pointsRequired">
-                        <label class="lableClass">Points Required</label>
-                        <input name="" id="pointsRequire2" stype="text" placeholder="0" value="" readonly>
-                    </div>
-                    <div class="pointsRequired">
-                        <label class="lableClass">Points Taken</label>
-                        <input name="" id="pointsTakenId2" type="text" placeholder="0" readonly>
-                    </div>
-                <!--<div class="clearfix"></div>-->
-                <em class="pointText" id="instructionText">Take at least 0 points and click Calculate or Arm button 3 to see the result. </em>
-                <div class="clearfix"></div>
-                <div class="marTop20">
-                <div class="pointsRequired" id="checkOutCancelButton">
-                <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
-                </div>
-                
-                <div class="pointsRequired" id="CalculateResultId">
-                  <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right">
-                  <img src="../images/btn_Icon.png" alt="" ></span> Calculate </a>
-                </div></div>
-                
-               </div> 
-            </div><!--Input Boxes END Here-->
-            
-            <div class="col-lg-5 col-sm-5 circleText"  style="width:60%;">
-              <div class="planeMeasure">
-
-                 <div id="animation"></div>
-
-
-
-              	<div class="dynamicText" id="calPointsId">1/15</div>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar">
+        <a class="navbar-brand" href="#"><img src="../images/home_icon.png" alt=""></a>
+        <h3 class="brand" id="headerText">Test</h3>
+        <ul class="topRgtIcon">
+          <li><img id="selectedIconId" src="../images/circle_breadcrumb_200x200.png" alt=""></li>
+        </ul>               
+      </div>            
+    </div>	
+  </div>
+  <div class="container" id="step2Id" style="display:block;">
+    <div class="row marTop">
+      <div class="col-lg-7 col-sm-7"  style="width:40%;">
+        <div class="pointsContainer">
+          <div class="enterBarlength" id="barRequireId">
+            <label id="lengthId" >Enter Bar Length</label>
+            <input name="" id="continueText" stype="tel" placeholder="" value=""> 
+            <div class="lenBtn" id="continueButton"><a href="#" class="btn btn-green"> Continue </a></div>
+          </div>
+          <div class="pointsRequired">
+            <label class="lableClass">Points Required</label>
+            <input name="" id="pointsRequire2" stype="text" placeholder="0" value="" readonly>
+          </div>
+          <div class="pointsRequired">
+            <label class="lableClass">Points Taken</label>
+            <input name="" id="pointsTakenId2" type="text" placeholder="0" readonly>
+          </div>
+          <em class="pointText" id="instructionText">Take at least 0 points and click Calculate or Arm button 3 to see the result. </em>
+          <div class="clearfix"></div>
+          <div class="marTop20">
+            <div class="pointsRequired" id="checkOutCancelButton">
+              <a href="#" class="btn btn-red"><span class="glyphicon glyphicon-chevron-right"><img src="../images/closeIcon.png" alt=""></span> Cancel </a>
+            </div>
+            <div class="pointsRequired" id="CalculateResultId">
+              <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right">
+                <img src="../images/btn_Icon.png" alt="" ></span> Calculate </a>
+              </div></div>
+            </div> 
+          </div>
+          <div class="col-lg-5 col-sm-5 circleText"  style="width:60%;">
+            <div class="planeMeasure">
+              <div id="animation"></div>
+              <div class="dynamicText" id="calPointsId">1/15</div>
+            </div>
+            <p id="measureTypeTitle">Follow this guide for best results</p>
+          </div>
+          <div class="row" id="resultDiv">
+            <div class="col-md-8 col-md-offset-6 center-table" id="hideResponsiveTbl">
+              <h2>Results</h2>
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th id="r10">Min Deviation</th>
+                      <th id="r11">Max Deviation</th>
+                      <th id="r12">Average Deviation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="minDevi"></td>
+                      <td id="maxDevi"></td>
+                      <td id="aveDevi"></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-                <p id="measureTypeTitle">Follow this guide for best results</p>
-            </div>
-            
-            <div class="row" id="resultDiv"> <!--Table START here-->
-            	<div class="col-md-8 col-md-offset-6 center-table" id="hideResponsiveTbl">
-                    <h2>Results</h2>
-                    <div class="table-responsive"><!-- Responsive Table 1st START Here-->
-                        <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th id="r10">Min Deviation</th>
-                                            <th id="r11">Max Deviation</th>
-                                            <th id="r12">Average Deviation</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="minDevi"></td>
-                                            <td id="maxDevi"></td>
-                                            <td id="aveDevi"></td>
-                                           
-                                        </tr>
-                                    </tbody>
-                                </table>
-                    </div><!-- Responsive Table 1st END Here-->
-                    <div class="table-responsive" id="secondRow"><!-- Responsive Table 1st START Here-->
-                        <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th id="r20">Range Over 2-X</th>
-                                            <th id="r21">Range Over 2-Y</th>
-                                            <th id="r22">Range Over 2-Z</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="rangeX"></td>
-                                            <td id="rangeY"></td>
-                                            <td id="rangeZ"></td>
-                                           
-                                        </tr>
-                                    </tbody>
-                                </table>
-                    </div><!-- Responsive Table 2nd END Here-->
+              <div class="table-responsive" id="secondRow">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th id="r20">Range Over 2-X</th>
+                      <th id="r21">Range Over 2-Y</th>
+                      <th id="r22">Range Over 2-Z</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="rangeX"></td>
+                      <td id="rangeY"></td>
+                      <td id="rangeZ"></td>
 
-                    <div class="table-responsive" id="thirdRow"><!-- Responsive Table 3rd START Here-->
-                        <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th id="r30">Range Over</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="rr30"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                    </div><!-- Responsive Table 3rd END Here-->
-                    
-            	</div>
-            </div><!--Table END here-->
-            
-            <div class="diameterContainer pad0" id="resultButton">
-                <div class="diameterButtons pad0">
-                  <div class="pointsRequired" id="saveCheckOutButton">
-                    <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Save </a>
-                  </div>
-                  <div class="pointsRequired" id="measureDetailsDoneButton">
-                  <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span> Done </a>
-                  </div>
-               </div> 
-                
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive" id="thirdRow">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th id="r30">Range Over</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="rr30"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            
+          </div>
+          <div class="diameterContainer pad0" id="resultButton">
+            <div class="diameterButtons pad0">
+              <div class="pointsRequired" id="saveCheckOutButton">
+                <a href="#" class="btn btn-green"><span class="glyphicon glyphicon-chevron-right"><img src="../images/floppyIcon.png" alt=""></span> Save </a>
+              </div>
+              <div class="pointsRequired" id="measureDetailsDoneButton">
+                <a href="#" class="btn btn-blue"><span class="glyphicon glyphicon-chevron-right"><img src="../images/tickIcon.png" alt=""></span> Done </a>
+              </div>
+            </div> 
+          </div>
         </div>
-    </div><!--Body END Here-->
-    
-    <div class="popup_div" id="popUpId" style="display:none;">
-    <div  class="import_contact" >
-        <div class="heaading_bg">
+      </div>
+      <div class="popup_div" id="popUpId" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
             <div class="div_1_heading">
-            	SUCCESS
+              SUCCESS
             </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-        	<p id="popUpText">Your data has been successfully saved.</p>
-        </div>
-        <div class="cancelBtns">
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText"></p>
+          </div>
+          <div class="cancelBtns">
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-      
-     </div>
-        
-    </div>
-
-
-    <div class="popup_div" id="saveAlert" style="display:none;">
-    <div  class="import_contact" >
-        <div class="heaading_bg">
+          </div>
+        </div>
+      </div>
+      <div class="popup_div" id="noProbe" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
             <div class="div_1_heading">
-              ALERT!
+              ALERT
             </div>
-             
-         </div>
-        
-        <div class="inputHolder">
-          <p id="popUpText">Your data has been successfully saved.</p>
-        </div>
-        <div class="cancelBtns">
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText"></p>
+          </div>
+          <div class="cancelBtns">
             <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
-       </div>
-      
-     </div>
-        
-    </div>
-
-</body>
-</html>
+          </div>
+        </div>
+      </div>
+      <div class="popup_div" id="saveAlert" style="display:none;">
+        <div  class="import_contact" >
+          <div class="heaading_bg">
+            <div class="div_1_heading">
+              SUCCESS
+            </div>
+          </div>
+          <div class="inputHolder">
+            <p id="popUpText">Your data has been successfully saved.</p>
+          </div>
+          <div class="cancelBtns">
+            <a href="#" title="Close" onClick="" id="closePopUp">Close</a>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
