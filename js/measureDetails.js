@@ -60,7 +60,7 @@ $(document).ready(function() {
 		$("#measureTypeTitle").html("Rectangle")
 		$("#measureTitleText").html("Step 2: Measure the Rectangle")
 		$("#pointsRequire2").val("5"); //Should be 4 here for rectangle 
-		$("#resultId").html('<h2>Slot length is:</h2><h1 id="diameterId"></h1><h2>Slot width is:</h2><h1 id="diameterId"></h1>');
+		$("#resultId").html('<h2>Rectangle length is:</h2><h1 id="diameterId"></h1><h2>Rectangle width is:</h2><h1 id="diameterId"></h1>');
 	}else if(MeasureType=="diameterOfAShaft"){
 		SetMeasurement(Measurements.MeasureAnExtCircle)
 		$("#headerText").html("Measure Shaft")
@@ -491,8 +491,8 @@ socket.on('ARM', function(data){
 });
 
 socket.on('PROBE', function(data){
-	console.log("PROBE.PID:"+data.PID);
 	if(data.PID == 0){
+		$(".container").eq(1).hide();
 		$("#noProbe #popUpText").html("Please insert a probe");
 		$("#noProbe").css('display','block');
 		$("#noProbe #closePopUp").click(function(){

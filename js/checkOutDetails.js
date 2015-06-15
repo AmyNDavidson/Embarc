@@ -499,6 +499,7 @@ socket.on('Settings', function(data){
 
   socket.on('PROBE', function(data){
       if(data.PID == 0){
+          $(".container").eq(1).hide();
           $("#noProbe #popUpText").html("Please insert a probe");
           $("#noProbe").css('display','block');
           $("#noProbe #closePopUp").click(function(){
